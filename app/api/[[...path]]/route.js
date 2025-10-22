@@ -336,7 +336,22 @@ async function handleRoute(request, { params }) {
       }
 
       const body = await request.json()
-      const { title, destination, startDate, endDate, segments, status, visibility } = body
+      const { 
+        title, 
+        destination, 
+        startDate, 
+        endDate, 
+        segments, 
+        status, 
+        visibility,
+        description,
+        coverPhoto,
+        tripImages,
+        weather,
+        overallComment,
+        airlines,
+        accommodations
+      } = body
 
       if (!title || !destination || !startDate) {
         return handleCORS(NextResponse.json(
@@ -354,6 +369,13 @@ async function handleRoute(request, { params }) {
         endDate: endDate || startDate,
         status: status || 'future',
         visibility: visibility || 'private',
+        description: description || '',
+        coverPhoto: coverPhoto || '',
+        tripImages: tripImages || '',
+        weather: weather || '',
+        overallComment: overallComment || '',
+        airlines: airlines || [],
+        accommodations: accommodations || [],
         segments: segments || [],
         createdAt: new Date(),
         updatedAt: new Date()
