@@ -286,8 +286,8 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         {renderContent()}
       </main>
 
-      {/* New Trip Modal */}
-      <NewTripModal 
+      {/* Enhanced Trip Modal */}
+      <EnhancedTripModal 
         open={showNewTripModal}
         onClose={() => setShowNewTripModal(false)}
         onSuccess={(newTrip) => {
