@@ -259,17 +259,25 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200 bg-white">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
-              <span className="text-sm font-medium text-gray-700">{user.name}</span>
+              <span className="text-sm font-medium text-gray-700 truncate">{user.name}</span>
             </div>
-            <Button onClick={onLogout} variant="ghost" size="sm">
-              <LogOut className="w-4 h-4" />
-            </Button>
+            <div className="flex space-x-1">
+              <Button onClick={() => setShowProfileSettings(true)} variant="ghost" size="sm" title="Profile Settings">
+                <Settings className="w-4 h-4" />
+              </Button>
+              <Button onClick={onLogout} variant="ghost" size="sm" title="Logout">
+                <LogOut className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
+          {user.bio && (
+            <p className="text-xs text-gray-500 truncate">{user.bio}</p>
+          )}
         </div>
       </aside>
 
