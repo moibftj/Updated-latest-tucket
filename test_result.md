@@ -155,15 +155,18 @@ backend:
 
   - task: "User profile management"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented PATCH /api/users/profile to update user name and bio. Added bio field to user model. Profile changes stored in database."
+      - working: true
+        agent: "testing"
+        comment: "✅ Profile management tested successfully! PATCH /api/users/profile works correctly: 1) Alice updated name and bio - both fields saved correctly ✅, 2) Bob updated only bio - bio saved, name preserved ✅, 3) Long bio (500 chars) handled correctly ✅. Profile updates are properly stored and retrieved from database."
 
   - task: "Online user tracking and heartbeat"
     implemented: true
