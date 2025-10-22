@@ -543,8 +543,8 @@ class TuckerTripsAPITester:
             return False
 
     def test_list_trips(self):
-        """Test GET /api/trips"""
-        print("\n🧪 Testing List Trips...")
+        """Test GET /api/trips and verify status/visibility fields are returned"""
+        print("\n🧪 Testing List Trips with Status and Visibility Fields...")
         
         if not self.auth_token:
             print("❌ No auth token available")
@@ -566,10 +566,38 @@ class TuckerTripsAPITester:
                     print(f"   Found {len(trips)} trips")
                     
                     if len(trips) > 0:
-                        trip = trips[0]
-                        print(f"   First trip: {trip.get('title', 'No title')} - {trip.get('destination', 'No destination')}")
-                    
-                    return True
+                        # Check if all trips have status and visibility fields
+                        all_have_fields = True
+                        field_details = []
+                        
+                        for trip in trips:
+                            has_status = 'status' in trip
+                            has_visibility = 'visibility' in trip
+                            has_segments = 'segments' in trip
+                            
+                            field_details.append({
+                                'title': trip.get('title', 'Unknown'),
+                                'status': trip.get('status', 'Missing'),
+                                'visibility': trip.get('visibility', 'Missing'),
+                                'segments_count': len(trip.get('segments', []))
+                            })
+                            
+                            if not (has_status and has_visibility and has_segments):
+                                all_have_fields = False
+                        
+                        if all_have_fields:
+                            print(f"✅ All trips have status and visibility fields")
+                            for detail in field_details:
+                                print(f"   - {detail['title']}: status={detail['status']}, visibility={detail['visibility']}, segments={detail['segments_count']}")
+                            return True
+                        else:
+                            print(f"❌ Some trips are missing status or visibility fields")
+                            for detail in field_details:
+                                print(f"   - {detail['title']}: status={detail['status']}, visibility={detail['visibility']}")
+                            return False
+                    else:
+                        print(f"⚠️  No trips found to verify fields")
+                        return True
                 else:
                     print(f"❌ List trips failed - Response is not a list")
                     return False
