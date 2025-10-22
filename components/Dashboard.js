@@ -296,6 +296,14 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           toast.success('Trip created successfully!')
         }}
       />
+
+      {/* Profile Settings Modal */}
+      <ProfileSettings 
+        open={showProfileSettings}
+        onClose={() => setShowProfileSettings(false)}
+        user={user}
+        onUserUpdate={setUser}
+      />
     </div>
   )
 }
