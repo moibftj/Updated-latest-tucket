@@ -87,6 +87,9 @@ async function handleRoute(request, { params }) {
         email,
         password: hashedPassword,
         name,
+        bio: '',
+        lastSeen: new Date(),
+        isOnline: false,
         createdAt: new Date()
       }
 
@@ -100,7 +103,7 @@ async function handleRoute(request, { params }) {
       )
 
       return handleCORS(NextResponse.json({
-        user: { id: user.id, email: user.email, name: user.name },
+        user: { id: user.id, email: user.email, name: user.name, bio: user.bio },
         token
       }))
     }
@@ -135,6 +138,12 @@ async function handleRoute(request, { params }) {
         ))
       }
 
+      // Update last seen and online status
+      await db.collection('users').updateOne(
+        { id: user.id },
+        { $set: { lastSeen: new Date(), isOnline: true } }
+      )
+
       // Generate JWT
       const token = jwt.sign(
         { userId: user.id, email: user.email },
@@ -143,7 +152,7 @@ async function handleRoute(request, { params }) {
       )
 
       return handleCORS(NextResponse.json({
-        user: { id: user.id, email: user.email, name: user.name },
+        user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' },
         token
       }))
     }
@@ -167,8 +176,151 @@ async function handleRoute(request, { params }) {
       }
 
       return handleCORS(NextResponse.json({
-        user: { id: user.id, email: user.email, name: user.name }
+        user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' }
       }))
+    }
+
+    // ============ USER ROUTES ============
+
+    // PATCH /api/users/profile
+    if (route === '/users/profile' && method === 'PATCH') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      const body = await request.json()
+      const { name, bio } = body
+
+      const updateData = {}
+      if (name) updateData.name = name
+      if (bio !== undefined) updateData.bio = bio
+
+      await db.collection('users').updateOne(
+        { id: decoded.userId },
+        { $set: updateData }
+      )
+
+      const user = await db.collection('users').findOne({ id: decoded.userId })
+      return handleCORS(NextResponse.json({
+        user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' }
+      }))
+    }
+
+    // POST /api/users/heartbeat
+    if (route === '/users/heartbeat' && method === 'POST') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      await db.collection('users').updateOne(
+        { id: decoded.userId },
+        { $set: { lastSeen: new Date(), isOnline: true } }
+      )
+
+      return handleCORS(NextResponse.json({ success: true }))
+    }
+
+    // GET /api/users/online
+    if (route === '/users/online' && method === 'GET') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      // Consider users online if they've been seen in the last 5 minutes
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000)
+      
+      const onlineUsers = await db.collection('users')
+        .find({ 
+          id: { $ne: decoded.userId },
+          lastSeen: { $gte: fiveMinutesAgo },
+          isOnline: true
+        })
+        .project({ id: 1, name: 1, email: 1, bio: 1, lastSeen: 1 })
+        .toArray()
+
+      const cleanedUsers = onlineUsers.map(({ _id, ...rest }) => rest)
+      return handleCORS(NextResponse.json(cleanedUsers))
+    }
+
+    // ============ MESSAGE ROUTES ============
+
+    // POST /api/messages
+    if (route === '/messages' && method === 'POST') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      const body = await request.json()
+      const { recipientId, content } = body
+
+      if (!recipientId || !content) {
+        return handleCORS(NextResponse.json(
+          { error: 'Recipient and content are required' },
+          { status: 400 }
+        ))
+      }
+
+      const message = {
+        id: uuidv4(),
+        senderId: decoded.userId,
+        recipientId,
+        content,
+        read: false,
+        createdAt: new Date()
+      }
+
+      await db.collection('messages').insertOne(message)
+
+      const { _id, ...messageData } = message
+      return handleCORS(NextResponse.json(messageData))
+    }
+
+    // GET /api/messages/:userId
+    if (route.startsWith('/messages/') && method === 'GET') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      const otherUserId = path[1]
+      
+      const messages = await db.collection('messages')
+        .find({
+          $or: [
+            { senderId: decoded.userId, recipientId: otherUserId },
+            { senderId: otherUserId, recipientId: decoded.userId }
+          ]
+        })
+        .sort({ createdAt: 1 })
+        .toArray()
+
+      // Mark messages as read
+      await db.collection('messages').updateMany(
+        { senderId: otherUserId, recipientId: decoded.userId, read: false },
+        { $set: { read: true } }
+      )
+
+      const cleanedMessages = messages.map(({ _id, ...rest }) => rest)
+      return handleCORS(NextResponse.json(cleanedMessages))
     }
 
     // ============ TRIP ROUTES ============
