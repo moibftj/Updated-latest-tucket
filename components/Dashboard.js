@@ -304,6 +304,9 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         user={user}
         onUserUpdate={setUser}
       />
+
+      {/* Live Chat Panel */}
+      <ChatPanel currentUser={user} />
     </div>
   )
 }
