@@ -17,11 +17,11 @@ const LandingPage = ({ onShowAuth }) => {
               <h1 className="text-2xl font-bold text-white">Tucker Trips</h1>
             </div>
             <div className="flex space-x-3">
-              <Button onClick={onShowAuth} className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/40 font-semibold">
+              <Button onClick={onShowAuth} className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/40 font-semibold backdrop-blur-sm shadow-lg">
                 <Users className="w-4 h-4 mr-2" />
                 Login
               </Button>
-              <Button onClick={onShowAuth} className="bg-pink-500 hover:bg-pink-600 text-white font-semibold shadow-lg">
+              <Button onClick={onShowAuth} className="bg-pink-500 hover:bg-pink-600 text-white font-semibold shadow-lg hover:shadow-pink-500/50 transition-all">
                 Sign Up
               </Button>
             </div>
