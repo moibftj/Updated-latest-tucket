@@ -149,47 +149,47 @@ class TuckerTripsBackendTester:
             
         return True
 
-    def test_user_login(self):
-        """Test POST /api/auth/login"""
-        print("\n🧪 Testing User Login...")
+    def test_heartbeat_system(self):
+        """Test POST /api/users/heartbeat - Send heartbeat to mark user online"""
+        self.log("=== Testing Heartbeat System ===")
         
-        login_data = {
-            "email": self.test_user["email"],
-            "password": self.test_user["password"]
-        }
-        
-        response = self.make_request('POST', '/auth/login', login_data)
-        
-        if not response:
-            print("❌ Login failed - No response")
+        # Alice sends heartbeat
+        alice_headers = {"Authorization": f"Bearer {self.alice_token}"}
+        try:
+            response = requests.post(f"{self.base_url}/users/heartbeat", headers=alice_headers)
+            if response.status_code == 200:
+                result = response.json()
+                if result.get('success'):
+                    self.log("✅ Alice heartbeat sent successfully")
+                else:
+                    self.log(f"❌ Alice heartbeat response invalid: {result}")
+                    return False
+            else:
+                self.log(f"❌ Alice heartbeat failed: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Alice heartbeat error: {str(e)}")
             return False
             
-        print(f"Status Code: {response.status_code}")
-        
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                if 'user' in data and 'token' in data:
-                    self.user_data = data['user']
-                    self.auth_token = data['token']
-                    print(f"✅ Login successful")
-                    print(f"   User ID: {self.user_data['id']}")
-                    print(f"   Email: {self.user_data['email']}")
-                    print(f"   Token received: {len(self.auth_token)} chars")
-                    return True
+        # Bob sends heartbeat
+        bob_headers = {"Authorization": f"Bearer {self.bob_token}"}
+        try:
+            response = requests.post(f"{self.base_url}/users/heartbeat", headers=bob_headers)
+            if response.status_code == 200:
+                result = response.json()
+                if result.get('success'):
+                    self.log("✅ Bob heartbeat sent successfully")
                 else:
-                    print(f"❌ Login failed - Missing user or token in response")
+                    self.log(f"❌ Bob heartbeat response invalid: {result}")
                     return False
-            except json.JSONDecodeError:
-                print(f"❌ Login failed - Invalid JSON response")
+            else:
+                self.log(f"❌ Bob heartbeat failed: {response.status_code} - {response.text}")
                 return False
-        else:
-            try:
-                error_data = response.json()
-                print(f"❌ Login failed - {error_data.get('error', 'Unknown error')}")
-            except:
-                print(f"❌ Login failed - Status {response.status_code}")
+        except Exception as e:
+            self.log(f"❌ Bob heartbeat error: {str(e)}")
             return False
+            
+        return True
 
     def test_get_user_profile(self):
         """Test GET /api/auth/me"""
