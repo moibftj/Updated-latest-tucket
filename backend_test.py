@@ -73,44 +73,81 @@ class TuckerTripsBackendTester:
             
         return True
 
-    def test_user_registration(self):
-        """Test POST /api/auth/register"""
-        print("\n🧪 Testing User Registration...")
+    def test_profile_management(self):
+        """Test PATCH /api/users/profile - Update user name and bio"""
+        self.log("=== Testing Profile Management ===")
         
-        response = self.make_request('POST', '/auth/register', self.test_user)
+        # Test Alice updating her profile with bio
+        alice_headers = {"Authorization": f"Bearer {self.alice_token}"}
+        profile_update = {
+            "name": "Alice Johnson (Travel Enthusiast)",
+            "bio": "Love exploring new destinations and sharing travel tips! Currently planning trips to Japan and Iceland. Always looking for hidden gems and local experiences."
+        }
         
-        if not response:
-            print("❌ Registration failed - No response")
+        try:
+            response = requests.patch(f"{self.base_url}/users/profile", 
+                                    json=profile_update, headers=alice_headers)
+            if response.status_code == 200:
+                result = response.json()
+                user = result['user']
+                if user['name'] == profile_update['name'] and user['bio'] == profile_update['bio']:
+                    self.log("✅ Alice profile update successful - name and bio updated correctly")
+                else:
+                    self.log(f"❌ Profile data mismatch - Expected: {profile_update}, Got: {user}")
+                    return False
+            else:
+                self.log(f"❌ Alice profile update failed: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Alice profile update error: {str(e)}")
             return False
             
-        print(f"Status Code: {response.status_code}")
+        # Test Bob updating just his bio
+        bob_headers = {"Authorization": f"Bearer {self.bob_token}"}
+        bio_update = {
+            "bio": "Adventure seeker and photography lover. Documenting my journeys around the world. Next stop: New Zealand!"
+        }
         
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                if 'user' in data and 'token' in data:
-                    self.user_data = data['user']
-                    self.auth_token = data['token']
-                    print(f"✅ Registration successful")
-                    print(f"   User ID: {self.user_data['id']}")
-                    print(f"   Email: {self.user_data['email']}")
-                    print(f"   Name: {self.user_data['name']}")
-                    print(f"   Token received: {len(self.auth_token)} chars")
-                    return True
+        try:
+            response = requests.patch(f"{self.base_url}/users/profile", 
+                                    json=bio_update, headers=bob_headers)
+            if response.status_code == 200:
+                result = response.json()
+                user = result['user']
+                if user['bio'] == bio_update['bio'] and user['name'] == "Bob Smith":
+                    self.log("✅ Bob bio update successful - bio updated, name preserved")
                 else:
-                    print(f"❌ Registration failed - Missing user or token in response")
-                    print(f"   Response: {data}")
+                    self.log(f"❌ Bob profile data mismatch - Expected bio: {bio_update['bio']}, Got: {user}")
                     return False
-            except json.JSONDecodeError:
-                print(f"❌ Registration failed - Invalid JSON response")
+            else:
+                self.log(f"❌ Bob bio update failed: {response.status_code} - {response.text}")
                 return False
-        else:
-            try:
-                error_data = response.json()
-                print(f"❌ Registration failed - {error_data.get('error', 'Unknown error')}")
-            except:
-                print(f"❌ Registration failed - Status {response.status_code}")
+        except Exception as e:
+            self.log(f"❌ Bob bio update error: {str(e)}")
             return False
+            
+        # Test various bio lengths
+        long_bio = "A" * 500  # Test with long bio
+        long_bio_update = {"bio": long_bio}
+        
+        try:
+            response = requests.patch(f"{self.base_url}/users/profile", 
+                                    json=long_bio_update, headers=alice_headers)
+            if response.status_code == 200:
+                result = response.json()
+                if result['user']['bio'] == long_bio:
+                    self.log("✅ Long bio (500 chars) handled correctly")
+                else:
+                    self.log("❌ Long bio not saved correctly")
+                    return False
+            else:
+                self.log(f"❌ Long bio update failed: {response.status_code}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Long bio update error: {str(e)}")
+            return False
+            
+        return True
 
     def test_user_login(self):
         """Test POST /api/auth/login"""
