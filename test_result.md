@@ -153,6 +153,42 @@ backend:
         agent: "testing"
         comment: "✅ Status and visibility fields working perfectly! Tested: 1) Create trip with status='future' & visibility='private' ✅, 2) Create trip with status='taken' & visibility='public' ✅, 3) Default values applied correctly when fields omitted ✅, 4) GET /api/trips returns all trips with status/visibility fields ✅. All segments functionality preserved. Backend ready for production."
 
+  - task: "User profile management"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented PATCH /api/users/profile to update user name and bio. Added bio field to user model. Profile changes stored in database."
+
+  - task: "Online user tracking and heartbeat"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented POST /api/users/heartbeat to update user's lastSeen and isOnline status. GET /api/users/online returns list of users active in last 5 minutes. Login automatically sets user as online."
+
+  - task: "Live chat messaging system"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented POST /api/messages to send messages between users. GET /api/messages/:userId retrieves chat history between current user and specified user. Messages marked as read when retrieved."
+
 frontend:
   - task: "Authentication UI (Login/Signup)"
     implemented: true
