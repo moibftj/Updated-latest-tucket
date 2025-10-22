@@ -191,7 +191,7 @@ class TuckerTripsBackendTester:
             
         return True
 
-    def test_get_user_profile(self):
+    def test_online_user_tracking(self):
         """Test GET /api/auth/me"""
         print("\n🧪 Testing Get User Profile...")
         
