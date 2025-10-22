@@ -20,9 +20,11 @@ class TuckerTripsAPITester:
         self.user_data = None
         self.created_trip_id = None
         
-        # Test data
+        # Test data with unique email to avoid conflicts
+        import time
+        timestamp = int(time.time())
         self.test_user = {
-            "email": "tucker@test.com",
+            "email": f"tucker.{timestamp}@test.com",
             "password": "test123",
             "name": "Tucker Test"
         }
