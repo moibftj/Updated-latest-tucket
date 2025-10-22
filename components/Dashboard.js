@@ -14,6 +14,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [activeSection, setActiveSection] = useState('home')
   const [trips, setTrips] = useState([])
   const [showNewTripModal, setShowNewTripModal] = useState(false)
+  const [showProfileSettings, setShowProfileSettings] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
