@@ -305,6 +305,243 @@ class TuckerTripsAPITester:
                 print(f"❌ Trip creation failed - Status {response.status_code}")
             return False
 
+    def test_create_trip_future_private(self):
+        """Test creating a trip with status='future' and visibility='private'"""
+        print("\n🧪 Testing Create Future Private Trip...")
+        
+        if not self.auth_token:
+            print("❌ No auth token available")
+            return False
+        
+        # Create trip with future status and private visibility
+        start_date = (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d")
+        end_date = (datetime.now() + timedelta(days=37)).strftime("%Y-%m-%d")
+        
+        trip_data = {
+            "title": "Future Private Trip to Tokyo",
+            "destination": "Tokyo, Japan",
+            "startDate": start_date,
+            "endDate": end_date,
+            "status": "future",
+            "visibility": "private",
+            "segments": [
+                {
+                    "type": "flight",
+                    "details": {
+                        "airline": "Japan Airlines",
+                        "flightNumber": "JL123",
+                        "departure": "LAX",
+                        "arrival": "NRT"
+                    }
+                },
+                {
+                    "type": "accommodation",
+                    "details": {
+                        "name": "Tokyo Grand Hotel",
+                        "address": "Shibuya, Tokyo"
+                    }
+                }
+            ]
+        }
+        
+        response = self.make_request('POST', '/trips', trip_data)
+        
+        if not response:
+            print("❌ Create future private trip failed - No response")
+            return False
+            
+        print(f"Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                if 'id' in data:
+                    # Verify the fields are correctly set
+                    if (data.get('status') == 'future' and 
+                        data.get('visibility') == 'private' and
+                        data.get('title') == trip_data['title'] and
+                        len(data.get('segments', [])) == 2):
+                        
+                        print(f"✅ Future private trip created successfully")
+                        print(f"   Trip ID: {data['id']}")
+                        print(f"   Status: {data.get('status')}")
+                        print(f"   Visibility: {data.get('visibility')}")
+                        print(f"   Segments: {len(data.get('segments', []))} items")
+                        return True
+                    else:
+                        print(f"❌ Trip created but fields are incorrect")
+                        print(f"   Expected: status='future', visibility='private', segments=2")
+                        print(f"   Got: status='{data.get('status')}', visibility='{data.get('visibility')}', segments={len(data.get('segments', []))}")
+                        return False
+                else:
+                    print(f"❌ Trip creation failed - Missing trip ID in response")
+                    return False
+            except json.JSONDecodeError:
+                print(f"❌ Trip creation failed - Invalid JSON response")
+                return False
+        else:
+            try:
+                error_data = response.json()
+                print(f"❌ Trip creation failed - {error_data.get('error', 'Unknown error')}")
+            except:
+                print(f"❌ Trip creation failed - Status {response.status_code}")
+            return False
+
+    def test_create_trip_taken_public(self):
+        """Test creating a trip with status='taken' and visibility='public'"""
+        print("\n🧪 Testing Create Taken Public Trip...")
+        
+        if not self.auth_token:
+            print("❌ No auth token available")
+            return False
+        
+        # Create trip with taken status and public visibility
+        start_date = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        end_date = (datetime.now() - timedelta(days=23)).strftime("%Y-%m-%d")
+        
+        trip_data = {
+            "title": "Past Public Trip to Paris",
+            "destination": "Paris, France",
+            "startDate": start_date,
+            "endDate": end_date,
+            "status": "taken",
+            "visibility": "public",
+            "segments": [
+                {
+                    "type": "flight",
+                    "details": {
+                        "airline": "Air France",
+                        "flightNumber": "AF123",
+                        "departure": "JFK",
+                        "arrival": "CDG"
+                    }
+                },
+                {
+                    "type": "hotel",
+                    "details": {
+                        "name": "Hotel Le Marais",
+                        "address": "Le Marais, Paris",
+                        "rating": "4 stars"
+                    }
+                },
+                {
+                    "type": "transportation",
+                    "details": {
+                        "type": "Metro Pass",
+                        "duration": "7 days"
+                    }
+                }
+            ]
+        }
+        
+        response = self.make_request('POST', '/trips', trip_data)
+        
+        if not response:
+            print("❌ Create taken public trip failed - No response")
+            return False
+            
+        print(f"Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                if 'id' in data:
+                    # Verify the fields are correctly set
+                    if (data.get('status') == 'taken' and 
+                        data.get('visibility') == 'public' and
+                        data.get('title') == trip_data['title'] and
+                        len(data.get('segments', [])) == 3):
+                        
+                        print(f"✅ Taken public trip created successfully")
+                        print(f"   Trip ID: {data['id']}")
+                        print(f"   Status: {data.get('status')}")
+                        print(f"   Visibility: {data.get('visibility')}")
+                        print(f"   Segments: {len(data.get('segments', []))} items")
+                        return True
+                    else:
+                        print(f"❌ Trip created but fields are incorrect")
+                        print(f"   Expected: status='taken', visibility='public', segments=3")
+                        print(f"   Got: status='{data.get('status')}', visibility='{data.get('visibility')}', segments={len(data.get('segments', []))}")
+                        return False
+                else:
+                    print(f"❌ Trip creation failed - Missing trip ID in response")
+                    return False
+            except json.JSONDecodeError:
+                print(f"❌ Trip creation failed - Invalid JSON response")
+                return False
+        else:
+            try:
+                error_data = response.json()
+                print(f"❌ Trip creation failed - {error_data.get('error', 'Unknown error')}")
+            except:
+                print(f"❌ Trip creation failed - Status {response.status_code}")
+            return False
+
+    def test_default_values(self):
+        """Test that default values are applied when status/visibility are not provided"""
+        print("\n🧪 Testing Default Status and Visibility Values...")
+        
+        if not self.auth_token:
+            print("❌ No auth token available")
+            return False
+        
+        # Create trip without status and visibility fields
+        start_date = (datetime.now() + timedelta(days=60)).strftime("%Y-%m-%d")
+        
+        trip_data = {
+            "title": "Default Values Test Trip",
+            "destination": "London, UK",
+            "startDate": start_date,
+            "segments": [
+                {
+                    "type": "flight",
+                    "details": {
+                        "airline": "British Airways",
+                        "flightNumber": "BA456"
+                    }
+                }
+            ]
+        }
+        
+        response = self.make_request('POST', '/trips', trip_data)
+        
+        if not response:
+            print("❌ Create default trip failed - No response")
+            return False
+            
+        print(f"Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                if 'id' in data:
+                    # Verify default values are applied
+                    if (data.get('status') == 'future' and 
+                        data.get('visibility') == 'private'):
+                        
+                        print(f"✅ Default values applied correctly")
+                        print(f"   Status: {data.get('status')} (expected: future)")
+                        print(f"   Visibility: {data.get('visibility')} (expected: private)")
+                        return True
+                    else:
+                        print(f"❌ Default values not applied correctly")
+                        print(f"   Expected: status='future', visibility='private'")
+                        print(f"   Got: status='{data.get('status')}', visibility='{data.get('visibility')}'")
+                        return False
+                else:
+                    print(f"❌ Trip creation failed - Missing trip ID in response")
+                    return False
+            except json.JSONDecodeError:
+                print(f"❌ Trip creation failed - Invalid JSON response")
+                return False
+        else:
+            try:
+                error_data = response.json()
+                print(f"❌ Trip creation failed - {error_data.get('error', 'Unknown error')}")
+            except:
+                print(f"❌ Trip creation failed - Status {response.status_code}")
+            return False
+
     def test_list_trips(self):
         """Test GET /api/trips"""
         print("\n🧪 Testing List Trips...")
