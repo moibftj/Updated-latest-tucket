@@ -184,7 +184,7 @@ async function handleRoute(request, { params }) {
       }
 
       const body = await request.json()
-      const { title, destination, startDate, endDate, segments } = body
+      const { title, destination, startDate, endDate, segments, status, visibility } = body
 
       if (!title || !destination || !startDate) {
         return handleCORS(NextResponse.json(
@@ -200,6 +200,8 @@ async function handleRoute(request, { params }) {
         destination,
         startDate,
         endDate: endDate || startDate,
+        status: status || 'future',
+        visibility: visibility || 'private',
         segments: segments || [],
         createdAt: new Date(),
         updatedAt: new Date()
