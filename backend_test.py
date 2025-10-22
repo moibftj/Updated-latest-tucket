@@ -192,44 +192,82 @@ class TuckerTripsBackendTester:
         return True
 
     def test_online_user_tracking(self):
-        """Test GET /api/auth/me"""
-        print("\n🧪 Testing Get User Profile...")
+        """Test GET /api/users/online - Get list of online users"""
+        self.log("=== Testing Online User Tracking ===")
         
-        if not self.auth_token:
-            print("❌ No auth token available")
-            return False
-            
-        response = self.make_request('GET', '/auth/me')
-        
-        if not response:
-            print("❌ Get profile failed - No response")
-            return False
-            
-        print(f"Status Code: {response.status_code}")
-        
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                if 'user' in data:
-                    user = data['user']
-                    print(f"✅ Profile retrieved successfully")
-                    print(f"   User ID: {user['id']}")
-                    print(f"   Email: {user['email']}")
-                    print(f"   Name: {user['name']}")
-                    return True
-                else:
-                    print(f"❌ Profile retrieval failed - Missing user in response")
+        # Alice checks online users (should see Bob)
+        alice_headers = {"Authorization": f"Bearer {self.alice_token}"}
+        try:
+            response = requests.get(f"{self.base_url}/users/online", headers=alice_headers)
+            if response.status_code == 200:
+                online_users = response.json()
+                
+                # Should be a list
+                if not isinstance(online_users, list):
+                    self.log(f"❌ Online users response should be list, got: {type(online_users)}")
                     return False
-            except json.JSONDecodeError:
-                print(f"❌ Profile retrieval failed - Invalid JSON response")
+                    
+                # Should contain Bob but not Alice (current user excluded)
+                bob_found = False
+                alice_found = False
+                
+                for user in online_users:
+                    if user['id'] == self.bob_id:
+                        bob_found = True
+                        if user['name'] == "Bob Smith":
+                            self.log("✅ Bob found in online users with correct name")
+                        else:
+                            self.log(f"❌ Bob found but name incorrect: {user['name']}")
+                            return False
+                    elif user['id'] == self.alice_id:
+                        alice_found = True
+                        
+                if bob_found and not alice_found:
+                    self.log("✅ Online users list correct - Bob present, Alice (current user) excluded")
+                elif not bob_found:
+                    self.log("❌ Bob not found in online users list")
+                    return False
+                elif alice_found:
+                    self.log("❌ Alice (current user) should not appear in her own online users list")
+                    return False
+                    
+            else:
+                self.log(f"❌ Get online users failed: {response.status_code} - {response.text}")
                 return False
-        else:
-            try:
-                error_data = response.json()
-                print(f"❌ Profile retrieval failed - {error_data.get('error', 'Unknown error')}")
-            except:
-                print(f"❌ Profile retrieval failed - Status {response.status_code}")
+        except Exception as e:
+            self.log(f"❌ Get online users error: {str(e)}")
             return False
+            
+        # Bob checks online users (should see Alice)
+        bob_headers = {"Authorization": f"Bearer {self.bob_token}"}
+        try:
+            response = requests.get(f"{self.base_url}/users/online", headers=bob_headers)
+            if response.status_code == 200:
+                online_users = response.json()
+                
+                alice_found = False
+                bob_found = False
+                
+                for user in online_users:
+                    if user['id'] == self.alice_id:
+                        alice_found = True
+                    elif user['id'] == self.bob_id:
+                        bob_found = True
+                        
+                if alice_found and not bob_found:
+                    self.log("✅ Bob's online users list correct - Alice present, Bob (current user) excluded")
+                else:
+                    self.log(f"❌ Bob's online users list incorrect - Alice found: {alice_found}, Bob found: {bob_found}")
+                    return False
+                    
+            else:
+                self.log(f"❌ Bob get online users failed: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Bob get online users error: {str(e)}")
+            return False
+            
+        return True
 
     def test_unauthorized_access(self):
         """Test that protected routes return 401 without token"""
