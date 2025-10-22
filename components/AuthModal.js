@@ -45,11 +45,7 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md border-0 shadow-2xl bg-white relative overflow-hidden">
-        {/* Subtle Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-pink-100/50 to-orange-100/50 blur-3xl -z-10"></div>
-        <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-br from-purple-400/20 via-pink-400/20 to-orange-400/20 rounded-lg"></div>
-        
+      <DialogContent className="sm:max-w-md glow-purple-pink glow-border bg-white relative">
         <DialogHeader>
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-lg">
