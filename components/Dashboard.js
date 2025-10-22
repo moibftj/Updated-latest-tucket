@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Home, MapPin, Share2, Calendar as CalendarIcon, PlusCircle, Compass, Plane, LogOut } from 'lucide-react'
+import { Home, MapPin, Share2, Calendar as CalendarIcon, PlusCircle, Compass, Plane, LogOut, Settings } from 'lucide-react'
 import { toast } from 'sonner'
 import TripCard from '@/components/TripCard'
 import NewTripModal from '@/components/NewTripModal'
+import ProfileSettings from '@/components/ProfileSettings'
+import ChatPanel from '@/components/ChatPanel'
 
-const Dashboard = ({ user, onLogout }) => {
+const Dashboard = ({ user: initialUser, onLogout }) => {
+  const [user, setUser] = useState(initialUser)
   const [activeSection, setActiveSection] = useState('home')
   const [trips, setTrips] = useState([])
   const [showNewTripModal, setShowNewTripModal] = useState(false)
