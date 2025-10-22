@@ -45,14 +45,20 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md border-0 shadow-2xl bg-white relative overflow-hidden">
+        {/* Subtle Glow Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-pink-100/50 to-orange-100/50 blur-3xl -z-10"></div>
+        <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-br from-purple-400/20 via-pink-400/20 to-orange-400/20 rounded-lg"></div>
+        
         <DialogHeader>
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-purple-100 rounded-full">
+            <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-lg">
               <Plane className="w-8 h-8 text-purple-600" />
             </div>
           </div>
-          <DialogTitle className="text-center text-2xl">Tucker Trips</DialogTitle>
+          <DialogTitle className="text-center text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+            Tucker Trips
+          </DialogTitle>
         </DialogHeader>
         
         <Tabs value={isLogin ? 'login' : 'register'} onValueChange={(v) => setIsLogin(v === 'login')}>
