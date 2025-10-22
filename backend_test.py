@@ -25,40 +25,53 @@ class TuckerTripsBackendTester:
         timestamp = datetime.now().strftime("%H:%M:%S")
         print(f"[{timestamp}] {message}")
 
-    def make_request(self, method, endpoint, data=None, headers=None):
-        """Make HTTP request with proper error handling"""
-        url = f"{self.base_url}{endpoint}"
+    def test_user_registration_and_login(self):
+        """Test user registration and login for Alice and Bob"""
+        self.log("=== Testing User Registration and Login ===")
         
-        # Default headers
-        default_headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        # Register Alice
+        alice_data = {
+            "name": "Alice Johnson",
+            "email": "alice.johnson@example.com",
+            "password": "SecurePass123!"
         }
         
-        if headers:
-            default_headers.update(headers)
+        try:
+            response = requests.post(f"{self.base_url}/auth/register", json=alice_data)
+            if response.status_code == 200:
+                alice_result = response.json()
+                self.alice_token = alice_result['token']
+                self.alice_id = alice_result['user']['id']
+                self.log(f"✅ Alice registered successfully - ID: {self.alice_id}")
+            else:
+                self.log(f"❌ Alice registration failed: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Alice registration error: {str(e)}")
+            return False
             
-        # Add auth token if available
-        if self.auth_token:
-            default_headers['Authorization'] = f'Bearer {self.auth_token}'
+        # Register Bob
+        bob_data = {
+            "name": "Bob Smith",
+            "email": "bob.smith@example.com", 
+            "password": "SecurePass456!"
+        }
         
         try:
-            if method.upper() == 'GET':
-                response = self.session.get(url, headers=default_headers)
-            elif method.upper() == 'POST':
-                response = self.session.post(url, json=data, headers=default_headers)
-            elif method.upper() == 'PATCH':
-                response = self.session.patch(url, json=data, headers=default_headers)
-            elif method.upper() == 'DELETE':
-                response = self.session.delete(url, headers=default_headers)
+            response = requests.post(f"{self.base_url}/auth/register", json=bob_data)
+            if response.status_code == 200:
+                bob_result = response.json()
+                self.bob_token = bob_result['token']
+                self.bob_id = bob_result['user']['id']
+                self.log(f"✅ Bob registered successfully - ID: {self.bob_id}")
             else:
-                raise ValueError(f"Unsupported method: {method}")
-                
-            return response
+                self.log(f"❌ Bob registration failed: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            self.log(f"❌ Bob registration error: {str(e)}")
+            return False
             
-        except requests.exceptions.RequestException as e:
-            print(f"❌ Request failed: {e}")
-            return None
+        return True
 
     def test_user_registration(self):
         """Test POST /api/auth/register"""
