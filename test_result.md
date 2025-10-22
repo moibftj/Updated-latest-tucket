@@ -170,15 +170,18 @@ backend:
 
   - task: "Online user tracking and heartbeat"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented POST /api/users/heartbeat to update user's lastSeen and isOnline status. GET /api/users/online returns list of users active in last 5 minutes. Login automatically sets user as online."
+      - working: true
+        agent: "testing"
+        comment: "✅ Online user tracking and heartbeat system working perfectly! POST /api/users/heartbeat successfully updates user online status for both Alice and Bob ✅. GET /api/users/online correctly returns online users excluding current user: Alice sees Bob, Bob sees Alice ✅. 5-minute activity window logic implemented correctly. Heartbeat responses return proper success confirmation."
 
   - task: "Live chat messaging system"
     implemented: true
