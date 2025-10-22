@@ -134,6 +134,24 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ All trip CRUD operations tested successfully. POST /api/trips creates trips with segments (flights, accommodations, transport), GET /api/trips lists user trips, GET /api/trips/:id retrieves specific trips, PATCH /api/trips/:id updates trip details, DELETE /api/trips/:id removes trips. All operations require authentication and properly filter by user. Segments are stored and retrieved correctly."
+      - working: true
+        agent: "testing"
+        comment: "✅ NEW STATUS & VISIBILITY FIELDS TESTED SUCCESSFULLY! Created trips with status='future'/visibility='private' and status='taken'/visibility='public'. All fields stored and retrieved correctly. Default values (future/private) applied when fields not provided. GET /api/trips returns all trips with status and visibility fields. Segments functionality remains intact. All 4 new field tests passed."
+
+  - task: "Trip status and visibility fields"
+    implemented: true
+    working: true
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added status (future/taken) and visibility (public/private) fields to trip model. Default values: status='future', visibility='private'. Updated POST /api/trips to accept and store these fields."
+      - working: true
+        agent: "testing"
+        comment: "✅ Status and visibility fields working perfectly! Tested: 1) Create trip with status='future' & visibility='private' ✅, 2) Create trip with status='taken' & visibility='public' ✅, 3) Default values applied correctly when fields omitted ✅, 4) GET /api/trips returns all trips with status/visibility fields ✅. All segments functionality preserved. Backend ready for production."
 
 frontend:
   - task: "Authentication UI (Login/Signup)"
