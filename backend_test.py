@@ -237,11 +237,23 @@ class TuckerTripsAPITester:
         
         all_passed = True
         for endpoint in endpoints:
-            response = self.make_request('GET', endpoint)
-            if response and response.status_code == 401:
-                print(f"✅ {endpoint} correctly returns 401 without token")
-            else:
-                print(f"❌ {endpoint} should return 401 without token, got {response.status_code if response else 'No response'}")
+            try:
+                # Make request without auth token
+                url = f"{self.base_url}{endpoint}"
+                headers = {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+                response = requests.get(url, headers=headers, timeout=10)
+                
+                if response.status_code == 401:
+                    print(f"✅ {endpoint} correctly returns 401 without token")
+                else:
+                    print(f"❌ {endpoint} should return 401 without token, got {response.status_code}")
+                    all_passed = False
+                    
+            except Exception as e:
+                print(f"❌ {endpoint} request failed: {e}")
                 all_passed = False
         
         # Restore token
