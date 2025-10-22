@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-Tucker Trips Backend API Test Suite
-Tests all authentication and trip management endpoints
+Tucker Trips Backend API Test Suite - Profile Settings & Live Chat
+Tests Profile Management, Online User Tracking, and Live Chat Messaging
 """
 
 import requests
 import json
 import sys
-from datetime import datetime, timedelta
+import time
+from datetime import datetime
 
 # Get base URL from environment
 BASE_URL = "https://journey-notes-3.preview.emergentagent.com/api"
 
-class TuckerTripsAPITester:
+class TuckerTripsBackendTester:
     def __init__(self):
         self.base_url = BASE_URL
         self.session = requests.Session()
