@@ -43,7 +43,7 @@ const LandingPage = ({ onShowAuth }) => {
             Travel is packed with priceless lessons—document it all here! Your future self (and friends) will thank you.
           </p>
           <div className="flex justify-center space-x-4">
-            <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6">
+            <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6 shadow-2xl hover:shadow-pink-500/50 transition-all glow-purple-pink">
               Get Started
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
