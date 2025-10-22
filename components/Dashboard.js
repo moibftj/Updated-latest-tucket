@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Home, MapPin, Share2, Calendar as CalendarIcon, PlusCircle, Compass, Plane, LogOut, Settings } from 'lucide-react'
 import { toast } from 'sonner'
 import TripCard from '@/components/TripCard'
-import NewTripModal from '@/components/NewTripModal'
+import EnhancedTripModal from '@/components/EnhancedTripModal'
 import ProfileSettings from '@/components/ProfileSettings'
 import ChatPanel from '@/components/ChatPanel'
 
