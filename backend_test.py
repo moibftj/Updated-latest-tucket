@@ -16,60 +16,14 @@ BASE_URL = "https://journey-notes-3.preview.emergentagent.com/api"
 class TuckerTripsBackendTester:
     def __init__(self):
         self.base_url = BASE_URL
-        self.session = requests.Session()
-        self.auth_token = None
-        self.user_data = None
-        self.created_trip_id = None
+        self.alice_token = None
+        self.bob_token = None
+        self.alice_id = None
+        self.bob_id = None
         
-        # Test data with unique email to avoid conflicts
-        import time
-        timestamp = int(time.time())
-        self.test_user = {
-            "email": f"tucker.{timestamp}@test.com",
-            "password": "test123",
-            "name": "Tucker Test"
-        }
-        
-        self.test_trip = {
-            "title": "Japan Spring 2026",
-            "destination": "Tokyo, Japan",
-            "startDate": "2026-03-28",
-            "endDate": "2026-04-08",
-            "segments": [
-                {
-                    "type": "flight",
-                    "title": "Flight to Tokyo",
-                    "details": {
-                        "airline": "JAL",
-                        "flightNumber": "JL061",
-                        "departure": "LAX",
-                        "arrival": "NRT",
-                        "departureTime": "2026-03-28T11:50:00Z",
-                        "arrivalTime": "2026-03-29T15:05:00Z"
-                    }
-                },
-                {
-                    "type": "accommodation",
-                    "title": "Hotel in Shibuya",
-                    "details": {
-                        "name": "Shibuya Sky Hotel",
-                        "address": "1-1-1 Shibuya, Tokyo",
-                        "checkIn": "2026-03-29",
-                        "checkOut": "2026-04-05",
-                        "nights": 7
-                    }
-                },
-                {
-                    "type": "transport",
-                    "title": "JR Pass",
-                    "details": {
-                        "type": "7-day JR Pass",
-                        "validFrom": "2026-03-29",
-                        "validTo": "2026-04-05"
-                    }
-                }
-            ]
-        }
+    def log(self, message):
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        print(f"[{timestamp}] {message}")
 
     def make_request(self, method, endpoint, data=None, headers=None):
         """Make HTTP request with proper error handling"""
