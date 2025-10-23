@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 
 # Get base URL from environment
-BASE_URL = "https://journey-notes-3.preview.emergentagent.com/api"
+BASE_URL = "https://travelbook-3.preview.emergentagent.com/api"
 
 class TuckerTripsBackendTester:
     def __init__(self):
