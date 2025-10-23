@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
@@ -8,6 +8,7 @@ import TripCard from '@/components/TripCard'
 import EnhancedTripModal from '@/components/EnhancedTripModal'
 import ProfileSettings from '@/components/ProfileSettings'
 import ChatPanel from '@/components/ChatPanel'
+import ShinyText from '@/components/ShinyText'
 
 const Dashboard = ({ user: initialUser, onLogout }) => {
   const [user, setUser] = useState(initialUser)
@@ -24,7 +25,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const fetchTrips = async () => {
     try {
       const response = await fetch('/api/trips', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       if (response.ok) {
         const data = await response.json()
@@ -41,11 +42,11 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
     try {
       const response = await fetch(`/api/trips/${tripId}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
 
       if (response.ok) {
-        setTrips(prev => prev.filter(t => t.id !== tripId))
+        setTrips((prev) => prev.filter((t) => t.id !== tripId))
         toast.success('Trip deleted')
       }
     } catch (error) {
@@ -53,8 +54,8 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
     }
   }
 
-  const myTrips = trips.filter(t => t.status === 'taken')
-  const futureTrips = trips.filter(t => t.status === 'future')
+  const myTrips = trips.filter((t) => t.status === 'taken')
+  const futureTrips = trips.filter((t) => t.status === 'future')
   const sharedTrips = [] // TODO: Implement sharing
 
   const renderContent = () => {
@@ -75,7 +76,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div 
+            <div
               onClick={() => setActiveSection('shared')}
               className="cursor-pointer group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all h-48 bg-cover bg-center relative"
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400')" }}
@@ -85,7 +86,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
               </div>
             </div>
 
-            <div 
+            <div
               onClick={() => setActiveSection('future')}
               className="cursor-pointer group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all h-48 bg-cover bg-center relative"
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400')" }}
@@ -95,7 +96,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
               </div>
             </div>
 
-            <div 
+            <div
               onClick={() => setActiveSection('mytrips')}
               className="cursor-pointer group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all h-48 bg-cover bg-center relative"
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400')" }}
@@ -105,7 +106,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
               </div>
             </div>
 
-            <div 
+            <div
               onClick={() => setShowNewTripModal(true)}
               className="cursor-pointer group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all h-48 bg-cover bg-center relative"
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=400')" }}
@@ -153,7 +154,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           <h2 className="text-3xl font-bold text-gray-900">{sectionTitle}</h2>
           <Button onClick={() => setShowNewTripModal(true)} className="bg-purple-600 hover:bg-purple-700">
             <PlusCircle className="w-5 h-5 mr-2" />
-            New Trip
+            <ShinyText text="New Trip" speed={3} />
           </Button>
         </div>
 
@@ -171,7 +172,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tripsToShow.map(trip => (
+            {tripsToShow.map((trip) => (
               <TripCard key={trip.id} trip={trip} onDelete={deleteTrip} />
             ))}
           </div>
@@ -192,12 +193,9 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
             <h1 className="text-xl font-bold text-gray-900">TuckerTrips</h1>
           </div>
 
-          <Button 
-            onClick={() => setShowNewTripModal(true)}
-            className="w-full mb-6 bg-purple-600 hover:bg-purple-700"
-          >
+          <Button onClick={() => setShowNewTripModal(true)} className="w-full mb-6 bg-purple-600 hover:bg-purple-700">
             <PlusCircle className="w-5 h-5 mr-2" />
-            New Trip
+            <ShinyText text="New Trip" speed={3} />
           </Button>
 
           <nav className="space-y-2">
@@ -275,35 +273,26 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
               </Button>
             </div>
           </div>
-          {user.bio && (
-            <p className="text-xs text-gray-500 truncate">{user.bio}</p>
-          )}
+          {user.bio && <p className="text-xs text-gray-500 truncate">{user.bio}</p>}
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 flex-1 p-8">
-        {renderContent()}
-      </main>
+      <main className="ml-64 flex-1 p-8">{renderContent()}</main>
 
       {/* Enhanced Trip Modal */}
-      <EnhancedTripModal 
+      <EnhancedTripModal
         open={showNewTripModal}
         onClose={() => setShowNewTripModal(false)}
         onSuccess={(newTrip) => {
-          setTrips(prev => [newTrip, ...prev])
+          setTrips((prev) => [newTrip, ...prev])
           setShowNewTripModal(false)
           toast.success('Trip created successfully!')
         }}
       />
 
       {/* Profile Settings Modal */}
-      <ProfileSettings 
-        open={showProfileSettings}
-        onClose={() => setShowProfileSettings(false)}
-        user={user}
-        onUserUpdate={setUser}
-      />
+      <ProfileSettings open={showProfileSettings} onClose={() => setShowProfileSettings(false)} user={user} onUserUpdate={setUser} />
 
       {/* Live Chat Panel */}
       <ChatPanel currentUser={user} />

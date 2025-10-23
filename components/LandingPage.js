@@ -2,6 +2,17 @@
 
 import { Button } from '@/components/ui/button'
 import { Plane, Camera, MapPin, Users, ArrowRight } from 'lucide-react'
+import ShinyText from '@/components/ShinyText'
+import Stack from '@/components/Stack'
+import MagicBento from '@/components/MagicBento'
+
+const heroImages = [
+  { id: 1, img: 'https://images.unsplash.com/photo-1568005885177-4645086c3e01?q=80&w=800&auto=format' },
+  { id: 2, img: 'https://images.unsplash.com/photo-1614088459293-5669fadc3448?q=80&w=800&auto=format' },
+  { id: 3, img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800&auto=format' },
+  { id: 4, img: 'https://images.unsplash.com/photo-1489396160836-2c99c977e970?q=80&w=800&auto=format' },
+  { id: 5, img: 'https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=800&auto=format' },
+]
 
 const LandingPage = ({ onShowAuth }) => {
   return (
@@ -31,85 +42,37 @@ const LandingPage = ({ onShowAuth }) => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
-            WELCOME TO<br />
-            <span className="text-pink-300">TUCKER TRIPS</span>
-          </h1>
-          <p className="text-2xl md:text-3xl text-purple-200 mb-8 font-light">
-            Experience The World, One Voyage At A Time.
-          </p>
-          <p className="text-lg text-purple-100 max-w-2xl mx-auto mb-10">
-            Travel is packed with priceless lessons—document it all here! Your future self (and friends) will thank you.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6 shadow-2xl hover:shadow-pink-500/50 transition-all glow-purple-pink">
-              Get Started
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                WELCOME TO<br />
+                <span className="text-pink-300">TUCKER TRIPS</span>
+              </h1>
+              <p className="text-2xl md:text-3xl text-purple-200 mb-8 font-light">Experience The World, One Voyage At A Time.</p>
+              <p className="text-lg text-purple-100 max-w-2xl mx-auto lg:mx-0 mb-10">Travel is packed with priceless lessons—document it all here! Your future self (and friends) will thank you.</p>
+              <div className="flex justify-center lg:justify-start">
+                <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6 shadow-2xl hover:shadow-pink-500/50 transition-all glow-purple-pink">
+                  <ShinyText text="Get Started" speed={3} />
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <Stack cardsData={heroImages} cardDimensions={{ width: 240, height: 300 }} />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Subtitle Section */}
-      <section className="py-12 px-4 bg-gradient-to-r from-purple-600 to-pink-500">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Tucker Trips Organizes Your Travel Logistics - Log It, Share It, Love It!
-          </h2>
+      {/* Magic Bento Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-purple-800 to-purple-900">
+        <div className="max-w-7xl mx-auto text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Everything you need to plan and remember remarkable trips</h2>
+          <p className="text-purple-200 mt-2">We can swap the card copy with your custom labels and descriptions anytime.</p>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-purple-800 to-purple-900">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          {/* Feature 1 */}
-          <div className="text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="p-6 bg-pink-500 rounded-full">
-                <Camera className="w-12 h-12 text-white" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Capture Every Moment!</h3>
-            <p className="text-purple-200 text-lg">
-              Travel is packed with priceless lessons—document it all here! Your future self (and friends) will thank you.
-            </p>
-            <div className="mt-4 text-pink-400">
-              <ArrowRight className="w-6 h-6 mx-auto" />
-            </div>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="p-6 bg-pink-500 rounded-full">
-                <MapPin className="w-12 h-12 text-white" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Master Your Journey!</h3>
-            <p className="text-purple-200 text-lg">
-              Plan like a pro! Save time, money, and headaches by tapping into your network's insider tips—skip the faceless online reviews!
-            </p>
-            <div className="mt-4 text-pink-400">
-              <ArrowRight className="w-6 h-6 mx-auto" />
-            </div>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="p-6 bg-pink-500 rounded-full">
-                <Users className="w-12 h-12 text-white" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Build Your Adventure Tribe!</h3>
-            <p className="text-purple-200 text-lg">
-              Turn connections into a powerhouse of shared experiences. Swap stories, trade tips, and grow your travel community!
-            </p>
-            <div className="mt-4 text-pink-400">
-              <ArrowRight className="w-6 h-6 mx-auto" />
-            </div>
-          </div>
+        <div className="flex justify-center">
+          <MagicBento />
         </div>
       </section>
 
