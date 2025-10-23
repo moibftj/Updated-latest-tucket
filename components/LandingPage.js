@@ -7,11 +7,11 @@ import Stack from '@/components/Stack'
 import MagicBento from '@/components/MagicBento'
 
 const heroImages = [
-  { id: 1, img: 'https://images.unsplash.com/photo-1568005885177-4645086c3e01?q=80&w=800&auto=format' },
-  { id: 2, img: 'https://images.unsplash.com/photo-1614088459293-5669fadc3448?q=80&w=800&auto=format' },
-  { id: 3, img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800&auto=format' },
-  { id: 4, img: 'https://images.unsplash.com/photo-1489396160836-2c99c977e970?q=80&w=800&auto=format' },
-  { id: 5, img: 'https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=800&auto=format' },
+  { id: 1, img: 'https://images.unsplash.com/photo-1568005885177-4645086c3e01?q=80&w=1200&auto=format' },
+  { id: 2, img: 'https://images.unsplash.com/photo-1614088459293-5669fadc3448?q=80&w=1200&auto=format' },
+  { id: 3, img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format' },
+  { id: 4, img: 'https://images.unsplash.com/photo-1489396160836-2c99c977e970?q=80&w=1200&auto=format' },
+  { id: 5, img: 'https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=1200&auto=format' },
 ]
 
 const LandingPage = ({ onShowAuth }) => {
@@ -59,7 +59,7 @@ const LandingPage = ({ onShowAuth }) => {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <Stack cardsData={heroImages} cardDimensions={{ width: 240, height: 300 }} />
+              <Stack cardsData={heroImages} cardDimensions={{ width: 300, height: 360 }} />
             </div>
           </div>
         </div>
