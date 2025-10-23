@@ -18,7 +18,7 @@ const ShinyText = ({ text = '', disabled = false, speed = 3, className = '' }) =
         WebkitBackgroundClip: 'text',
         backgroundSize: '200% 100%',
         animation: `tt-shimmer ${duration}s linear infinite`,
-        filter: 'drop-shadow(0 0 6px rgba(236,72,153,0.35)) drop-shadow(0 0 12px rgba(168,85,247,0.25))`,
+        filter: 'drop-shadow(0 0 6px rgba(236,72,153,0.35)) drop-shadow(0 0 12px rgba(168,85,247,0.25))',
       }}
     >
       {text}
