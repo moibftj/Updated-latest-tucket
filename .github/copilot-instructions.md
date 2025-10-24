@@ -18,12 +18,16 @@ Tucker Trips is a Next.js 14 travel planning application with a complete full-st
 - Token verification via `verifyToken()` helper extracts `userId` from JWT payload
 - Protected routes check `Authorization: Bearer <token>` header
 - User authentication state managed in main `app/page.js` with `checkAuth()` on mount
+- Online presence tracking via heartbeat system (`POST /api/users/heartbeat`)
 
 ### MongoDB Data Patterns
 - Collections: `users`, `trips`, `messages`
 - All documents use custom `id` field (UUID v4) instead of MongoDB `_id`
 - Responses always strip MongoDB `_id` with destructuring: `const { _id, ...data } = result`
 - Connection singleton pattern: `connectToMongo()` reuses client instance
+- **User Model**: `{ id, email, password, name, bio, lastSeen, isOnline }`
+- **Trip Model**: `{ id, userId, title, destination, startDate, endDate, status: 'future'|'taken', visibility: 'private'|'public', segments: [], description, coverPhoto }`
+- **Message Model**: `{ id, senderId, recipientId, content, read: boolean, createdAt }`
 
 ### UI Component Architecture
 - **shadcn/ui + Radix**: All UI components in `/components/ui/` follow shadcn patterns
@@ -47,18 +51,28 @@ yarn dev              # Uses NODE_OPTIONS='--max-old-space-size=512'
 # Alternative dev modes
 yarn dev:no-reload    # Without hot reload
 yarn dev:webpack      # Webpack-specific optimizations
+
+# Production build
+yarn build && yarn start
 ```
 
 ### Database Operations
 - MongoDB connection via environment variables: `MONGO_URL`, `DB_NAME`, `JWT_SECRET`
 - No migrations - collections created on first write
 - Direct MongoDB client usage, no schema validation
+- Connection singleton pattern prevents multiple connections
 
-### Testing
-- Backend API testing via Python script `backend_test.py`
-- Tests cover full user journey: registration → profile → messaging → trips
-- Tests run against live deployment URL
-- No frontend unit tests currently implemented
+### Testing & Quality Assurance
+- **Backend Testing**: Comprehensive Python test suite in `backend_test.py`
+  - Tests full user journey: registration → profile → messaging → trips
+  - Runs against live deployment (`BASE_URL` configurable)
+  - Tests authentication, CRUD operations, real-time features
+  - Usage: `python backend_test.py` (requires `requests` library)
+- **AI Agent Testing Protocol**: Uses `test_result.md` for agent coordination
+  - YAML-structured task tracking with status history
+  - Main agent updates before delegating to testing agent
+  - Tracks stuck tasks and testing priorities
+- **Performance**: Webpack optimized for dev containers with reduced file watching
 
 ## Key File Locations
 
@@ -105,6 +119,19 @@ yarn dev:webpack      # Webpack-specific optimizations
 }
 ```
 
+### User Schema
+```javascript
+{
+  id: string,           // UUID
+  email: string,
+  password: string,     // bcrypt hashed
+  name: string,
+  bio: string,
+  lastSeen: Date,
+  isOnline: boolean
+}
+```
+
 ## Common Patterns
 
 ### API Route Addition
@@ -131,3 +158,36 @@ Components like `EnhancedTripModal.js` use:
 - JWT secret in `JWT_SECRET` 
 - Optional `CORS_ORIGINS` for production deployments
 - Uses standalone Next.js build for containerization
+
+## AI Agent Testing Protocol
+This project uses a specialized multi-agent testing system via `test_result.md`:
+
+### Key Patterns
+- **YAML Task Tracking**: All tasks tracked with `implemented`, `working`, `stuck_count`, `priority`
+- **Status History**: Each task maintains detailed history with agent attribution
+- **Communication Log**: Agent coordination through `agent_communication` array
+- **Testing Delegation**: Main agent updates `test_result.md` before calling testing agent
+
+### Usage Guidelines
+- Always read `test_result.md` before making changes to understand current state
+- Update task status history when implementing features
+- Use `needs_retesting: true` to flag items for testing agent
+- Track persistent issues via `stuck_count` increments
+- Reference `test_plan.current_focus` for priority guidance
+
+### File Structure
+```yaml
+user_problem_statement: "..."
+backend:
+  - task: "Feature name"
+    implemented: true/false
+    working: true/false/"NA"
+    file: "path/to/file"
+    stuck_count: 0
+    priority: "high"/"medium"/"low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"/"testing"/"user"
+        comment: "Detailed description"
+```
