@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button'
 import { MapPin, Calendar, Plane, Hotel, Car, Trash2, Eye, EyeOff } from 'lucide-react'
 
-const TripCard = ({ trip, onDelete }) => {
+const TripCard = ({ trip, onDelete, showUserName = false }) => {
   return (
     <Card className="hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden">
       {/* Cover Image */}
@@ -22,6 +22,9 @@ const TripCard = ({ trip, onDelete }) => {
             <MapPin className="w-4 h-4 mr-1" />
             {trip.destination}
           </p>
+          {showUserName && trip.userName && (
+            <p className="text-white/80 text-sm mt-1">by {trip.userName}</p>
+          )}
         </div>
       </div>
 
@@ -63,17 +66,19 @@ const TripCard = ({ trip, onDelete }) => {
           <span className="text-xs text-gray-500">
             {trip.status === 'future' ? '📅 Future Trip' : '✓ Trip Taken'}
           </span>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              onDelete(trip.id)
-            }}
-            className="opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <Trash2 className="w-4 h-4 text-red-500" />
-          </Button>
+          {onDelete && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation()
+                onDelete(trip.id)
+              }}
+              className="opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <Trash2 className="w-4 h-4 text-red-500" />
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

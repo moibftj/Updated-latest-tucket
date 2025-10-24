@@ -14,6 +14,8 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [user, setUser] = useState(initialUser)
   const [activeSection, setActiveSection] = useState('home')
   const [trips, setTrips] = useState([])
+  const [publicTrips, setPublicTrips] = useState([])
+  const [sharedTrips, setSharedTrips] = useState([])
   const [showNewTripModal, setShowNewTripModal] = useState(false)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -21,6 +23,14 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   useEffect(() => {
     fetchTrips()
   }, [])
+
+  useEffect(() => {
+    if (activeSection === 'discover') {
+      fetchPublicTrips()
+    } else if (activeSection === 'shared') {
+      fetchSharedTrips()
+    }
+  }, [activeSection])
 
   const fetchTrips = async () => {
     try {
@@ -33,6 +43,40 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
       }
     } catch (error) {
       console.error('Failed to fetch trips:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchPublicTrips = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('/api/trips/public/all', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setPublicTrips(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch public trips:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchSharedTrips = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('/api/trips/shared', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setSharedTrips(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch shared trips:', error)
     } finally {
       setLoading(false)
     }
@@ -56,7 +100,6 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
 
   const myTrips = trips.filter((t) => t.status === 'taken')
   const futureTrips = trips.filter((t) => t.status === 'future')
-  const sharedTrips = [] // TODO: Implement sharing
 
   const renderContent = () => {
     if (loading) {
@@ -145,17 +188,41 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
       )
     }
 
-    const tripsToShow = activeSection === 'mytrips' ? myTrips : activeSection === 'future' ? futureTrips : sharedTrips
-    const sectionTitle = activeSection === 'mytrips' ? 'My Trips' : activeSection === 'future' ? 'Future Trips' : 'Shared Trips'
+    let tripsToShow = []
+    let sectionTitle = ''
+    let emptyMessage = 'Start planning your next adventure!'
+    let canDelete = true
+
+    if (activeSection === 'mytrips') {
+      tripsToShow = myTrips
+      sectionTitle = 'My Trips'
+      emptyMessage = 'You haven\'t taken any trips yet. Start planning your first adventure!'
+    } else if (activeSection === 'future') {
+      tripsToShow = futureTrips
+      sectionTitle = 'Future Trips'
+      emptyMessage = 'No future trips planned yet. Create your first trip!'
+    } else if (activeSection === 'shared') {
+      tripsToShow = sharedTrips
+      sectionTitle = 'Shared Trips'
+      emptyMessage = 'No trips have been shared with you yet.'
+      canDelete = false
+    } else if (activeSection === 'discover') {
+      tripsToShow = publicTrips
+      sectionTitle = 'Discover Public Trips'
+      emptyMessage = 'No public trips available yet. Be the first to share a trip!'
+      canDelete = false
+    }
 
     return (
       <div>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-gray-900">{sectionTitle}</h2>
-          <Button onClick={() => setShowNewTripModal(true)} className="bg-purple-600 hover:bg-purple-700">
-            <PlusCircle className="w-5 h-5 mr-2" />
-            <ShinyText text="New Trip" speed={3} />
-          </Button>
+          {(activeSection === 'mytrips' || activeSection === 'future') && (
+            <Button onClick={() => setShowNewTripModal(true)} className="bg-purple-600 hover:bg-purple-700">
+              <PlusCircle className="w-5 h-5 mr-2" />
+              <ShinyText text="New Trip" speed={3} />
+            </Button>
+          )}
         </div>
 
         {tripsToShow.length === 0 ? (
@@ -164,16 +231,18 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
               <MapPin className="w-12 h-12 text-gray-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No trips yet</h3>
-            <p className="text-gray-500 mb-6">Start planning your next adventure!</p>
-            <Button onClick={() => setShowNewTripModal(true)} className="bg-purple-600 hover:bg-purple-700">
-              <PlusCircle className="w-5 h-5 mr-2" />
-              Create Your First Trip
-            </Button>
+            <p className="text-gray-500 mb-6">{emptyMessage}</p>
+            {(activeSection === 'mytrips' || activeSection === 'future') && (
+              <Button onClick={() => setShowNewTripModal(true)} className="bg-purple-600 hover:bg-purple-700">
+                <PlusCircle className="w-5 h-5 mr-2" />
+                Create Your First Trip
+              </Button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tripsToShow.map((trip) => (
-              <TripCard key={trip.id} trip={trip} onDelete={deleteTrip} />
+              <TripCard key={trip.id} trip={trip} onDelete={canDelete ? deleteTrip : null} showUserName={!canDelete} />
             ))}
           </div>
         )}

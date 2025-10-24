@@ -411,6 +411,7 @@ async function handleRoute(request, { params }) {
         airlines: airlines || [],
         accommodations: accommodations || [],
         segments: segments || [],
+        sharedWith: [],
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -439,6 +440,66 @@ async function handleRoute(request, { params }) {
 
       const cleanedTrips = trips.map(({ _id, ...rest }) => rest)
       return handleCORS(request, NextResponse.json(cleanedTrips))
+    }
+
+    // GET /api/trips/public/all - Get all public trips
+    if (route === '/trips/public/all' && method === 'GET') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(request, NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      const trips = await db.collection('trips')
+        .find({ visibility: 'public' })
+        .sort({ createdAt: -1 })
+        .limit(50)
+        .toArray()
+
+      // Get user info for each trip
+      const tripsWithUsers = await Promise.all(trips.map(async (trip) => {
+        const user = await db.collection('users').findOne({ id: trip.userId })
+        const { _id, password, ...tripData } = trip
+        return {
+          ...tripData,
+          userName: user?.name || 'Unknown User'
+        }
+      }))
+
+      return handleCORS(request, NextResponse.json(tripsWithUsers))
+    }
+
+    // GET /api/trips/shared - Get trips shared with current user
+    if (route === '/trips/shared' && method === 'GET') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(request, NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      // Find trips where current user is in the sharedWith array
+      const trips = await db.collection('trips')
+        .find({
+          sharedWith: { $in: [decoded.userId] }
+        })
+        .sort({ createdAt: -1 })
+        .toArray()
+
+      // Get user info for each trip
+      const tripsWithUsers = await Promise.all(trips.map(async (trip) => {
+        const user = await db.collection('users').findOne({ id: trip.userId })
+        const { _id, ...tripData } = trip
+        return {
+          ...tripData,
+          userName: user?.name || 'Unknown User'
+        }
+      }))
+
+      return handleCORS(request, NextResponse.json(tripsWithUsers))
     }
 
     // GET /api/trips/:id

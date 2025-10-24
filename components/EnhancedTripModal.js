@@ -156,7 +156,7 @@ const EnhancedTripModal = ({ open, onClose, onSuccess }) => {
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Create New Trip</DialogTitle>
-          <DialogDescription>Step {currentStep} of 6</DialogDescription>
+          <DialogDescription>Step {currentStep} of 5</DialogDescription>
         </DialogHeader>
 
         {/* Step 1: Basic Trip Details */}
