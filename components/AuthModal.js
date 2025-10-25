@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import { Plane } from 'lucide-react'
+import { authApi } from '@/lib/api'
 
 const AuthModal = ({ open, onClose, onSuccess }) => {
   const [isLogin, setIsLogin] = useState(true)
@@ -19,27 +20,18 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
 
   const handleAuth = async (e) => {
     e.preventDefault()
-    const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register'
-    
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(authForm)
-      })
 
-      const data = await response.json()
-      
-      if (response.ok) {
-        localStorage.setItem('token', data.token)
-        toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!')
-        setAuthForm({ email: '', password: '', name: '' })
-        onSuccess(data.user)
-      } else {
-        toast.error(data.error || 'Authentication failed')
-      }
+    try {
+      const data = isLogin
+        ? await authApi.login(authForm)
+        : await authApi.register(authForm)
+
+      localStorage.setItem('token', data.token)
+      toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!')
+      setAuthForm({ email: '', password: '', name: '' })
+      onSuccess(data.user)
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error(error.message || 'Authentication failed')
     }
   }
 

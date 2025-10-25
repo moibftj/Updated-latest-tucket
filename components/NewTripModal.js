@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Plane, Hotel, Car, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { tripApi } from '@/lib/api'
 
 const NewTripModal = ({ open, onClose, onSuccess }) => {
   const [currentStep, setCurrentStep] = useState(1)
@@ -55,25 +56,12 @@ const NewTripModal = ({ open, onClose, onSuccess }) => {
     }
 
     try {
-      const response = await fetch('/api/trips', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(tripForm)
-      })
-
-      if (response.ok) {
-        const newTrip = await response.json()
-        onSuccess(newTrip)
-        setCurrentStep(1)
-        setTripForm({ title: '', destination: '', startDate: '', endDate: '', status: 'future', visibility: 'private', segments: [] })
-      } else {
-        toast.error('Failed to create trip')
-      }
+      const newTrip = await tripApi.create(tripForm)
+      onSuccess(newTrip)
+      setCurrentStep(1)
+      setTripForm({ title: '', destination: '', startDate: '', endDate: '', status: 'future', visibility: 'private', segments: [] })
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Failed to create trip')
     }
   }
 

@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { User } from 'lucide-react'
+import { userApi } from '@/lib/api'
 
 const ProfileSettings = ({ open, onClose, user, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -19,25 +20,12 @@ const ProfileSettings = ({ open, onClose, user, onUpdate }) => {
   const handleSave = async () => {
     setSaving(true)
     try {
-      const response = await fetch('/api/users/profile', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(formData)
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        onUpdate(data.user)
-        toast.success('Profile updated successfully!')
-        onClose()
-      } else {
-        toast.error('Failed to update profile')
-      }
+      const data = await userApi.updateProfile(formData)
+      onUpdate(data.user)
+      toast.success('Profile updated successfully!')
+      onClose()
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Failed to update profile')
     } finally {
       setSaving(false)
     }

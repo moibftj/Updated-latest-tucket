@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { MessageCircle, X, Send, Circle } from 'lucide-react'
 import { toast } from 'sonner'
+import { userApi, messageApi } from '@/lib/api'
 
 const ChatPanel = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,10 +28,7 @@ const ChatPanel = ({ currentUser }) => {
   useEffect(() => {
     const heartbeat = setInterval(async () => {
       try {
-        await fetch('/api/users/heartbeat', {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        })
+        await userApi.heartbeat()
       } catch (error) {
         console.error('Heartbeat failed:', error)
       }
@@ -45,13 +43,8 @@ const ChatPanel = ({ currentUser }) => {
 
     const fetchOnlineUsers = async () => {
       try {
-        const response = await fetch('/api/users/online', {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        })
-        if (response.ok) {
-          const users = await response.json()
-          setOnlineUsers(users)
-        }
+        const users = await userApi.getOnlineUsers()
+        setOnlineUsers(users)
       } catch (error) {
         console.error('Failed to fetch online users:', error)
       }
@@ -69,13 +62,8 @@ const ChatPanel = ({ currentUser }) => {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`/api/messages/${selectedUser.id}`, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        })
-        if (response.ok) {
-          const msgs = await response.json()
-          setMessages(msgs)
-        }
+        const msgs = await messageApi.getConversation(selectedUser.id)
+        setMessages(msgs)
       } catch (error) {
         console.error('Failed to fetch messages:', error)
       }
@@ -91,27 +79,14 @@ const ChatPanel = ({ currentUser }) => {
     if (!newMessage.trim() || !selectedUser) return
 
     try {
-      const response = await fetch('/api/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          recipientId: selectedUser.id,
-          content: newMessage
-        })
+      const message = await messageApi.send({
+        recipientId: selectedUser.id,
+        content: newMessage
       })
-
-      if (response.ok) {
-        const message = await response.json()
-        setMessages(prev => [...prev, message])
-        setNewMessage('')
-      } else {
-        toast.error('Failed to send message')
-      }
+      setMessages(prev => [...prev, message])
+      setNewMessage('')
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Failed to send message')
     }
   }
 

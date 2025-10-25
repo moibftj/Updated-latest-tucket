@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Star, Trash2, Plus } from 'lucide-react'
 import { toast } from 'sonner'
+import { tripApi } from '@/lib/api'
 
 const StarRating = ({ value, onChange, disabled }) => {
   return (
@@ -113,39 +114,26 @@ const EnhancedTripModal = ({ open, onClose, onSuccess }) => {
     }
 
     try {
-      const response = await fetch('/api/trips', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(tripForm)
+      const newTrip = await tripApi.create(tripForm)
+      onSuccess(newTrip)
+      setCurrentStep(1)
+      setTripForm({
+        title: '',
+        destination: '',
+        startDate: '',
+        endDate: '',
+        description: '',
+        status: 'future',
+        visibility: 'private',
+        coverPhoto: '',
+        tripImages: '',
+        weather: '',
+        overallComment: '',
+        airlines: [],
+        accommodations: []
       })
-
-      if (response.ok) {
-        const newTrip = await response.json()
-        onSuccess(newTrip)
-        setCurrentStep(1)
-        setTripForm({
-          title: '',
-          destination: '',
-          startDate: '',
-          endDate: '',
-          description: '',
-          status: 'future',
-          visibility: 'private',
-          coverPhoto: '',
-          tripImages: '',
-          weather: '',
-          overallComment: '',
-          airlines: [],
-          accommodations: []
-        })
-      } else {
-        toast.error('Failed to create trip')
-      }
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Failed to create trip')
     }
   }
 

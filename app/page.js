@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import LandingPage from '@/components/LandingPage'
 import AuthModal from '@/components/AuthModal'
 import Dashboard from '@/components/Dashboard'
+import { authApi } from '@/lib/api'
 
 const LoadingState = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
@@ -29,20 +30,11 @@ const App = () => {
 
     const verifyUser = async () => {
       try {
-        const response = await fetch('/api/auth/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-
-        if (!response.ok) {
-          localStorage.removeItem('token')
-          setLoading(false)
-          return
-        }
-
-        const data = await response.json()
+        const data = await authApi.getMe()
         setUser(data.user)
       } catch (error) {
         console.error('Auth check failed:', error)
+        localStorage.removeItem('token')
       } finally {
         setLoading(false)
       }
