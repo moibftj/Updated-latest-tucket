@@ -1,0 +1,11 @@
+[build]
+  command = "pnpm build"
+  publish = ".next"
+  functions = ".netlify/functions-internal"
+
+[build.environment]
+  NODE_VERSION = "22.17.0"
+  NETLIFY_USE_PNPM = "true"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

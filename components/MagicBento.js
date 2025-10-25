@@ -5,16 +5,46 @@ import { gsap } from 'gsap'
 
 const DEFAULT_PARTICLE_COUNT = 12
 const DEFAULT_SPOTLIGHT_RADIUS = 300
-const DEFAULT_GLOW_COLOR = '132, 0, 255'
+const DEFAULT_GLOW_COLOR = '236, 72, 153'
 const MOBILE_BREAKPOINT = 768
 
 const defaultCards = [
-  { color: '#060010', title: 'Plan Trips', description: 'Dates, budgets, segments', label: 'Planner' },
-  { color: '#060010', title: 'Itineraries', description: 'Flights, stays, activities', label: 'Logistics' },
-  { color: '#060010', title: 'Collaboration', description: 'Share with trusted circle', label: 'Sharing' },
-  { color: '#060010', title: 'Journal', description: 'Notes, tags and memories', label: 'Journal' },
-  { color: '#060010', title: 'Templates', description: 'Reuse winning plans', label: 'Templates' },
-  { color: '#060010', title: 'Recommendations', description: 'Save and publish tips', label: 'Tips' },
+  {
+    background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.32), rgba(59, 7, 100, 0.85))',
+    title: 'Plan Trips',
+    description: 'Dates, budgets, segments',
+    label: 'Planner',
+  },
+  {
+    background: 'linear-gradient(135deg, rgba(219, 39, 119, 0.35), rgba(126, 34, 206, 0.75))',
+    title: 'Itineraries',
+    description: 'Flights, stays, activities',
+    label: 'Logistics',
+  },
+  {
+    background: 'linear-gradient(135deg, rgba(244, 114, 182, 0.28), rgba(76, 29, 149, 0.9))',
+    title: 'Collaboration',
+    description: 'Share with trusted circle',
+    label: 'Sharing',
+  },
+  {
+    background: 'linear-gradient(135deg, rgba(253, 164, 175, 0.3), rgba(88, 28, 135, 0.85))',
+    title: 'Journal',
+    description: 'Notes, tags and memories',
+    label: 'Journal',
+  },
+  {
+    background: 'linear-gradient(135deg, rgba(251, 113, 133, 0.26), rgba(109, 40, 217, 0.82))',
+    title: 'Templates',
+    description: 'Reuse winning plans',
+    label: 'Templates',
+  },
+  {
+    background: 'linear-gradient(135deg, rgba(244, 63, 94, 0.35), rgba(91, 33, 182, 0.78))',
+    title: 'Recommendations',
+    description: 'Save and publish tips',
+    label: 'Tips',
+  },
 ]
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
@@ -443,20 +473,22 @@ const MagicBento = ({
             }`
 
             const cardStyle = {
-              backgroundColor: card.color || 'var(--background-dark)',
-              borderColor: 'var(--border-color)',
+              background: card.background || card.color || 'var(--background-dark)',
+              borderColor: card.borderColor || 'rgba(255, 255, 255, 0.08)',
               color: '#fff',
               '--glow-x': '50%',
               '--glow-y': '50%',
               '--glow-intensity': '0',
               '--glow-radius': '200px',
+              '--accent-color': `rgba(${glowColor}, 1)`,
+              '--accent-soft': `rgba(${glowColor}, 0.22)`,
             }
 
             if (enableStars) {
               return (
                 <ParticleCard key={index} className={baseClassName} style={cardStyle} disableAnimations={shouldDisableAnimations} particleCount={particleCount} glowColor={glowColor} enableTilt={enableTilt} clickEffect={clickEffect} enableMagnetism={enableMagnetism}>
                   <div className="card__header flex justify-between gap-3 relative text-white">
-                    <span className="card__label text-base opacity-90">{card.label}</span>
+                    <span className="card__label text-base font-semibold tracking-wide" style={{ color: 'var(--accent-color)' }}>{card.label}</span>
                   </div>
                   <div className="card__content flex flex-col relative text-white">
                     <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>{card.title}</h3>
@@ -469,7 +501,7 @@ const MagicBento = ({
             return (
               <div key={index} className={baseClassName} style={cardStyle}>
                 <div className="card__header flex justify-between gap-3 relative text-white">
-                  <span className="card__label text-base opacity-90">{card.label}</span>
+                  <span className="card__label text-base font-semibold tracking-wide" style={{ color: 'var(--accent-color)' }}>{card.label}</span>
                 </div>
                 <div className="card__content flex flex-col relative text-white">
                   <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>{card.title}</h3>
