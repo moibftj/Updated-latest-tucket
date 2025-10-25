@@ -31,45 +31,11 @@ async function connectToMongo() {
 }
 
 // Helper function to handle CORS
-function parseAllowedOrigins() {
-  return (process.env.CORS_ORIGINS ?? '')
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean)
-}
-
-function resolveAllowedOrigin(request) {
-  const allowedOrigins = parseAllowedOrigins()
-  const requestOrigin = request.headers.get('origin')
-
-  if (allowedOrigins.length === 0 || allowedOrigins.includes('*')) {
-    return requestOrigin ?? '*'
-  }
-
-  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
-    return requestOrigin
-  }
-
-  return allowedOrigins[0]
-}
-
-function handleCORS(request, response) {
-  const allowOrigin = resolveAllowedOrigin(request)
-
-  if (allowOrigin) {
-    response.headers.set('Access-Control-Allow-Origin', allowOrigin)
-  }
-
+function handleCORS(response) {
+  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
   response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
   response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.append('Vary', 'Origin')
-
-  if (allowOrigin && allowOrigin !== '*') {
-    response.headers.set('Access-Control-Allow-Credentials', 'true')
-  } else {
-    response.headers.delete('Access-Control-Allow-Credentials')
-  }
-
+  response.headers.set('Access-Control-Allow-Credentials', 'true')
   return response
 }
 
@@ -89,8 +55,8 @@ function verifyToken(request) {
 }
 
 // OPTIONS handler for CORS
-export async function OPTIONS(request) {
-  return handleCORS(request, new NextResponse(null, { status: 200 }))
+export async function OPTIONS() {
+  return handleCORS(new NextResponse(null, { status: 200 }))
 }
 
 // Route handler function
@@ -115,7 +81,7 @@ async function handleRoute(request, { params }) {
         // Check if user exists
         const existingUser = await db.collection('users').findOne({ email })
         if (existingUser) {
-          return handleCORS(request, NextResponse.json(
+          return handleCORS(NextResponse.json(
             { error: 'User already exists' },
             { status: 409 }
           ))
@@ -145,13 +111,13 @@ async function handleRoute(request, { params }) {
           { expiresIn: '7d' }
         )
 
-        return handleCORS(request, NextResponse.json({
+        return handleCORS(NextResponse.json({
           user: { id: user.id, email: user.email, name: user.name, bio: user.bio },
           token
         }, { status: 201 }))
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return handleCORS(request, NextResponse.json(
+          return handleCORS(NextResponse.json(
             { error: 'Validation failed', details: error.errors },
             { status: 400 }
           ))
@@ -171,7 +137,7 @@ async function handleRoute(request, { params }) {
         // Find user
         const user = await db.collection('users').findOne({ email })
         if (!user) {
-          return handleCORS(request, NextResponse.json(
+          return handleCORS(NextResponse.json(
             { error: 'Invalid credentials' },
             { status: 401 }
           ))
@@ -180,7 +146,7 @@ async function handleRoute(request, { params }) {
         // Verify password
         const isValid = await bcrypt.compare(password, user.password)
         if (!isValid) {
-          return handleCORS(request, NextResponse.json(
+          return handleCORS(NextResponse.json(
             { error: 'Invalid credentials' },
             { status: 401 }
           ))
@@ -199,13 +165,13 @@ async function handleRoute(request, { params }) {
           { expiresIn: '7d' }
         )
 
-        return handleCORS(request, NextResponse.json({
+        return handleCORS(NextResponse.json({
           user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' },
           token
         }))
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return handleCORS(request, NextResponse.json(
+          return handleCORS(NextResponse.json(
             { error: 'Validation failed', details: error.errors },
             { status: 400 }
           ))
@@ -218,7 +184,7 @@ async function handleRoute(request, { params }) {
     if (route === '/auth/me' && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -226,13 +192,13 @@ async function handleRoute(request, { params }) {
 
       const user = await db.collection('users').findOne({ id: decoded.userId })
       if (!user) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'User not found' },
           { status: 404 }
         ))
       }
 
-      return handleCORS(request, NextResponse.json({
+      return handleCORS(NextResponse.json({
         user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' }
       }))
     }
@@ -243,7 +209,7 @@ async function handleRoute(request, { params }) {
     if (route === '/users/profile' && method === 'PATCH') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -262,7 +228,7 @@ async function handleRoute(request, { params }) {
       )
 
       const user = await db.collection('users').findOne({ id: decoded.userId })
-      return handleCORS(request, NextResponse.json({
+      return handleCORS(NextResponse.json({
         user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' }
       }))
     }
@@ -271,7 +237,7 @@ async function handleRoute(request, { params }) {
     if (route === '/users/heartbeat' && method === 'POST') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -282,14 +248,14 @@ async function handleRoute(request, { params }) {
         { $set: { lastSeen: new Date(), isOnline: true } }
       )
 
-      return handleCORS(request, NextResponse.json({ success: true }))
+      return handleCORS(NextResponse.json({ success: true }))
     }
 
     // GET /api/users/online
     if (route === '/users/online' && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -308,7 +274,7 @@ async function handleRoute(request, { params }) {
         .toArray()
 
       const cleanedUsers = onlineUsers.map(({ _id, ...rest }) => rest)
-      return handleCORS(request, NextResponse.json(cleanedUsers))
+      return handleCORS(NextResponse.json(cleanedUsers))
     }
 
     // ============ MESSAGE ROUTES ============
@@ -317,7 +283,7 @@ async function handleRoute(request, { params }) {
     if (route === '/messages' && method === 'POST') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -327,7 +293,7 @@ async function handleRoute(request, { params }) {
       const { recipientId, content } = body
 
       if (!recipientId || !content) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Recipient and content are required' },
           { status: 400 }
         ))
@@ -345,14 +311,14 @@ async function handleRoute(request, { params }) {
       await db.collection('messages').insertOne(message)
 
       const { _id, ...messageData } = message
-      return handleCORS(request, NextResponse.json(messageData))
+      return handleCORS(NextResponse.json(messageData))
     }
 
     // GET /api/messages/:userId
     if (route.startsWith('/messages/') && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -377,7 +343,7 @@ async function handleRoute(request, { params }) {
       )
 
       const cleanedMessages = messages.map(({ _id, ...rest }) => rest)
-      return handleCORS(request, NextResponse.json(cleanedMessages))
+      return handleCORS(NextResponse.json(cleanedMessages))
     }
 
     // ============ TRIP ROUTES ============
@@ -386,7 +352,7 @@ async function handleRoute(request, { params }) {
     if (route === '/trips' && method === 'POST') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -411,7 +377,7 @@ async function handleRoute(request, { params }) {
       } = body
 
       if (!title || !destination || !startDate) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Title, destination, and start date are required' },
           { status: 400 }
         ))
@@ -443,14 +409,14 @@ async function handleRoute(request, { params }) {
 
       // Remove MongoDB _id
       const { _id, ...tripData } = trip
-      return handleCORS(request, NextResponse.json(tripData))
+      return handleCORS(NextResponse.json(tripData))
     }
 
     // GET /api/trips
     if (route === '/trips' && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -462,7 +428,7 @@ async function handleRoute(request, { params }) {
         .toArray()
 
       const cleanedTrips = trips.map(({ _id, ...rest }) => rest)
-      return handleCORS(request, NextResponse.json(cleanedTrips))
+      return handleCORS(NextResponse.json(cleanedTrips))
     }
 
     // GET /api/trips/public/all - Get all public trips
@@ -529,7 +495,7 @@ async function handleRoute(request, { params }) {
     if (route.startsWith('/trips/') && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -542,21 +508,21 @@ async function handleRoute(request, { params }) {
       })
 
       if (!trip) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
       const { _id, ...tripData } = trip
-      return handleCORS(request, NextResponse.json(tripData))
+      return handleCORS(NextResponse.json(tripData))
     }
 
     // PATCH /api/trips/:id
     if (route.startsWith('/trips/') && method === 'PATCH') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -577,21 +543,21 @@ async function handleRoute(request, { params }) {
       )
 
       if (!result) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
       const { _id, ...tripData } = result
-      return handleCORS(request, NextResponse.json(tripData))
+      return handleCORS(NextResponse.json(tripData))
     }
 
     // DELETE /api/trips/:id
     if (route.startsWith('/trips/') && method === 'DELETE') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -604,24 +570,24 @@ async function handleRoute(request, { params }) {
       })
 
       if (result.deletedCount === 0) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
-      return handleCORS(request, NextResponse.json({ success: true }))
+      return handleCORS(NextResponse.json({ success: true }))
     }
 
     // Route not found
-    return handleCORS(request, NextResponse.json(
+    return handleCORS(NextResponse.json(
       { error: `Route ${route} not found` },
       { status: 404 }
     ))
 
   } catch (error) {
     console.error('API Error:', error)
-    return handleCORS(request, NextResponse.json(
+    return handleCORS(NextResponse.json(
       { error: 'Internal server error', details: error.message },
       { status: 500 }
     ))
