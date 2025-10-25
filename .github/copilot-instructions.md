@@ -45,16 +45,24 @@ Tucker Trips is a Next.js 14 travel planning application with a complete full-st
 
 ### Running the Application
 ```bash
-# Development with memory optimization
-yarn dev              # Uses NODE_OPTIONS='--max-old-space-size=512'
+# Package manager: pnpm (not yarn/npm)
+# Development with memory optimization for dev containers
+pnpm dev              # Uses NODE_OPTIONS='--max-old-space-size=512'
 
 # Alternative dev modes
-yarn dev:no-reload    # Without hot reload
-yarn dev:webpack      # Webpack-specific optimizations
+pnpm dev:no-reload    # Without hot reload for performance
+pnpm dev:webpack      # Webpack-specific optimizations
 
 # Production build
-yarn build && yarn start
+pnpm build && pnpm start
 ```
+
+### Dev Container Optimizations
+- Webpack configured with polling (2s intervals) instead of file watching
+- `aggregateTimeout: 300ms` to batch rebuilds
+- `node_modules` excluded from watch to reduce CPU/memory
+- `onDemandEntries` limits in-memory pages to 2 with 10s max inactive age
+- See `next.config.js` webpack section for tuning parameters
 
 ### Database Operations
 - MongoDB connection via environment variables: `MONGO_URL`, `DB_NAME`, `JWT_SECRET`
@@ -83,9 +91,10 @@ yarn build && yarn start
 - `components/ui/` - shadcn/ui component library
 
 ### Configuration
-- `next.config.js` - Standalone build, MongoDB external packages, CORS headers
+- `next.config.js` - Standalone build, MongoDB external packages, CORS headers, webpack polling
 - `tailwind.config.js` - Extended shadcn theme with custom animations
-- `package.json` - Yarn package manager, extensive Radix UI dependencies
+- `package.json` - **pnpm** package manager (v9.12.3), extensive Radix UI dependencies
+- `components.json` - shadcn/ui config (style: "new-york", tsx: false, icon: lucide)
 
 ## Data Models
 
@@ -152,6 +161,17 @@ Components like `EnhancedTripModal.js` use:
 - State managed in parent component
 - `onSuccess` callback pattern for data updates
 - Consistent `open`/`onClose` prop interface
+- **Multi-step forms**: See `EnhancedTripModal.js` for pattern with `currentStep` state
+  - Step navigation with validation before advancing
+  - Form state accumulation across steps
+  - Segments stored as arrays (airlines, accommodations)
+  - Final submission combines all steps into single API call
+
+### Form & Input Patterns
+- Use Radix primitives with shadcn wrappers (e.g., `RadioGroup`, `Input`, `Textarea`)
+- Custom components like `StarRating` follow controlled component pattern
+- Toast notifications via `sonner`: `toast.success()`, `toast.error()`
+- Form arrays managed with spread operators: `[...prev.airlines, newItem]`
 
 ## Environment Setup
 - Requires MongoDB connection string in `MONGO_URL`

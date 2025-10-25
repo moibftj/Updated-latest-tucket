@@ -3,6 +3,19 @@ import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { z } from 'zod'
+
+// Validation schemas
+const registerSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  name: z.string().min(1, 'Name is required'),
+})
+
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(1, 'Password is required'),
+})
 
 // MongoDB connection
 let client
@@ -93,102 +106,112 @@ async function handleRoute(request, { params }) {
     
     // POST /api/auth/register
     if (route === '/auth/register' && method === 'POST') {
-      const body = await request.json()
-      const { email, password, name } = body
+      try {
+        const body = await request.json()
 
-      if (!email || !password || !name) {
-        return handleCORS(request, NextResponse.json(
-          { error: 'Email, password, and name are required' },
-          { status: 400 }
-        ))
+        // Validate input with Zod
+        const { email, password, name } = registerSchema.parse(body)
+
+        // Check if user exists
+        const existingUser = await db.collection('users').findOne({ email })
+        if (existingUser) {
+          return handleCORS(request, NextResponse.json(
+            { error: 'User already exists' },
+            { status: 409 }
+          ))
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        // Create user
+        const user = {
+          id: uuidv4(),
+          email,
+          password: hashedPassword,
+          name,
+          bio: '',
+          lastSeen: new Date(),
+          isOnline: false,
+          createdAt: new Date()
+        }
+
+        await db.collection('users').insertOne(user)
+
+        // Generate JWT
+        const token = jwt.sign(
+          { userId: user.id, email: user.email },
+          process.env.JWT_SECRET,
+          { expiresIn: '7d' }
+        )
+
+        return handleCORS(request, NextResponse.json({
+          user: { id: user.id, email: user.email, name: user.name, bio: user.bio },
+          token
+        }, { status: 201 }))
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return handleCORS(request, NextResponse.json(
+            { error: 'Validation failed', details: error.errors },
+            { status: 400 }
+          ))
+        }
+        throw error
       }
-
-      // Check if user exists
-      const existingUser = await db.collection('users').findOne({ email })
-      if (existingUser) {
-        return handleCORS(request, NextResponse.json(
-          { error: 'User already exists' },
-          { status: 400 }
-        ))
-      }
-
-      // Hash password
-      const hashedPassword = await bcrypt.hash(password, 10)
-
-      // Create user
-      const user = {
-        id: uuidv4(),
-        email,
-        password: hashedPassword,
-        name,
-        bio: '',
-        lastSeen: new Date(),
-        isOnline: false,
-        createdAt: new Date()
-      }
-
-      await db.collection('users').insertOne(user)
-
-      // Generate JWT
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        process.env.JWT_SECRET,
-        { expiresIn: '7d' }
-      )
-
-      return handleCORS(request, NextResponse.json({
-        user: { id: user.id, email: user.email, name: user.name, bio: user.bio },
-        token
-      }))
     }
 
     // POST /api/auth/login
     if (route === '/auth/login' && method === 'POST') {
-      const body = await request.json()
-      const { email, password } = body
+      try {
+        const body = await request.json()
 
-      if (!email || !password) {
-        return handleCORS(request, NextResponse.json(
-          { error: 'Email and password are required' },
-          { status: 400 }
-        ))
+        // Validate input with Zod
+        const { email, password } = loginSchema.parse(body)
+
+        // Find user
+        const user = await db.collection('users').findOne({ email })
+        if (!user) {
+          return handleCORS(request, NextResponse.json(
+            { error: 'Invalid credentials' },
+            { status: 401 }
+          ))
+        }
+
+        // Verify password
+        const isValid = await bcrypt.compare(password, user.password)
+        if (!isValid) {
+          return handleCORS(request, NextResponse.json(
+            { error: 'Invalid credentials' },
+            { status: 401 }
+          ))
+        }
+
+        // Update last seen and online status
+        await db.collection('users').updateOne(
+          { id: user.id },
+          { $set: { lastSeen: new Date(), isOnline: true } }
+        )
+
+        // Generate JWT
+        const token = jwt.sign(
+          { userId: user.id, email: user.email },
+          process.env.JWT_SECRET,
+          { expiresIn: '7d' }
+        )
+
+        return handleCORS(request, NextResponse.json({
+          user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' },
+          token
+        }))
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return handleCORS(request, NextResponse.json(
+            { error: 'Validation failed', details: error.errors },
+            { status: 400 }
+          ))
+        }
+        throw error
       }
-
-      // Find user
-      const user = await db.collection('users').findOne({ email })
-      if (!user) {
-        return handleCORS(request, NextResponse.json(
-          { error: 'Invalid credentials' },
-          { status: 401 }
-        ))
-      }
-
-      // Verify password
-      const isValid = await bcrypt.compare(password, user.password)
-      if (!isValid) {
-        return handleCORS(request, NextResponse.json(
-          { error: 'Invalid credentials' },
-          { status: 401 }
-        ))
-      }
-
-      // Update last seen and online status
-      await db.collection('users').updateOne(
-        { id: user.id },
-        { $set: { lastSeen: new Date(), isOnline: true } }
-      )
-
-      // Generate JWT
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        process.env.JWT_SECRET,
-        { expiresIn: '7d' }
-      )
-
-      return handleCORS(request, NextResponse.json({
-        user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' },
-        token
-      }))
     }
 
     // GET /api/auth/me

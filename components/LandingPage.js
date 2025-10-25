@@ -79,8 +79,8 @@ const LandingPage = ({ onShowAuth }) => {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-t from-purple-900 to-purple-800 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
-        <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6">
-          Sign Up For Tucker Trips Today
+        <Button onClick={onShowAuth} size="lg" className="bg-pink-500 hover:bg-pink-600 text-white text-lg px-8 py-6 shadow-2xl hover:shadow-pink-500/50 transition-all glow-purple-pink">
+          <ShinyText text="Sign Up For Tucker Trips Today" speed={3} />
         </Button>
       </section>
 
