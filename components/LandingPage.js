@@ -139,9 +139,32 @@ const LandingPage = ({ onShowAuth }) => {
     const dialogTimer = setTimeout(() => setDialogOpen(true), 3000)
     const ctaTimer = setTimeout(() => setPulseCta(true), 4500)
 
+    // Intersection Observer for video autoplay on scroll
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target
+          if (entry.isIntersecting) {
+            video.play().catch((err) => console.log('Video autoplay failed:', err))
+          } else {
+            video.pause()
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    const featureVideo = document.getElementById('feature-video')
+    if (featureVideo) {
+      videoObserver.observe(featureVideo)
+    }
+
     return () => {
       clearTimeout(dialogTimer)
       clearTimeout(ctaTimer)
+      if (featureVideo) {
+        videoObserver.unobserve(featureVideo)
+      }
     }
   }, [])
 
