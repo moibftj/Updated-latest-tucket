@@ -315,10 +315,10 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Partner Grid */}
-      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(236,72,153,0.1),_transparent_65%)]" />
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/95">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.12),_transparent_65%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
-          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-pink-200/70">Integrations</p>
+          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Integrations</p>
           <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
             Seamlessly connect with your favorite travel platforms
           </h2>
@@ -326,10 +326,10 @@ const LandingPage = ({ onShowAuth }) => {
             {partnerLogos.map((name) => (
               <div
                 key={name}
-                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 px-4 py-6 sm:px-6 sm:py-8 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/70 transition duration-300 hover:-translate-y-1 hover:border-pink-400/60 hover:text-white"
+                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-6 sm:px-6 sm:py-8 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/70 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60 hover:text-white"
               >
                 <div className="absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
-                  <div className="animate-shimmer absolute inset-0 bg-gradient-to-r from-pink-500/30 via-transparent to-pink-500/30" />
+                  <div className="animate-shimmer absolute inset-0 bg-gradient-to-r from-[#ff34ac]/30 via-transparent to-[#7dbbe5]/30" />
                 </div>
                 <span className="relative">{name}</span>
               </div>
@@ -339,12 +339,12 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Experience Highlights */}
-      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-20" />
-        <div className="relative mx-auto flex max-w-6xl flex-col gap-6 sm:gap-10 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur">
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-8 bg-[#343f65]">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#e5dbf1]/5 to-transparent opacity-30" />
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-6 sm:gap-10 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 sm:p-8">
           <div className="flex flex-col gap-4 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-pink-200/70">Features</p>
+              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Features</p>
               <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
                 Everything you need for the perfect trip
               </h2>
@@ -352,7 +352,7 @@ const LandingPage = ({ onShowAuth }) => {
             <Button
               variant="ghost"
               onClick={onShowAuth}
-              className="rounded-full border border-white/20 bg-white/5 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base text-white/80 transition hover:border-pink-400/60 hover:bg-pink-500/10 hover:text-white"
+              className="rounded-full border border-white/20 bg-white/5 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base text-white/80 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 hover:text-white"
             >
               Explore Dashboard
               <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
@@ -362,14 +362,14 @@ const LandingPage = ({ onShowAuth }) => {
             {experienceHighlights.map(({ title, subtitle, icon: Icon }) => (
               <div
                 key={title}
-                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-[#150226]/70 p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-pink-400/60"
+                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-[#343f65]/70 backdrop-blur-sm p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60"
               >
-                <div className="mb-4 sm:mb-5 inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500/30 to-purple-500/20 text-pink-100">
+                <div className="mb-4 sm:mb-5 inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 text-[#e5dbf1]">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm text-white/70">{subtitle}</p>
-                <div className="pointer-events-none absolute -bottom-10 right-0 h-28 w-28 rounded-full bg-pink-500/20 blur-3xl transition duration-500 group-hover:bottom-0" />
+                <p className="mt-2 text-sm text-[#e5dbf1]">{subtitle}</p>
+                <div className="pointer-events-none absolute -bottom-10 right-0 h-28 w-28 rounded-full bg-[#ff34ac]/20 blur-3xl transition duration-500 group-hover:bottom-0" />
               </div>
             ))}
           </div>
@@ -377,10 +377,10 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Features Grid */}
-      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/90">
         <div className="relative mx-auto max-w-6xl">
           <div className="text-center mb-8 sm:mb-12">
-            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-pink-200/70">Powerful Tools</p>
+            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Powerful Tools</p>
             <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
               Built for every type of traveler
             </h2>
@@ -389,14 +389,14 @@ const LandingPage = ({ onShowAuth }) => {
             {features.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-pink-400/50 hover:bg-pink-500/10"
+                className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/50 hover:bg-[#ff34ac]/10"
               >
-                <div className="mb-3 sm:mb-4 inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-pink-500/20 text-pink-200">
+                <div className="mb-3 sm:mb-4 inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#ff34ac]/20 text-[#e5dbf1]">
                   <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{title}</h3>
-                <p className="text-xs sm:text-sm text-white/70">{description}</p>
-                <span className="pointer-events-none absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-pink-500/20 blur-3xl" />
+                <p className="text-xs sm:text-sm text-[#e5dbf1]">{description}</p>
+                <span className="pointer-events-none absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-[#7dbbe5]/20 blur-3xl" />
               </div>
             ))}
           </div>
