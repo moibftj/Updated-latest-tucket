@@ -177,22 +177,34 @@ const LandingPage = ({ onShowAuth }) => {
   )
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0b0016] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-[#343f65] text-white">
       <style>{animationStyles}</style>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.18),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-full md:w-1/2 bg-[radial-gradient(circle_at_center,_rgba(76,29,149,0.24),_transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,52,172,0.15),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-full md:w-1/2 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.2),_transparent_65%)] blur-3xl" />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#110122]/70 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#343f65]/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="rounded-xl bg-gradient-to-br from-pink-500 via-pink-400 to-purple-500 p-1.5 sm:p-2 shadow-lg shadow-pink-500/40">
-                <Plane className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              {/* Logo Animation Video */}
+              <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg glow-tt-pink">
+                <div className="rounded-[10px] overflow-hidden bg-[#343f65] w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                    style={{ mixBlendMode: 'screen' }}
+                  >
+                    <source src="https://customer-assets.emergentagent.com/job_8205aa99-9784-4880-8173-eca98cfaee03/artifacts/e6r0jceo_logo%20animation%2012%20%28edited%29%20%281%29.webm" type="video/webm" />
+                  </video>
+                </div>
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">Tucker Trips</h1>
-                <p className="text-xs sm:text-sm text-pink-200/80 hidden sm:block">Plan, Share, Explore</p>
+                <p className="text-xs sm:text-sm text-[#e5dbf1] hidden sm:block">Plan, Share, Explore</p>
               </div>
             </div>
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-purple-100">
