@@ -59,6 +59,13 @@ code {
 
 @layer base {
   :root {
+        /* Tucker Trips Custom Color Palette */
+        --tt-pink: #ff34ac;
+        --tt-navy: #343f65;
+        --tt-lavender: #e5dbf1;
+        --tt-cream: #f7f0f0;
+        --tt-skyblue: #7dbbe5;
+        
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;
         --card: 0 0% 100%;
