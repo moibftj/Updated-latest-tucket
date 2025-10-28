@@ -404,28 +404,28 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Magic Bento Section */}
-      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-b from-transparent via-purple-900/40 to-purple-900/80" />
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/90 to-[#343f65]">
+        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-b from-transparent via-[#7dbbe5]/20 to-[#ff34ac]/30" />
         <div className="relative mx-auto max-w-7xl text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
             Interactive trip planning dashboard
           </h2>
-          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-purple-100/80 px-4">
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#e5dbf1] px-4">
             Organize your entire trip visually. Drag, drop, and arrange every detail with our intuitive interface.
           </p>
           <div className="mt-8 sm:mt-12 flex justify-center overflow-hidden">
             <div className="scale-75 sm:scale-90 md:scale-100">
-              <MagicBento glowColor="236, 72, 153" enableTilt particleCount={16} />
+              <MagicBento glowColor="255, 52, 172" enableTilt particleCount={16} />
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,7,100,0.55),_transparent_65%)]" />
+      <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#343f65]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(125,187,229,0.3),_transparent_65%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
-          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-pink-200/70">Testimonials</p>
+          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Testimonials</p>
           <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
             Loved by travelers worldwide
           </h2>
@@ -433,21 +433,21 @@ const LandingPage = ({ onShowAuth }) => {
             {testimonials.map(({ name, role, quote, avatar }) => (
               <div
                 key={name}
-                className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 text-left transition duration-300 hover:-translate-y-1 hover:border-pink-400/60"
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 sm:p-8 text-left transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60"
               >
                 <div className="flex items-center gap-3 sm:gap-4">
                   <img
                     src={avatar}
                     alt={name}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-white/30 object-cover"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-[#7dbbe5]/30 object-cover"
                   />
                   <div>
                     <p className="text-sm font-semibold text-white">{name}</p>
-                    <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white/60">{role}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#7dbbe5]">{role}</p>
                   </div>
                 </div>
-                <p className="mt-4 sm:mt-6 text-sm sm:text-base text-white/80">{quote}</p>
-                <div className="pointer-events-none absolute -right-10 top-0 h-28 w-28 sm:h-36 sm:w-36 rounded-full bg-gradient-to-br from-pink-500/30 to-purple-500/20 blur-3xl" />
+                <p className="mt-4 sm:mt-6 text-sm sm:text-base text-[#e5dbf1]">{quote}</p>
+                <div className="pointer-events-none absolute -right-10 top-0 h-28 w-28 sm:h-36 sm:w-36 rounded-full bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 blur-3xl" />
               </div>
             ))}
           </div>
@@ -455,13 +455,13 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 px-4 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-pink-900/50 to-transparent" />
+      <section className="relative py-16 sm:py-20 md:py-24 px-4 text-center bg-gradient-to-b from-[#343f65] to-[#343f65]/80">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#7dbbe5]/30 via-[#ff34ac]/20 to-transparent" />
         <div className="relative mx-auto max-w-3xl space-y-5 sm:space-y-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white px-4">
             Ready to plan your next adventure?
           </h2>
-          <p className="text-base sm:text-lg text-purple-100/80 px-4">
+          <p className="text-base sm:text-lg text-[#e5dbf1] px-4">
             Join thousands of travelers using Tucker Trips to create unforgettable journeys.
             Start planning for free today.
           </p>
@@ -469,14 +469,14 @@ const LandingPage = ({ onShowAuth }) => {
             <Button
               onClick={onShowAuth}
               size="lg"
-              className="w-full sm:w-auto rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-purple-400 px-8 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_22px_50px_rgba(236,72,153,0.35)] transition hover:-translate-y-0.5"
+              className="w-full sm:w-auto rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] px-8 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_22px_50px_rgba(255,52,172,0.4)] transition hover:-translate-y-0.5"
             >
               <ShinyText text="Create Free Account" speed={2.4} />
             </Button>
             <Button
               variant="ghost"
               onClick={onShowAuth}
-              className="w-full sm:w-auto rounded-full border border-white/20 bg-white/5 px-6 sm:px-8 py-4 text-sm sm:text-base text-white/80 transition hover:border-pink-400/60 hover:bg-pink-500/10 hover:text-white"
+              className="w-full sm:w-auto rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-6 sm:px-8 py-4 text-sm sm:text-base text-white/80 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/10 hover:text-white"
             >
               Explore Features
             </Button>
@@ -485,29 +485,29 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-[#080010] py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-white/60">
+      <footer className="border-t border-white/10 bg-[#343f65]/95 py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-white/60">
         <div className="max-w-7xl mx-auto">
           <p>
             &copy; {new Date().getFullYear()} Tucker Trips. Plan smarter. Travel better. Live fully.
           </p>
           <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-white/50">
-            <button className="hover:text-pink-300 transition">Privacy Policy</button>
-            <button className="hover:text-pink-300 transition">Terms of Service</button>
-            <button className="hover:text-pink-300 transition">Contact Us</button>
-            <button className="hover:text-pink-300 transition">Help Center</button>
+            <button className="hover:text-[#ff34ac] transition">Privacy Policy</button>
+            <button className="hover:text-[#ff34ac] transition">Terms of Service</button>
+            <button className="hover:text-[#ff34ac] transition">Contact Us</button>
+            <button className="hover:text-[#ff34ac] transition">Help Center</button>
           </div>
         </div>
       </footer>
 
       {/* Welcome Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="border border-pink-500/30 bg-[#110122]/90 text-white backdrop-blur-xl mx-4 sm:mx-auto">
+        <DialogContent className="border border-[#ff34ac]/30 bg-[#343f65]/95 text-white backdrop-blur-xl mx-4 sm:mx-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-white">
-              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-pink-300" />
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#ff34ac]" />
               Welcome to Tucker Trips
             </DialogTitle>
-            <DialogDescription className="text-xs sm:text-sm text-white/70">
+            <DialogDescription className="text-xs sm:text-sm text-[#e5dbf1]">
               Start planning your dream trip today. Create detailed itineraries, collaborate with friends,
               and make every journey unforgettable.
             </DialogDescription>
@@ -518,14 +518,14 @@ const LandingPage = ({ onShowAuth }) => {
                 setDialogOpen(false)
                 onShowAuth?.()
               }}
-              className="flex-1 bg-gradient-to-r from-pink-500 via-pink-400 to-purple-400 text-white shadow-lg shadow-pink-500/30 hover:-translate-y-0.5 text-sm sm:text-base"
+              className="flex-1 bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/30 hover:-translate-y-0.5 text-sm sm:text-base"
             >
               Get Started Free
             </Button>
             <Button
               variant="ghost"
               onClick={() => setDialogOpen(false)}
-              className="flex-1 border border-white/10 bg-white/5 text-white/80 transition hover:border-pink-400/60 hover:bg-pink-500/10 hover:text-white text-sm sm:text-base"
+              className="flex-1 border border-white/10 bg-white/5 text-white/80 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/10 hover:text-white text-sm sm:text-base"
             >
               Maybe Later
             </Button>
