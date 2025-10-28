@@ -187,24 +187,19 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              {/* Logo Animation Video */}
-              <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg glow-tt-pink">
-                <div className="rounded-[10px] overflow-hidden bg-[#343f65] w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+              {/* Logo Animation Video - Larger Rectangular */}
+              <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg glow-tt-pink">
+                <div className="rounded-md overflow-hidden bg-[#343f65] w-32 h-12 sm:w-40 sm:h-14 flex items-center justify-center">
                   <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover"
-                    style={{ mixBlendMode: 'screen' }}
+                    className="w-full h-full object-contain"
                   >
                     <source src="https://customer-assets.emergentagent.com/job_8205aa99-9784-4880-8173-eca98cfaee03/artifacts/e6r0jceo_logo%20animation%2012%20%28edited%29%20%281%29.webm" type="video/webm" />
                   </video>
                 </div>
-              </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">Tucker Trips</h1>
-                <p className="text-xs sm:text-sm text-[#e5dbf1] hidden sm:block">Plan, Share, Explore</p>
               </div>
             </div>
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-[#e5dbf1]">
