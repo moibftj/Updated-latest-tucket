@@ -207,7 +207,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <p className="text-xs sm:text-sm text-[#e5dbf1] hidden sm:block">Plan, Share, Explore</p>
               </div>
             </div>
-            <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-purple-100">
+            <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-[#e5dbf1]">
               <button className="transition hover:text-white">Features</button>
               <button className="transition hover:text-white">Community</button>
               <button className="transition hover:text-white">About</button>
@@ -217,7 +217,7 @@ const LandingPage = ({ onShowAuth }) => {
                 onClick={onShowAuth}
                 variant="ghost"
                 size="sm"
-                className="backdrop-blur-md border border-white/10 bg-white/10 text-white shadow-lg shadow-purple-900/40 transition hover:border-pink-500/60 hover:bg-pink-500/10 text-xs sm:text-sm"
+                className="backdrop-blur-md border border-white/10 bg-white/10 text-white shadow-lg shadow-[#7dbbe5]/30 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 text-xs sm:text-sm"
               >
                 <Users className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 Login
@@ -225,7 +225,7 @@ const LandingPage = ({ onShowAuth }) => {
               <Button
                 onClick={onShowAuth}
                 size="sm"
-                className="bg-gradient-to-r from-pink-500 via-pink-400 to-purple-400 text-white shadow-lg shadow-pink-500/40 transition hover:shadow-pink-500/60 text-xs sm:text-sm"
+                className="bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/40 transition hover:shadow-[#ff34ac]/60 text-xs sm:text-sm"
               >
                 Sign Up
               </Button>
@@ -234,74 +234,81 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-32 md:pt-36 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6 lg:px-8">
+      {/* Hero Section with Video Banner */}
+      <section className="relative pt-0 pb-12 sm:pb-16 md:pb-24 min-h-screen flex items-center">
+        {/* Full-screen Video Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-pink-500/60 via-purple-500/40 to-pink-500/60 blur-3xl" />
-          <div className="animate-glow absolute bottom-0 left-0 h-60 w-60 rounded-full bg-pink-500/40 blur-[90px]" />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="https://customer-assets.emergentagent.com/job_8205aa99-9784-4880-8173-eca98cfaee03/artifacts/eo2z0j54_tucker-trips_3%20%281%29.webm" type="video/webm" />
+          </video>
+          
+          {/* Elegant gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#343f65]/90 via-[#343f65]/70 to-[#ff34ac]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#343f65] via-transparent to-transparent" />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-[1.1fr,0.9fr]">
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 rounded-full border border-pink-400/40 bg-white/5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-pink-200 shadow-[0_8px_35px_rgba(236,72,153,0.25)] backdrop-blur">
-              <Stars className="h-3 w-3 sm:h-4 sm:w-4" />
-              Your Journey Starts Here
-            </div>
+        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-7xl pt-20 sm:pt-24">
+          <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16">
+            <div className="space-y-6 sm:space-y-8 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#7dbbe5]/40 bg-white/5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#e5dbf1] shadow-[0_8px_35px_rgba(125,187,229,0.25)] backdrop-blur-lg">
+                <Stars className="h-3 w-3 sm:h-4 sm:w-4" />
+                Your Journey Starts Here
+              </div>
 
-            <div className="space-y-4 sm:space-y-5">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-                Plan Your Dream Trip.
-                <br className="hidden sm:block" />
-                <span className="bg-gradient-to-r from-pink-200 via-white to-pink-200 bg-clip-text text-transparent">
-                  Share Every Moment.
-                </span>
-              </h1>
-              <p className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-purple-100/80 lg:mx-0">
-                The ultimate travel planning platform for modern adventurers. Create detailed itineraries,
-                collaborate with friends, and turn every trip into an unforgettable story.
-              </p>
-            </div>
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                  Plan Your Dream Trip.
+                  <br className="hidden sm:block" />
+                  <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent drop-shadow-none">
+                    Share Every Moment.
+                  </span>
+                </h1>
+                <p className="mx-auto max-w-3xl text-base sm:text-lg md:text-xl text-[#f7f0f0] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                  The ultimate travel planning platform for modern adventurers. Create detailed itineraries,
+                  collaborate with friends, and turn every trip into an unforgettable story.
+                </p>
+              </div>
 
-            <div className="flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center lg:justify-start">
-              <Button
-                onClick={onShowAuth}
-                size="lg"
-                className={`w-full sm:w-auto relative flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-purple-500 px-6 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_20px_40px_rgba(236,72,153,0.25)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(236,72,153,0.35)] ${pulseCta ? 'animate-pulse-ring' : ''}`}
-              >
-                <ShinyText text="Start Planning Free" speed={2.2} />
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-              <button
-                onClick={onShowAuth}
-                className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-4 sm:px-6 py-3 text-sm font-semibold text-white/80 transition hover:border-pink-400/60 hover:text-white"
-              >
-                View Demo
-                <Camera className="h-4 w-4 transition group-hover:text-pink-300" />
-              </button>
-            </div>
-
-            <div className="grid gap-4 sm:gap-6 pt-4 sm:pt-6 text-left grid-cols-1 sm:grid-cols-3">
-              {highlightMetrics.map(({ icon: Icon, label, value, blurb }) => (
-                <div
-                  key={label}
-                  className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-pink-400/50 hover:bg-pink-500/10"
+              <div className="flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
+                <Button
+                  onClick={onShowAuth}
+                  size="lg"
+                  className={`w-full sm:w-auto relative flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] px-6 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_20px_40px_rgba(255,52,172,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(255,52,172,0.45)] ${pulseCta ? 'animate-pulse-ring' : ''}`}
                 >
-                  <div className="mb-3 sm:mb-4 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-pink-500/20 text-pink-200">
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/60">{label}</p>
-                  <p className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold text-white">{value}</p>
-                  <p className="mt-1 text-xs sm:text-sm text-white/70">{blurb}</p>
-                  <span className="pointer-events-none absolute -right-8 bottom-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-pink-500/20 blur-3xl" />
-                </div>
-              ))}
-            </div>
-          </div>
+                  <ShinyText text="Start Planning Free" speed={2.2} />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+                <button
+                  onClick={onShowAuth}
+                  className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 sm:px-6 py-3 text-sm font-semibold text-white/90 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/20 hover:text-white"
+                >
+                  View Demo
+                  <Camera className="h-4 w-4 transition group-hover:text-[#7dbbe5]" />
+                </button>
+              </div>
 
-          <div className="relative flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="animate-float-slow pointer-events-none absolute -top-12 left-10 hidden h-28 w-28 rounded-full bg-gradient-to-br from-pink-500/40 to-purple-500/30 blur-3xl md:block" />
-            <div className="scale-75 sm:scale-90 md:scale-100">
-              <Stack cardsData={heroImages} cardDimensions={{ width: 300, height: 360 }} />
+              <div className="grid gap-4 sm:gap-6 pt-8 sm:pt-12 text-left grid-cols-1 sm:grid-cols-3 max-w-5xl mx-auto">
+                {highlightMetrics.map(({ icon: Icon, label, value, blurb }) => (
+                  <div
+                    key={label}
+                    className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/50 hover:bg-[#ff34ac]/10"
+                  >
+                    <div className="mb-3 sm:mb-4 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 text-[#e5dbf1]">
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/70">{label}</p>
+                    <p className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold text-white">{value}</p>
+                    <p className="mt-1 text-xs sm:text-sm text-[#e5dbf1]">{blurb}</p>
+                    <span className="pointer-events-none absolute -right-8 bottom-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-[#7dbbe5]/20 blur-3xl" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
