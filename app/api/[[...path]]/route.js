@@ -435,7 +435,7 @@ async function handleRoute(request, { params }) {
     if (route === '/trips/public/all' && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -457,14 +457,14 @@ async function handleRoute(request, { params }) {
         }
       }))
 
-      return handleCORS(request, NextResponse.json(tripsWithUsers))
+      return handleCORS(NextResponse.json(tripsWithUsers))
     }
 
     // GET /api/trips/shared - Get trips shared with current user
     if (route === '/trips/shared' && method === 'GET') {
       const decoded = verifyToken(request)
       if (!decoded) {
-        return handleCORS(request, NextResponse.json(
+        return handleCORS(NextResponse.json(
           { error: 'Unauthorized' },
           { status: 401 }
         ))
@@ -488,7 +488,7 @@ async function handleRoute(request, { params }) {
         }
       }))
 
-      return handleCORS(request, NextResponse.json(tripsWithUsers))
+      return handleCORS(NextResponse.json(tripsWithUsers))
     }
 
     // GET /api/trips/:id
@@ -533,23 +533,25 @@ async function handleRoute(request, { params }) {
 
       const result = await db.collection('trips').findOneAndUpdate(
         { id: tripId, userId: decoded.userId },
-        { 
-          $set: { 
+        {
+          $set: {
             ...body,
-            updatedAt: new Date() 
-          } 
+            updatedAt: new Date()
+          }
         },
         { returnDocument: 'after' }
       )
 
-      if (!result) {
+      const updatedTrip = result?.value
+
+      if (!updatedTrip) {
         return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
-      const { _id, ...tripData } = result
+      const { _id, ...tripData } = updatedTrip
       return handleCORS(NextResponse.json(tripData))
     }
 
