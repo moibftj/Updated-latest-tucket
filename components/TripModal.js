@@ -49,7 +49,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
     weather: '',
     overallComment: '',
     transportations: [],
-    accommodations: []
+    accommodations: [],
+    segments: []
   })
 
   const [currentTransport, setCurrentTransport] = useState({
@@ -84,9 +85,18 @@ const TripModal = ({ open, onClose, onSuccess }) => {
     }
 
     const transport = { id: Date.now(), ...currentTransport }
+    const segment = {
+      id: transport.id,
+      type: transport.type === 'flight' ? 'flight' : 'transport',
+      airline: transport.airline,
+      flightNumber: transport.flightNumber,
+      details: transport.details,
+      price: transport.cost
+    }
     setTripForm(prev => ({
       ...prev,
-      transportations: [...prev.transportations, transport]
+      transportations: [...prev.transportations, transport],
+      segments: [...prev.segments, segment]
     }))
 
     setCurrentTransport({
@@ -107,7 +117,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
   const removeTransportation = (id) => {
     setTripForm(prev => ({
       ...prev,
-      transportations: prev.transportations.filter(t => t.id !== id)
+      transportations: prev.transportations.filter(t => t.id !== id),
+      segments: prev.segments.filter(segment => segment.id !== id)
     }))
   }
 
@@ -120,7 +131,16 @@ const TripModal = ({ open, onClose, onSuccess }) => {
     const accommodation = { id: Date.now(), ...currentAccommodation }
     setTripForm(prev => ({
       ...prev,
-      accommodations: [...prev.accommodations, accommodation]
+      accommodations: [...prev.accommodations, accommodation],
+      segments: [
+        ...prev.segments,
+        {
+          id: accommodation.id,
+          type: 'accommodation',
+          name: accommodation.name,
+          price: accommodation.cost
+        }
+      ]
     }))
 
     setCurrentAccommodation({
@@ -142,7 +162,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
   const removeAccommodation = (id) => {
     setTripForm(prev => ({
       ...prev,
-      accommodations: prev.accommodations.filter(a => a.id !== id)
+      accommodations: prev.accommodations.filter(a => a.id !== id),
+      segments: prev.segments.filter(segment => segment.id !== id)
     }))
   }
 
@@ -153,7 +174,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
     }
 
     try {
-      const newTrip = await tripApi.create(tripForm)
+      const { transportations: _transportations, ...payload } = tripForm
+      const newTrip = await tripApi.create(payload)
       onSuccess(newTrip)
       setCurrentStep(1)
       setTripForm({
@@ -169,7 +191,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
         weather: '',
         overallComment: '',
         transportations: [],
-        accommodations: []
+        accommodations: [],
+        segments: []
       })
     } catch (error) {
       toast.error('Failed to create trip')

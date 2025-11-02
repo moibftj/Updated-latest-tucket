@@ -153,7 +153,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         open={showProfileSettings}
         onClose={() => setShowProfileSettings(false)}
         user={user}
-        onUserUpdate={handleUserUpdate}
+        onUpdate={handleUserUpdate}
       />
 
       <ChatPanel currentUser={user} />
