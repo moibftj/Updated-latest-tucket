@@ -3,7 +3,12 @@
 ## Project Overview
 Tucker Trips is a Next.js 14 travel planning application with a complete full-stack architecture. The app allows users to plan, document, and share travel adventures with features including trip management, live chat, and social interactions.
 
+## Critical Design Constraints
+- **Landing Page**: DO NOT modify the landing page design (`app/page.js` unauthenticated state)
+- All improvements should focus on authenticated features, backend logic, performance, and code quality
+
 ## Architecture & Key Patterns
+
 
 ### Single-File API Handler (`app/api/[[...path]]/route.js`)
 - **Critical**: All API routes are handled in one monolithic file using Next.js catch-all routes
