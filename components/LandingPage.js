@@ -852,7 +852,7 @@ const LandingPage = ({ onShowAuth }) => {
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
                     <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
                       <img
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1ihdBCjlTa6E3r6f66aHlOK7R8l26E.png"
+                        src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLmpwZyIsImlhdCI6MTc2MjE5MjYxMiwiZXhwIjoxNzkzNzI4NjEyfQ.NtQT70gQB0V0oFH4n0-Vb96ZACFFXOSSS4rY5hwYtYM"
                         alt="Kristin Stein - Founder"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
@@ -880,6 +880,14 @@ const LandingPage = ({ onShowAuth }) => {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-[#343f65]/95 py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-white/60">
         <div className="max-w-7xl mx-auto">
+          {/* Logo Animation */}
+          <div className="flex justify-center mb-4">
+            <img
+              src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Untitled%20(Logo).gif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL1VudGl0bGVkIChMb2dvKS5naWYiLCJpYXQiOjE3NjIxOTIwODMsImV4cCI6MTc5MzcyODA4M30.5N-G57YWF2rv8vjQ9QxjUqZj0dNdDzmOa7tuqJG2ffc"
+              alt="Tucker Trips Logo"
+              className="h-12 sm:h-16 w-auto"
+            />
+          </div>
           <p>
             &copy; {new Date().getFullYear()} Tucker Trips. Plan smarter. Travel better. Live fully.
           </p>
