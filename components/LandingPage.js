@@ -401,7 +401,7 @@ const LandingPage = ({ onShowAuth }) => {
           <div className="absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
-              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
               id="hero-card-1"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-1'] = el
