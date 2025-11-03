@@ -758,9 +758,19 @@ async function handleRoute(request, { params }) {
     ))
 
   } catch (error) {
-    console.error('API Error:', error)
+    console.error('API Error:', {
+      message: error.message,
+      stack: error.stack,
+      route,
+      method
+    })
     return handleCORS(NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      {
+        error: 'Internal server error',
+        message: error.message,
+        route: route,
+        method: method
+      },
       { status: 500 }
     ))
   }
