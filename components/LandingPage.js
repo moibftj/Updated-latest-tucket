@@ -518,7 +518,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F1ab2aa9dfe9749deb69cc85a9ee54327?format=webp&width=800"
                   alt="Tucker Trips Logo"
-                  className="h-24 w-auto hover:scale-110 transition duration-300"
+                  className="h-24 w-auto"
                 />
               </div>
 
