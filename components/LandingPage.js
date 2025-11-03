@@ -23,6 +23,7 @@ import ShinyText from '@/components/ShinyText'
 import Stack from '@/components/Stack'
 import MagicBento from '@/components/MagicBento'
 import { Timeline } from '@/components/ui/timeline'
+import { Globe } from '@/components/ui/globe'
 
 const heroImages = [
   { id: 1, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format' },
@@ -807,6 +808,88 @@ const LandingPage = ({ onShowAuth }) => {
       {/* Why Choose Tucker Trips Timeline Section */}
       <section className="relative bg-[#343f65]">
         <Timeline data={timelineData} />
+      </section>
+
+      {/* Global Travelers Community Section with Globe */}
+      <section 
+        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#2a3454]"
+        id="globe-section"
+        ref={(el) => {
+          if (el) elementsRef.current['globe-section'] = el
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.15),_transparent_65%)]" />
+        <div className="relative mx-auto max-w-7xl">
+          <div className={`text-center mb-12 sm:mb-16 ${visibleElements['globe-section'] ? 'animate-in-up' : 'opacity-0'}`}>
+            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Community</p>
+            <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white px-4">
+              <span className="bg-gradient-to-r from-[#ff34ac] via-white to-[#7dbbe5] bg-clip-text text-transparent">
+                Travelers Around the World
+              </span>
+            </h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#e5dbf1] px-4 max-w-2xl mx-auto">
+              Join thousands of adventurers sharing their journeys and planning their next escapes
+            </p>
+          </div>
+          
+          <div className={`mb-16 sm:mb-20 ${visibleElements['globe-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
+            <Globe className="mx-auto" />
+          </div>
+
+          {/* Consolidated Founders Section - 2 Columns */}
+          <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
+            <div className="text-center mb-8 sm:mb-12">
+              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#ff34ac]">Meet the Founders</p>
+              <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
+                Built by Travelers, for Travelers
+              </h3>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Founder 1 */}
+              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 hover:border-[#ff34ac]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(255,52,172,0.3)]">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
+                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format"
+                        alt="Co-Founder 1"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                  <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Alex Tucker</h4>
+                  <p className="text-sm text-[#ff34ac] mb-4 uppercase tracking-wider">Co-Founder & CEO</p>
+                  <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
+                    A passionate world traveler who's explored over 50 countries. Alex founded Tucker Trips to help others organize and share their adventures as seamlessly as he wished he could during his journeys across six continents.
+                  </p>
+                </div>
+              </div>
+
+              {/* Founder 2 */}
+              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 hover:border-[#7dbbe5]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(125,187,229,0.3)]">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#7dbbe5] to-[#ff34ac] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
+                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#7dbbe5]/30 group-hover:border-[#7dbbe5]/60 transition-all">
+                      <img
+                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format"
+                        alt="Co-Founder 2"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                  <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Jordan Miles</h4>
+                  <p className="text-sm text-[#7dbbe5] mb-4 uppercase tracking-wider">Co-Founder & CTO</p>
+                  <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
+                    A digital nomad and software engineer with a love for building tools that bring people together. Jordan's vision was to create a platform where travel planning meets social connection, making every trip a collaborative masterpiece.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}

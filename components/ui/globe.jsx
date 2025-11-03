@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import createGlobe from "cobe"
-import { useSpring } from "framer-motion"
+import { useMotionValue, useSpring } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
@@ -46,7 +46,8 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
   const pointerInteractionMovement = useRef(0)
   const [visibleAvatars, setVisibleAvatars] = useState([])
 
-  const r = useSpring(0, {
+  const r = useMotionValue(0)
+  const rs = useSpring(r, {
     mass: 1,
     damping: 30,
     stiffness: 100,
@@ -83,7 +84,7 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
       height: width * 2,
       onRender: (state) => {
         if (!pointerInteracting.current) phi += 0.005
-        state.phi = phi + r.get()
+        state.phi = phi + rs.get()
         state.width = width * 2
         state.height = width * 2
 
@@ -128,7 +129,7 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
       globe.destroy()
       window.removeEventListener("resize", onResize)
     }
-  }, [config])
+  }, [config, rs])
 
   return (
     <div className={cn("relative mx-auto aspect-[1/1] w-full max-w-[600px]", className)}>
