@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 import DashboardSidebar from '@/components/DashboardSidebar'
 import HomeSection from '@/components/home/HomeSection'
 import TripsSection from '@/components/trips/TripsSection'
-import TripModal from '@/components/TripModal'
+import NewTripModal from '@/components/NewTripModal'
 import ProfileSettings from '@/components/ProfileSettings'
 import ChatPanel from '@/components/ChatPanel'
 import { tripApi } from '@/lib/api'
@@ -147,7 +147,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         )}
       </main>
 
-      <TripModal
+      <NewTripModal
         open={showNewTripModal}
         onClose={() => setShowNewTripModal(false)}
         onSuccess={handleTripCreated}
