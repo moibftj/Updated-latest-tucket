@@ -513,11 +513,13 @@ const LandingPage = ({ onShowAuth }) => {
             }}
           >
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-[#ff34ac]/20">
-              {/* Center Icon */}
+              {/* Tucker Logo */}
               <div className={`flex justify-center mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center shadow-lg shadow-[#ff34ac]/40">
-                  <Globe2 className="w-8 h-8 text-white" />
-                </div>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F1ab2aa9dfe9749deb69cc85a9ee54327?format=webp&width=800"
+                  alt="Tucker Trips Logo"
+                  className="h-24 w-auto hover:scale-110 transition duration-300"
+                />
               </div>
 
               {/* Title */}
