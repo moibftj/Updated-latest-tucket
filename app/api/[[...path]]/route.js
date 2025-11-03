@@ -1,9 +1,9 @@
-import { MongoClient } from 'mongodb'
 import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { z } from 'zod'
+import { createServerSupabaseClient } from '@/lib/supabase'
 
 // Validation schemas
 const registerSchema = z.object({
@@ -17,17 +17,14 @@ const loginSchema = z.object({
   password: z.string().min(1, 'Password is required'),
 })
 
-// MongoDB connection
-let client
-let db
+// Supabase client (singleton pattern)
+let supabase = null
 
-async function connectToMongo() {
-  if (!client) {
-    client = new MongoClient(process.env.MONGO_URL)
-    await client.connect()
-    db = client.db(process.env.DB_NAME)
+function getSupabase() {
+  if (!supabase) {
+    supabase = createServerSupabaseClient()
   }
-  return db
+  return supabase
 }
 
 // Helper function to handle CORS
@@ -66,7 +63,7 @@ async function handleRoute(request, { params }) {
   const method = request.method
 
   try {
-    const db = await connectToMongo()
+    const supabase = getSupabase()
 
     // ============ AUTH ROUTES ============
     
@@ -79,7 +76,12 @@ async function handleRoute(request, { params }) {
         const { email, password, name } = registerSchema.parse(body)
 
         // Check if user exists
-        const existingUser = await db.collection('users').findOne({ email })
+        const { data: existingUser } = await supabase
+          .from('users')
+          .select('*')
+          .eq('email', email)
+          .single()
+
         if (existingUser) {
           return handleCORS(NextResponse.json(
             { error: 'User already exists' },
@@ -97,12 +99,16 @@ async function handleRoute(request, { params }) {
           password: hashedPassword,
           name,
           bio: '',
-          lastSeen: new Date(),
-          isOnline: false,
-          createdAt: new Date()
+          last_seen: new Date().toISOString(),
+          is_online: false,
+          created_at: new Date().toISOString()
         }
 
-        await db.collection('users').insertOne(user)
+        const { error } = await supabase
+          .from('users')
+          .insert([user])
+
+        if (error) throw error
 
         // Generate JWT
         const token = jwt.sign(
@@ -135,8 +141,13 @@ async function handleRoute(request, { params }) {
         const { email, password } = loginSchema.parse(body)
 
         // Find user
-        const user = await db.collection('users').findOne({ email })
-        if (!user) {
+        const { data: user, error } = await supabase
+          .from('users')
+          .select('*')
+          .eq('email', email)
+          .single()
+
+        if (error || !user) {
           return handleCORS(NextResponse.json(
             { error: 'Invalid credentials' },
             { status: 401 }
@@ -153,10 +164,10 @@ async function handleRoute(request, { params }) {
         }
 
         // Update last seen and online status
-        await db.collection('users').updateOne(
-          { id: user.id },
-          { $set: { lastSeen: new Date(), isOnline: true } }
-        )
+        await supabase
+          .from('users')
+          .update({ last_seen: new Date().toISOString(), is_online: true })
+          .eq('id', user.id)
 
         // Generate JWT
         const token = jwt.sign(
@@ -190,8 +201,13 @@ async function handleRoute(request, { params }) {
         ))
       }
 
-      const user = await db.collection('users').findOne({ id: decoded.userId })
-      if (!user) {
+      const { data: user, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', decoded.userId)
+        .single()
+
+      if (error || !user) {
         return handleCORS(NextResponse.json(
           { error: 'User not found' },
           { status: 404 }
@@ -222,12 +238,17 @@ async function handleRoute(request, { params }) {
       if (name) updateData.name = name
       if (bio !== undefined) updateData.bio = bio
 
-      await db.collection('users').updateOne(
-        { id: decoded.userId },
-        { $set: updateData }
-      )
+      await supabase
+        .from('users')
+        .update(updateData)
+        .eq('id', decoded.userId)
 
-      const user = await db.collection('users').findOne({ id: decoded.userId })
+      const { data: user } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', decoded.userId)
+        .single()
+
       return handleCORS(NextResponse.json({
         user: { id: user.id, email: user.email, name: user.name, bio: user.bio || '' }
       }))
@@ -243,10 +264,10 @@ async function handleRoute(request, { params }) {
         ))
       }
 
-      await db.collection('users').updateOne(
-        { id: decoded.userId },
-        { $set: { lastSeen: new Date(), isOnline: true } }
-      )
+      await supabase
+        .from('users')
+        .update({ last_seen: new Date().toISOString(), is_online: true })
+        .eq('id', decoded.userId)
 
       return handleCORS(NextResponse.json({ success: true }))
     }
@@ -262,19 +283,16 @@ async function handleRoute(request, { params }) {
       }
 
       // Consider users online if they've been seen in the last 5 minutes
-      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000)
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString()
       
-      const onlineUsers = await db.collection('users')
-        .find({ 
-          id: { $ne: decoded.userId },
-          lastSeen: { $gte: fiveMinutesAgo },
-          isOnline: true
-        })
-        .project({ id: 1, name: 1, email: 1, bio: 1, lastSeen: 1 })
-        .toArray()
+      const { data: onlineUsers } = await supabase
+        .from('users')
+        .select('id, name, email, bio, last_seen')
+        .neq('id', decoded.userId)
+        .gte('last_seen', fiveMinutesAgo)
+        .eq('is_online', true)
 
-      const cleanedUsers = onlineUsers.map(({ _id, ...rest }) => rest)
-      return handleCORS(NextResponse.json(cleanedUsers))
+      return handleCORS(NextResponse.json(onlineUsers || []))
     }
 
     // ============ MESSAGE ROUTES ============
@@ -301,17 +319,27 @@ async function handleRoute(request, { params }) {
 
       const message = {
         id: uuidv4(),
-        senderId: decoded.userId,
-        recipientId,
+        sender_id: decoded.userId,
+        recipient_id: recipientId,
         content,
         read: false,
-        createdAt: new Date()
+        created_at: new Date().toISOString()
       }
 
-      await db.collection('messages').insertOne(message)
+      const { error } = await supabase
+        .from('messages')
+        .insert([message])
 
-      const { _id, ...messageData } = message
-      return handleCORS(NextResponse.json(messageData))
+      if (error) throw error
+
+      return handleCORS(NextResponse.json({
+        id: message.id,
+        senderId: message.sender_id,
+        recipientId: message.recipient_id,
+        content: message.content,
+        read: message.read,
+        createdAt: message.created_at
+      }))
     }
 
     // GET /api/messages/:userId
@@ -326,24 +354,31 @@ async function handleRoute(request, { params }) {
 
       const otherUserId = path[1]
       
-      const messages = await db.collection('messages')
-        .find({
-          $or: [
-            { senderId: decoded.userId, recipientId: otherUserId },
-            { senderId: otherUserId, recipientId: decoded.userId }
-          ]
-        })
-        .sort({ createdAt: 1 })
-        .toArray()
+      const { data: messages } = await supabase
+        .from('messages')
+        .select('*')
+        .or(`and(sender_id.eq.${decoded.userId},recipient_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},recipient_id.eq.${decoded.userId})`)
+        .order('created_at', { ascending: true })
 
       // Mark messages as read
-      await db.collection('messages').updateMany(
-        { senderId: otherUserId, recipientId: decoded.userId, read: false },
-        { $set: { read: true } }
-      )
+      await supabase
+        .from('messages')
+        .update({ read: true })
+        .eq('sender_id', otherUserId)
+        .eq('recipient_id', decoded.userId)
+        .eq('read', false)
 
-      const cleanedMessages = messages.map(({ _id, ...rest }) => rest)
-      return handleCORS(NextResponse.json(cleanedMessages))
+      // Convert snake_case to camelCase for client
+      const formattedMessages = (messages || []).map(msg => ({
+        id: msg.id,
+        senderId: msg.sender_id,
+        recipientId: msg.recipient_id,
+        content: msg.content,
+        read: msg.read,
+        createdAt: msg.created_at
+      }))
+
+      return handleCORS(NextResponse.json(formattedMessages))
     }
 
     // ============ TRIP ROUTES ============
@@ -385,31 +420,54 @@ async function handleRoute(request, { params }) {
 
       const trip = {
         id: uuidv4(),
-        userId: decoded.userId,
+        user_id: decoded.userId,
         title,
         destination,
-        startDate,
-        endDate: endDate || startDate,
+        start_date: startDate,
+        end_date: endDate || startDate,
         status: status || 'future',
         visibility: visibility || 'private',
         description: description || '',
-        coverPhoto: coverPhoto || '',
-        tripImages: tripImages || '',
+        cover_photo: coverPhoto || '',
+        trip_images: tripImages || '',
         weather: weather || '',
-        overallComment: overallComment || '',
+        overall_comment: overallComment || '',
         airlines: airlines || [],
         accommodations: accommodations || [],
         segments: segments || [],
-        sharedWith: [],
-        createdAt: new Date(),
-        updatedAt: new Date()
+        shared_with: [],
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }
 
-      await db.collection('trips').insertOne(trip)
+      const { error } = await supabase
+        .from('trips')
+        .insert([trip])
 
-      // Remove MongoDB _id
-      const { _id, ...tripData } = trip
-      return handleCORS(NextResponse.json(tripData))
+      if (error) throw error
+
+      // Convert to camelCase for response
+      return handleCORS(NextResponse.json({
+        id: trip.id,
+        userId: trip.user_id,
+        title: trip.title,
+        destination: trip.destination,
+        startDate: trip.start_date,
+        endDate: trip.end_date,
+        status: trip.status,
+        visibility: trip.visibility,
+        description: trip.description,
+        coverPhoto: trip.cover_photo,
+        tripImages: trip.trip_images,
+        weather: trip.weather,
+        overallComment: trip.overall_comment,
+        airlines: trip.airlines,
+        accommodations: trip.accommodations,
+        segments: trip.segments,
+        sharedWith: trip.shared_with,
+        createdAt: trip.created_at,
+        updatedAt: trip.updated_at
+      }))
     }
 
     // GET /api/trips
@@ -422,13 +480,36 @@ async function handleRoute(request, { params }) {
         ))
       }
 
-      const trips = await db.collection('trips')
-        .find({ userId: decoded.userId })
-        .sort({ createdAt: -1 })
-        .toArray()
+      const { data: trips } = await supabase
+        .from('trips')
+        .select('*')
+        .eq('user_id', decoded.userId)
+        .order('created_at', { ascending: false })
 
-      const cleanedTrips = trips.map(({ _id, ...rest }) => rest)
-      return handleCORS(NextResponse.json(cleanedTrips))
+      // Convert to camelCase
+      const formattedTrips = (trips || []).map(trip => ({
+        id: trip.id,
+        userId: trip.user_id,
+        title: trip.title,
+        destination: trip.destination,
+        startDate: trip.start_date,
+        endDate: trip.end_date,
+        status: trip.status,
+        visibility: trip.visibility,
+        description: trip.description,
+        coverPhoto: trip.cover_photo,
+        tripImages: trip.trip_images,
+        weather: trip.weather,
+        overallComment: trip.overall_comment,
+        airlines: trip.airlines,
+        accommodations: trip.accommodations,
+        segments: trip.segments,
+        sharedWith: trip.shared_with,
+        createdAt: trip.created_at,
+        updatedAt: trip.updated_at
+      }))
+
+      return handleCORS(NextResponse.json(formattedTrips))
     }
 
     // GET /api/trips/public/all - Get all public trips
@@ -441,23 +522,41 @@ async function handleRoute(request, { params }) {
         ))
       }
 
-      const trips = await db.collection('trips')
-        .find({ visibility: 'public' })
-        .sort({ createdAt: -1 })
+      const { data: trips } = await supabase
+        .from('trips')
+        .select(`
+          *,
+          users (name)
+        `)
+        .eq('visibility', 'public')
+        .order('created_at', { ascending: false })
         .limit(50)
-        .toArray()
 
-      // Get user info for each trip
-      const tripsWithUsers = await Promise.all(trips.map(async (trip) => {
-        const user = await db.collection('users').findOne({ id: trip.userId })
-        const { _id, password, ...tripData } = trip
-        return {
-          ...tripData,
-          userName: user?.name || 'Unknown User'
-        }
+      // Convert to camelCase with user info
+      const formattedTrips = (trips || []).map(trip => ({
+        id: trip.id,
+        userId: trip.user_id,
+        title: trip.title,
+        destination: trip.destination,
+        startDate: trip.start_date,
+        endDate: trip.end_date,
+        status: trip.status,
+        visibility: trip.visibility,
+        description: trip.description,
+        coverPhoto: trip.cover_photo,
+        tripImages: trip.trip_images,
+        weather: trip.weather,
+        overallComment: trip.overall_comment,
+        airlines: trip.airlines,
+        accommodations: trip.accommodations,
+        segments: trip.segments,
+        sharedWith: trip.shared_with,
+        createdAt: trip.created_at,
+        updatedAt: trip.updated_at,
+        userName: trip.users?.name || 'Unknown User'
       }))
 
-      return handleCORS(NextResponse.json(tripsWithUsers))
+      return handleCORS(NextResponse.json(formattedTrips))
     }
 
     // GET /api/trips/shared - Get trips shared with current user
@@ -470,25 +569,41 @@ async function handleRoute(request, { params }) {
         ))
       }
 
-      // Find trips where current user is in the sharedWith array
-      const trips = await db.collection('trips')
-        .find({
-          sharedWith: { $in: [decoded.userId] }
-        })
-        .sort({ createdAt: -1 })
-        .toArray()
+      // Find trips where current user is in the shared_with array
+      const { data: trips } = await supabase
+        .from('trips')
+        .select(`
+          *,
+          users (name)
+        `)
+        .contains('shared_with', [decoded.userId])
+        .order('created_at', { ascending: false })
 
-      // Get user info for each trip
-      const tripsWithUsers = await Promise.all(trips.map(async (trip) => {
-        const user = await db.collection('users').findOne({ id: trip.userId })
-        const { _id, ...tripData } = trip
-        return {
-          ...tripData,
-          userName: user?.name || 'Unknown User'
-        }
+      // Convert to camelCase with user info
+      const formattedTrips = (trips || []).map(trip => ({
+        id: trip.id,
+        userId: trip.user_id,
+        title: trip.title,
+        destination: trip.destination,
+        startDate: trip.start_date,
+        endDate: trip.end_date,
+        status: trip.status,
+        visibility: trip.visibility,
+        description: trip.description,
+        coverPhoto: trip.cover_photo,
+        tripImages: trip.trip_images,
+        weather: trip.weather,
+        overallComment: trip.overall_comment,
+        airlines: trip.airlines,
+        accommodations: trip.accommodations,
+        segments: trip.segments,
+        sharedWith: trip.shared_with,
+        createdAt: trip.created_at,
+        updatedAt: trip.updated_at,
+        userName: trip.users?.name || 'Unknown User'
       }))
 
-      return handleCORS(NextResponse.json(tripsWithUsers))
+      return handleCORS(NextResponse.json(formattedTrips))
     }
 
     // GET /api/trips/:id
@@ -502,20 +617,41 @@ async function handleRoute(request, { params }) {
       }
 
       const tripId = path[1]
-      const trip = await db.collection('trips').findOne({ 
-        id: tripId, 
-        userId: decoded.userId 
-      })
+      const { data: trip, error } = await supabase
+        .from('trips')
+        .select('*')
+        .eq('id', tripId)
+        .eq('user_id', decoded.userId)
+        .single()
 
-      if (!trip) {
+      if (error || !trip) {
         return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
-      const { _id, ...tripData } = trip
-      return handleCORS(NextResponse.json(tripData))
+      return handleCORS(NextResponse.json({
+        id: trip.id,
+        userId: trip.user_id,
+        title: trip.title,
+        destination: trip.destination,
+        startDate: trip.start_date,
+        endDate: trip.end_date,
+        status: trip.status,
+        visibility: trip.visibility,
+        description: trip.description,
+        coverPhoto: trip.cover_photo,
+        tripImages: trip.trip_images,
+        weather: trip.weather,
+        overallComment: trip.overall_comment,
+        airlines: trip.airlines,
+        accommodations: trip.accommodations,
+        segments: trip.segments,
+        sharedWith: trip.shared_with,
+        createdAt: trip.created_at,
+        updatedAt: trip.updated_at
+      }))
     }
 
     // PATCH /api/trips/:id
@@ -531,28 +667,61 @@ async function handleRoute(request, { params }) {
       const tripId = path[1]
       const body = await request.json()
 
-      const result = await db.collection('trips').findOneAndUpdate(
-        { id: tripId, userId: decoded.userId },
-        {
-          $set: {
-            ...body,
-            updatedAt: new Date()
-          }
-        },
-        { returnDocument: 'after' }
-      )
+      // Convert camelCase to snake_case
+      const updateData = {}
+      if (body.title !== undefined) updateData.title = body.title
+      if (body.destination !== undefined) updateData.destination = body.destination
+      if (body.startDate !== undefined) updateData.start_date = body.startDate
+      if (body.endDate !== undefined) updateData.end_date = body.endDate
+      if (body.status !== undefined) updateData.status = body.status
+      if (body.visibility !== undefined) updateData.visibility = body.visibility
+      if (body.description !== undefined) updateData.description = body.description
+      if (body.coverPhoto !== undefined) updateData.cover_photo = body.coverPhoto
+      if (body.tripImages !== undefined) updateData.trip_images = body.tripImages
+      if (body.weather !== undefined) updateData.weather = body.weather
+      if (body.overallComment !== undefined) updateData.overall_comment = body.overallComment
+      if (body.airlines !== undefined) updateData.airlines = body.airlines
+      if (body.accommodations !== undefined) updateData.accommodations = body.accommodations
+      if (body.segments !== undefined) updateData.segments = body.segments
+      if (body.sharedWith !== undefined) updateData.shared_with = body.sharedWith
+      updateData.updated_at = new Date().toISOString()
 
-      const updatedTrip = result?.value
+      const { data: updatedTrip, error } = await supabase
+        .from('trips')
+        .update(updateData)
+        .eq('id', tripId)
+        .eq('user_id', decoded.userId)
+        .select()
+        .single()
 
-      if (!updatedTrip) {
+      if (error || !updatedTrip) {
         return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
         ))
       }
 
-      const { _id, ...tripData } = updatedTrip
-      return handleCORS(NextResponse.json(tripData))
+      return handleCORS(NextResponse.json({
+        id: updatedTrip.id,
+        userId: updatedTrip.user_id,
+        title: updatedTrip.title,
+        destination: updatedTrip.destination,
+        startDate: updatedTrip.start_date,
+        endDate: updatedTrip.end_date,
+        status: updatedTrip.status,
+        visibility: updatedTrip.visibility,
+        description: updatedTrip.description,
+        coverPhoto: updatedTrip.cover_photo,
+        tripImages: updatedTrip.trip_images,
+        weather: updatedTrip.weather,
+        overallComment: updatedTrip.overall_comment,
+        airlines: updatedTrip.airlines,
+        accommodations: updatedTrip.accommodations,
+        segments: updatedTrip.segments,
+        sharedWith: updatedTrip.shared_with,
+        createdAt: updatedTrip.created_at,
+        updatedAt: updatedTrip.updated_at
+      }))
     }
 
     // DELETE /api/trips/:id
@@ -566,12 +735,13 @@ async function handleRoute(request, { params }) {
       }
 
       const tripId = path[1]
-      const result = await db.collection('trips').deleteOne({ 
-        id: tripId, 
-        userId: decoded.userId 
-      })
+      const { error } = await supabase
+        .from('trips')
+        .delete()
+        .eq('id', tripId)
+        .eq('user_id', decoded.userId)
 
-      if (result.deletedCount === 0) {
+      if (error) {
         return handleCORS(NextResponse.json(
           { error: 'Trip not found' },
           { status: 404 }
