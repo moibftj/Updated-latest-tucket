@@ -388,33 +388,141 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-32 md:pt-36 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6 lg:px-8">
+      {/* Hero Section - 21st.dev Style */}
+      <section className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/50 to-[#343f65]">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-[#ff34ac]/60 via-[#7dbbe5]/40 to-[#ff34ac]/60 blur-3xl" />
-          <div className="animate-glow absolute bottom-0 left-0 h-60 w-60 rounded-full bg-[#ff34ac]/40 blur-[90px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,52,172,0.08),transparent_50%)]" />
+          <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-[#ff34ac]/40 via-[#7dbbe5]/30 to-[#ff34ac]/40 blur-3xl" />
+          <div className="animate-glow absolute bottom-0 left-0 h-60 w-60 rounded-full bg-[#ff34ac]/30 blur-[90px]" />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-[1.1fr,0.9fr]">
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-2 lg:order-1">
-            <div 
-              id="hero-badge"
+        <div className="relative w-full max-w-7xl mx-auto">
+          {/* Floating Demo Cards */}
+          <div className="absolute inset-0 w-full h-full perspective">
+            {/* Top Left Card */}
+            <div
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
+              id="hero-card-1"
               ref={(el) => {
-                if (el) elementsRef.current['hero-badge'] = el
+                if (el) elementsRef.current['hero-card-1'] = el
               }}
-              className={`inline-flex items-center gap-2 rounded-full border border-[#7dbbe5]/40 bg-white/5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#e5dbf1] shadow-[0_8px_35px_rgba(125,187,229,0.25)] backdrop-blur-lg ${visibleElements['hero-badge'] ? 'animate-in-up' : 'opacity-0'}`}
+              style={{ animation: `floatParticle 8s ease-in-out infinite`, animationDelay: '0s' }}
             >
-              <Stars className="h-3 w-3 sm:h-4 sm:w-4" />
-              Your Journey Starts Here
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
+                  <Plane className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Flight Booking</p>
+                  <p className="text-xs text-[#e5dbf1]">Seamless flight planning</p>
+                </div>
+              </div>
+              <div className="w-full h-24 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
+                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format" alt="Flight" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
+                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+              </div>
             </div>
 
-            <div className="space-y-4 sm:space-y-5">
-              <h1 
-                className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white ${visibleElements['hero-title'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
-                id="hero-title"
-                ref={(el) => {
-                  if (el) elementsRef.current['hero-title'] = el
-                }}
+            {/* Top Right Card */}
+            <div
+              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
+              id="hero-card-2"
+              ref={(el) => {
+                if (el) elementsRef.current['hero-card-2'] = el
+              }}
+              style={{ animation: `floatParticle 10s ease-in-out infinite`, animationDelay: '1s' }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
+                  <Camera className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Photo Memories</p>
+                  <p className="text-xs text-[#e5dbf1]">Capture every moment</p>
+                </div>
+              </div>
+              <div className="w-full h-28 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400&auto=format" alt="Memory" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
+                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+              </div>
+            </div>
+
+            {/* Bottom Left Card */}
+            <div
+              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
+              id="hero-card-3"
+              ref={(el) => {
+                if (el) elementsRef.current['hero-card-3'] = el
+              }}
+              style={{ animation: `floatParticle 9s ease-in-out infinite`, animationDelay: '2s' }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
+                  <Users className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Collaborate</p>
+                  <p className="text-xs text-[#e5dbf1]">Plan together</p>
+                </div>
+              </div>
+              <div className="w-full h-20 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format" alt="Collaboration" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
+                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+              </div>
+            </div>
+
+            {/* Bottom Right Card */}
+            <div
+              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
+              id="hero-card-4"
+              ref={(el) => {
+                if (el) elementsRef.current['hero-card-4'] = el
+              }}
+              style={{ animation: `floatParticle 11s ease-in-out infinite`, animationDelay: '0.5s' }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
+                  <Share2 className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Share Stories</p>
+                  <p className="text-xs text-[#e5dbf1]">Document adventures</p>
+                </div>
+              </div>
+              <div className="w-full h-20 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format" alt="Stories" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
+                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Central Hero Card */}
+          <div
+            className={`relative z-10 mx-auto max-w-2xl text-center ${visibleElements['hero-center'] ? 'animate-scale-in' : 'opacity-0'}`}
+            id="hero-center"
+            ref={(el) => {
+              if (el) elementsRef.current['hero-center'] = el
+            }}
+          >
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-[#ff34ac]/20">
+              {/* Center Icon */}
+              <div className={`flex justify-center mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center shadow-lg shadow-[#ff34ac]/40">
+                  <Globe2 className="w-8 h-8 text-white" />
+                </div>
+              </div>
+
+              {/* Title */}
+              <h1
+                className={`text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
               >
                 Plan Your Dream Trip.
                 <br className="hidden sm:block" />
@@ -422,79 +530,45 @@ const LandingPage = ({ onShowAuth }) => {
                   Share Every Moment.
                 </span>
               </h1>
-              <p 
-                className={`mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-[#e5dbf1] lg:mx-0 ${visibleElements['hero-desc'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
-                id="hero-desc"
-                ref={(el) => {
-                  if (el) elementsRef.current['hero-desc'] = el
-                }}
+
+              {/* Subtitle */}
+              <p
+                className={`text-base sm:text-lg text-[#e5dbf1] mb-8 max-w-xl mx-auto ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
               >
-                The ultimate travel planning platform for modern adventurers. Create detailed itineraries,
-                collaborate with friends, and turn every trip into an unforgettable story.
+                The ultimate travel planning platform for modern adventurers. Create detailed itineraries, collaborate with friends, and turn every trip into an unforgettable story.
               </p>
-            </div>
 
-            <div 
-              className={`flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center lg:justify-start ${visibleElements['hero-cta'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}
-              id="hero-cta"
-              ref={(el) => {
-                if (el) elementsRef.current['hero-cta'] = el
-              }}
-            >
-              <Button
-                onClick={onShowAuth}
-                size="lg"
-                className={`w-full sm:w-auto relative flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] px-6 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_20px_40px_rgba(255,52,172,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(255,52,172,0.45)] ${pulseCta ? 'animate-pulse-ring' : ''}`}
+              {/* CTA Buttons */}
+              <div
+                className={`flex flex-col sm:flex-row gap-4 justify-center ${visibleElements['hero-center'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}
               >
-                <ShinyText text="Start Planning Free" speed={2.2} />
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-              <button
-                onClick={onShowAuth}
-                className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 sm:px-6 py-3 text-sm font-semibold text-white/90 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/20 hover:text-white hover:scale-105 duration-300"
-              >
-                View Demo
-                <Camera className="h-4 w-4 transition group-hover:text-[#7dbbe5] group-hover:scale-110" />
-              </button>
-            </div>
-
-            <div 
-              className={`grid gap-4 sm:gap-6 pt-4 sm:pt-6 text-left grid-cols-1 sm:grid-cols-3 ${visibleElements['hero-metrics'] ? 'animate-in-up stagger-5' : 'opacity-0'}`}
-              id="hero-metrics"
-              ref={(el) => {
-                if (el) elementsRef.current['hero-metrics'] = el
-              }}
-            >
-              {highlightMetrics.map(({ icon: Icon, label, value, blurb }, idx) => (
-                <div
-                  key={label}
-                  className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/50 hover:bg-[#ff34ac]/10 cursor-pointer group"
-                  style={{
-                    animation: visibleElements['hero-metrics'] ? `fadeInUp 0.8s ease-out ${0.1 + idx * 0.1}s forwards` : 'none',
-                  }}
+                <Button
+                  onClick={onShowAuth}
+                  size="lg"
+                  className="rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white font-semibold shadow-lg shadow-[#ff34ac]/40 hover:shadow-[#ff34ac]/60 hover:-translate-y-1 transition duration-300 text-base"
                 >
-                  <div className="mb-3 sm:mb-4 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 text-[#e5dbf1] group-hover:scale-110 transition duration-300">
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/60">{label}</p>
-                  <p className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold text-white">{value}</p>
-                  <p className="mt-1 text-xs sm:text-sm text-[#e5dbf1]">{blurb}</p>
-                  <span className="pointer-events-none absolute -right-8 bottom-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-[#7dbbe5]/20 blur-3xl group-hover:right-0 transition duration-500" />
-                </div>
-              ))}
-            </div>
-          </div>
+                  <ShinyText text="Start Planning Free" speed={2.2} />
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <button
+                  onClick={onShowAuth}
+                  className="rounded-full border-2 border-white/20 bg-white/5 px-8 py-3 text-white font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
+                >
+                  View Demo
+                </button>
+              </div>
 
-          <div 
-            className={`relative flex justify-center lg:justify-end order-1 lg:order-2 ${visibleElements['hero-stack'] ? 'animate-scale-in' : 'opacity-0'}`}
-            id="hero-stack"
-            ref={(el) => {
-              if (el) elementsRef.current['hero-stack'] = el
-            }}
-          >
-            <div className="animate-float-slow pointer-events-none absolute -top-12 left-10 hidden h-28 w-28 rounded-full bg-gradient-to-br from-[#ff34ac]/40 to-[#7dbbe5]/30 blur-3xl md:block" />
-            <div className="scale-75 sm:scale-90 md:scale-100">
-              <Stack cardsData={heroImages} cardDimensions={{ width: 300, height: 360 }} />
+              {/* Metrics */}
+              <div
+                className={`mt-12 grid grid-cols-3 gap-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-5' : 'opacity-0'}`}
+              >
+                {highlightMetrics.map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="text-center">
+                    <p className="text-2xl sm:text-3xl font-bold text-white">{value}</p>
+                    <p className="text-xs sm:text-sm text-[#e5dbf1] uppercase tracking-wide">{label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
