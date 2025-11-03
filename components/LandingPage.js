@@ -611,12 +611,12 @@ const LandingPage = ({ onShowAuth }) => {
           <div className="absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
-              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
               id="hero-card-1"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-1'] = el
               }}
-              style={{ animation: `floatParticle 8s ease-in-out infinite`, animationDelay: '0s' }}
+              style={{ animation: `floatCard 8s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '0s' }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
