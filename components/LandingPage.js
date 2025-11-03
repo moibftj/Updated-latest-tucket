@@ -401,7 +401,7 @@ const LandingPage = ({ onShowAuth }) => {
           <div className="absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
-              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
               id="hero-card-1"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-1'] = el
@@ -427,7 +427,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Top Right Card */}
             <div
-              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
               id="hero-card-2"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-2'] = el
@@ -453,7 +453,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Left Card */}
             <div
-              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
               id="hero-card-3"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-3'] = el
@@ -479,7 +479,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Right Card */}
             <div
-              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
               id="hero-card-4"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-4'] = el
