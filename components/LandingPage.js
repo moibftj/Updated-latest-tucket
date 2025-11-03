@@ -389,6 +389,21 @@ const LandingPage = ({ onShowAuth }) => {
         100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
       }
 
+      @keyframes floatCard {
+        0%, 100% {
+          transform: translateY(0px) translateX(0px);
+        }
+        25% {
+          transform: translateY(-15px) translateX(5px);
+        }
+        50% {
+          transform: translateY(-10px) translateX(-5px);
+        }
+        75% {
+          transform: translateY(-20px) translateX(5px);
+        }
+      }
+
       @keyframes shimmerSoft {
         0% { background-position: 0% 50%; }
         100% { background-position: 200% 50%; }
@@ -622,12 +637,12 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Top Right Card */}
             <div
-              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
               id="hero-card-2"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-2'] = el
               }}
-              style={{ animation: `floatParticle 10s ease-in-out infinite`, animationDelay: '1s' }}
+              style={{ animation: `floatCard 10s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '1s' }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
