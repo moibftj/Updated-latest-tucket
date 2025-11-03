@@ -617,32 +617,34 @@ const LandingPage = ({ onShowAuth }) => {
         }}
       >
         <div className="relative mx-auto max-w-6xl">
-          {/* Top Image */}
-          <div className={`mb-8 sm:mb-12 ${visibleElements['founder-section'] ? 'animate-scale-in' : 'opacity-0'}`}>
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F8b3689a463744ae8b9e3ce8d681365e2?format=webp&width=800"
-              alt="Tucker and me"
-              className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
-            />
-          </div>
+          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center ${visibleElements['founder-section'] ? 'animate-in-up' : 'opacity-0'}`}>
+            {/* Images Column */}
+            <div className="space-y-6 sm:space-y-8">
+              <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-1' : 'opacity-0'}`}>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F8b3689a463744ae8b9e3ce8d681365e2?format=webp&width=800"
+                  alt="Tucker and me"
+                  className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
+                />
+              </div>
+              <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F4a0c624cc66e41999eaefba4dadf5be3?format=webp&width=800"
+                  alt="Tucker in nature"
+                  className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
+                />
+              </div>
+            </div>
 
-          {/* Content */}
-          <div className={`text-center max-w-3xl mx-auto mb-8 sm:mb-12 ${visibleElements['founder-section'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-              Why I Founded Tucker Trips
-            </h2>
-            <p className="text-base sm:text-lg text-[#e5dbf1] leading-relaxed">
-              I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure. With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
-            </p>
-          </div>
-
-          {/* Bottom Image */}
-          <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F4a0c624cc66e41999eaefba4dadf5be3?format=webp&width=800"
-              alt="Tucker in nature"
-              className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
-            />
+            {/* Content Column */}
+            <div className={`${visibleElements['founder-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+                Why I Founded Tucker Trips
+              </h2>
+              <p className="text-base sm:text-lg text-[#e5dbf1] leading-relaxed">
+                I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure. With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
+              </p>
+            </div>
           </div>
         </div>
       </section>
