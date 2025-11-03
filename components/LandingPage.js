@@ -404,6 +404,21 @@ const LandingPage = ({ onShowAuth }) => {
         }
       }
 
+      @keyframes inflateFromBottom {
+        0% {
+          transform: translateY(100px) scale(0.8);
+          opacity: 0;
+        }
+        60% {
+          transform: translateY(-10px) scale(1.02);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
       @keyframes shimmerSoft {
         0% { background-position: 0% 50%; }
         100% { background-position: 200% 50%; }
@@ -611,12 +626,16 @@ const LandingPage = ({ onShowAuth }) => {
           <div className="hidden lg:block absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
-              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-1"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-1'] = el
               }}
-              style={{ animation: `floatCard 8s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '0s' }}
+              style={{
+                animation: visibleElements['hero-card-1']
+                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards, floatCard 8s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite`
+                  : 'none'
+              }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
@@ -637,12 +656,16 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Top Right Card */}
             <div
-              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-2'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-2'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-2"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-2'] = el
               }}
-              style={{ animation: `floatCard 10s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '1s' }}
+              style={{
+                animation: visibleElements['hero-card-2']
+                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards, floatCard 10s cubic-bezier(0.4, 0, 0.2, 1) 1.4s infinite`
+                  : 'none'
+              }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
@@ -663,12 +686,16 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Left Card */}
             <div
-              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-3'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-3"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-3'] = el
               }}
-              style={{ animation: `floatCard 9s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '2s' }}
+              style={{
+                animation: visibleElements['hero-card-3']
+                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards, floatCard 9s cubic-bezier(0.4, 0, 0.2, 1) 1.6s infinite`
+                  : 'none'
+              }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
@@ -689,12 +716,16 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Right Card */}
             <div
-              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-4'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-4"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-4'] = el
               }}
-              style={{ animation: `floatCard 11s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '0.5s' }}
+              style={{
+                animation: visibleElements['hero-card-4']
+                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards, floatCard 11s cubic-bezier(0.4, 0, 0.2, 1) 1.8s infinite`
+                  : 'none'
+              }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
