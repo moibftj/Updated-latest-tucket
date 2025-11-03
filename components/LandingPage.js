@@ -663,12 +663,12 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Left Card */}
             <div
-              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-3'] ? 'animate-float-slow' : ''}`}
               id="hero-card-3"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-3'] = el
               }}
-              style={{ animation: `floatParticle 9s ease-in-out infinite`, animationDelay: '2s' }}
+              style={{ animation: `floatCard 9s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '2s' }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
@@ -689,12 +689,12 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Right Card */}
             <div
-              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 transform hover:scale-105 transition duration-500 cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
+              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-4'] ? 'animate-float-slow' : ''}`}
               id="hero-card-4"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-4'] = el
               }}
-              style={{ animation: `floatParticle 11s ease-in-out infinite`, animationDelay: '0.5s' }}
+              style={{ animation: `floatCard 11s cubic-bezier(0.4, 0, 0.2, 1) infinite`, animationDelay: '0.5s' }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
