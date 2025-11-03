@@ -40,179 +40,52 @@ Tucker Trips is a Next.js 14 travel planning application with a complete full-st
 - **Utility Function**: `cn()` in `/lib/utils.js` combines `clsx` and `tailwind-merge`
 - **Component Structure**: Business components in `/components/`, UI primitives in `/components/ui/`
 
-### State Management Patterns
-- Local state with React hooks (no external state management)
-- `Dashboard.js` manages main app state: `user`, `trips`, `activeSection`
-- API calls use fetch with manual token headers: `{ Authorization: \`Bearer ${localStorage.getItem('token')}\` }`
-- Real-time features through polling (heartbeat system for online status)
+## Tucker Trips — concise AI coding instructions
 
-## Development Workflows
+This short guide helps an AI coding agent become productive quickly in the Tucker Trips repository.
+Keep guidance short, actionable and reference real files below.
 
-### Running the Application
-```bash
-# Package manager: pnpm (not yarn/npm)
-# Development with memory optimization for dev containers
-pnpm dev              # Uses NODE_OPTIONS='--max-old-space-size=512'
+## High-level architecture (why it matters)
+- Next.js 14 frontend + API routes. Single-file API handler: `app/api/[[...path]]/route.js` — all backend routes and methods live here. Modify carefully: new endpoints are added as new branches inside `handleRoute()`.
+- MongoDB used directly via a `connectToMongo()` singleton. Documents use a custom `id` (UUID v4) instead of `_id`.
+- Client stores JWT in localStorage; server extracts userId with `verifyToken()` and checks Authorization header.
 
-# Alternative dev modes
-pnpm dev:no-reload    # Without hot reload for performance
-pnpm dev:webpack      # Webpack-specific optimizations
+## Key files to read before coding
+- `app/api/[[...path]]/route.js` — monolithic API router and DB usage examples.
+- `app/page.js` — top-level auth check and bootstrapping (checkAuth, heartbeat logic).
+- `components/` and `components/ui/` — business components vs shadcn/Radix UI primitives.
+- `lib/utils.js` — common helpers (notably `cn()` for classNames).
+- `next.config.js` — webpack polling and dev-container optimizations.
+- `backend_test.py` and `test_result.md` — testing protocol and agent coordination.
 
-# Production build
-pnpm build && pnpm start
-```
+## Project-specific conventions (follow these exactly)
+- Package manager: pnpm. Use `pnpm dev` / `pnpm build && pnpm start` (see `package.json`).
+- API pattern: add route logic inside `handleRoute()` and return via `handleCORS(NextResponse.json(...))`.
+- Use UUID `id` fields on all documents (users, trips, messages). When returning DB results, existing code strips `_id` — follow that pattern.
+- UI: use `'use client'` for interactive components. Import shadcn components from `@/components/ui/*`.
 
-### Dev Container Optimizations
-- Webpack configured with polling (2s intervals) instead of file watching
-- `aggregateTimeout: 300ms` to batch rebuilds
-- `node_modules` excluded from watch to reduce CPU/memory
-- `onDemandEntries` limits in-memory pages to 2 with 10s max inactive age
-- See `next.config.js` webpack section for tuning parameters
+## How to add an API endpoint (example)
+1. Edit `app/api/[[...path]]/route.js`.
+2. Follow existing route sections (look for comment headers: AUTH, USERS, MESSAGES, TRIPS).
+3. If protected, call `verifyToken(request)` and get userId.
+4. Perform DB operations via the established `connectToMongo()` client and return the result after stripping `_id`.
 
-### Database Operations
-- MongoDB connection via environment variables: `MONGO_URL`, `DB_NAME`, `JWT_SECRET`
-- No migrations - collections created on first write
-- Direct MongoDB client usage, no schema validation
-- Connection singleton pattern prevents multiple connections
+## Running & testing
+- Development (dev container optimized): `pnpm dev` (the repo config expects NODE_OPTIONS memory tuning).
+- Alternate dev modes: `pnpm dev:no-reload`, `pnpm dev:webpack` (see `package.json` scripts).
+- Backend tests: `python backend_test.py` (uses `requests`; configure `BASE_URL` as needed).
 
-### Testing & Quality Assurance
-- **Backend Testing**: Comprehensive Python test suite in `backend_test.py`
-  - Tests full user journey: registration → profile → messaging → trips
-  - Runs against live deployment (`BASE_URL` configurable)
-  - Tests authentication, CRUD operations, real-time features
-  - Usage: `python backend_test.py` (requires `requests` library)
-- **AI Agent Testing Protocol**: Uses `test_result.md` for agent coordination
-  - YAML-structured task tracking with status history
-  - Main agent updates before delegating to testing agent
-  - Tracks stuck tasks and testing priorities
-- **Performance**: Webpack optimized for dev containers with reduced file watching
+## Quick pitfalls to avoid
+- Do not split the API into new files — the codebase intentionally uses the single catch-all route.
+- Don’t assume MongoDB documents use `_id` — code expects `id`.
+- When changing auth behavior, update `app/page.js` and the way tokens are read from localStorage.
 
-## Key File Locations
+## Agent testing & coordination
+- Update `test_result.md` when you implement or change behavior so the testing agent can pick it up.
+- Mark `needs_retesting: true` when API or DB behavior changes.
 
-### Core Application Files
-- `app/page.js` - Main app component with auth routing
-- `app/api/[[...path]]/route.js` - Complete backend API
-- `components/Dashboard.js` - Main authenticated user interface
-- `components/ui/` - shadcn/ui component library
+## Where to add small improvements
+- Add unit-like integration tests in `tests/` if you expand behavior; keep them simple and fast.
+- Small, safe changes (readme updates, comments in `route.js`, helper refactors) are encouraged; large structural changes require human review.
 
-### Configuration
-- `next.config.js` - Standalone build, MongoDB external packages, CORS headers, webpack polling
-- `tailwind.config.js` - Extended shadcn theme with custom animations
-- `package.json` - **pnpm** package manager (v9.12.3), extensive Radix UI dependencies
-- `components.json` - shadcn/ui config (style: "new-york", tsx: false, icon: lucide)
-
-## Data Models
-
-### Trip Schema
-```javascript
-{
-  id: string,           // UUID
-  userId: string,       // Owner ID
-  title: string,
-  destination: string,
-  startDate: string,
-  endDate: string,
-  status: 'future' | 'taken',
-  visibility: 'private' | 'public',
-  segments: Array,      // Itinerary items (flights, hotels, etc.)
-  description: string,
-  coverPhoto: string,
-  // ... additional metadata
-}
-```
-
-### Message Schema
-```javascript
-{
-  id: string,
-  senderId: string,
-  recipientId: string,
-  content: string,
-  read: boolean,
-  createdAt: Date
-}
-```
-
-### User Schema
-```javascript
-{
-  id: string,           // UUID
-  email: string,
-  password: string,     // bcrypt hashed
-  name: string,
-  bio: string,
-  lastSeen: Date,
-  isOnline: boolean
-}
-```
-
-## Common Patterns
-
-### API Route Addition
-1. Add new route case in `handleRoute()` function
-2. Follow pattern: `if (route === '/new/endpoint' && method === 'POST')`
-3. Extract JWT with `verifyToken(request)` for protected routes
-4. Return with `handleCORS(NextResponse.json(...))`
-
-### Component Creation
-1. Use `'use client'` directive for interactive components
-2. Import UI components: `import { Button } from '@/components/ui/button'`
-3. Style with Tailwind classes, use `cn()` for conditional styling
-4. Follow naming: PascalCase for components, kebab-case for files
-
-### Modal Patterns
-Components like `EnhancedTripModal.js` use:
-- Radix Dialog primitives for accessibility
-- State managed in parent component
-- `onSuccess` callback pattern for data updates
-- Consistent `open`/`onClose` prop interface
-- **Multi-step forms**: See `EnhancedTripModal.js` for pattern with `currentStep` state
-  - Step navigation with validation before advancing
-  - Form state accumulation across steps
-  - Segments stored as arrays (airlines, accommodations)
-  - Final submission combines all steps into single API call
-
-### Form & Input Patterns
-- Use Radix primitives with shadcn wrappers (e.g., `RadioGroup`, `Input`, `Textarea`)
-- Custom components like `StarRating` follow controlled component pattern
-- Toast notifications via `sonner`: `toast.success()`, `toast.error()`
-- Form arrays managed with spread operators: `[...prev.airlines, newItem]`
-
-## Environment Setup
-- Requires MongoDB connection string in `MONGO_URL`
-- JWT secret in `JWT_SECRET` 
-- Optional `CORS_ORIGINS` for production deployments
-- Uses standalone Next.js build for containerization
-
-## AI Agent Testing Protocol
-This project uses a specialized multi-agent testing system via `test_result.md`:
-
-### Key Patterns
-- **YAML Task Tracking**: All tasks tracked with `implemented`, `working`, `stuck_count`, `priority`
-- **Status History**: Each task maintains detailed history with agent attribution
-- **Communication Log**: Agent coordination through `agent_communication` array
-- **Testing Delegation**: Main agent updates `test_result.md` before calling testing agent
-
-### Usage Guidelines
-- Always read `test_result.md` before making changes to understand current state
-- Update task status history when implementing features
-- Use `needs_retesting: true` to flag items for testing agent
-- Track persistent issues via `stuck_count` increments
-- Reference `test_plan.current_focus` for priority guidance
-
-### File Structure
-```yaml
-user_problem_statement: "..."
-backend:
-  - task: "Feature name"
-    implemented: true/false
-    working: true/false/"NA"
-    file: "path/to/file"
-    stuck_count: 0
-    priority: "high"/"medium"/"low"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "main"/"testing"/"user"
-        comment: "Detailed description"
-```
+If anything above is unclear or you want more detail for a particular area (API examples, test runs, or UX components), tell me which area to expand and I will iterate.
