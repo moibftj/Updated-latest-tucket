@@ -599,7 +599,7 @@ const LandingPage = ({ onShowAuth }) => {
       </header>
 
       {/* Hero Section - 21st.dev Style */}
-      <section className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/50 to-[#343f65]">
+      <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-10 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/50 to-[#343f65]">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,52,172,0.08),transparent_50%)]" />
           <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-[#ff34ac]/40 via-[#7dbbe5]/30 to-[#ff34ac]/40 blur-3xl" />
@@ -607,8 +607,8 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
 
         <div className="relative w-full max-w-7xl mx-auto">
-          {/* Floating Demo Cards */}
-          <div className="absolute inset-0 w-full h-full perspective">
+          {/* Floating Demo Cards - Hidden on mobile */}
+          <div className="hidden lg:block absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
               className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'animate-float-slow' : ''}`}
@@ -716,53 +716,53 @@ const LandingPage = ({ onShowAuth }) => {
 
           {/* Central Hero Card */}
           <div
-            className={`relative z-10 mx-auto max-w-2xl text-center ${visibleElements['hero-center'] ? 'animate-scale-in' : 'opacity-0'}`}
+            className={`relative z-10 mx-auto max-w-2xl text-center px-4 ${visibleElements['hero-center'] ? 'animate-scale-in' : 'opacity-0'}`}
             id="hero-center"
             ref={(el) => {
               if (el) elementsRef.current['hero-center'] = el
             }}
           >
-            <div className="rounded-3xl bg-white/5 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-[#ff34ac]/20">
+            <div className="rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-xl p-6 sm:p-8 md:p-12 shadow-2xl shadow-[#ff34ac]/20">
               {/* Tucker Logo */}
-              <div className={`flex justify-center mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
+              <div className={`flex justify-center mb-4 sm:mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F1ab2aa9dfe9749deb69cc85a9ee54327?format=webp&width=800"
                   alt="Tucker Trips Logo"
-                  className="h-24 w-auto"
+                  className="h-16 sm:h-20 md:h-24 w-auto"
                 />
               </div>
 
               {/* Title */}
               <h1
-                className={`text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-tight ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
               >
-                Welcome to Tucker Trips
+                Welcome to<br className="sm:hidden" /> Tucker Trips
               </h1>
 
               {/* Subtitle */}
               <p
-                className={`text-base sm:text-lg text-[#e5dbf1] mb-8 max-w-xl mx-auto ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
+                className={`text-sm sm:text-base md:text-lg text-[#e5dbf1] mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
               >
-                <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent font-medium">
                   Experience the world, one voyage at a time.
                 </span>
               </p>
 
               {/* CTA Buttons */}
               <div
-                className={`flex flex-col sm:flex-row gap-4 justify-center ${visibleElements['hero-center'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}
+                className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center ${visibleElements['hero-center'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}
               >
                 <Button
                   onClick={onShowAuth}
                   size="lg"
-                  className="rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white font-semibold shadow-lg shadow-[#ff34ac]/40 hover:shadow-[#ff34ac]/60 hover:-translate-y-1 transition duration-300 text-base"
+                  className="w-full sm:w-auto rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white font-semibold shadow-lg shadow-[#ff34ac]/40 hover:shadow-[#ff34ac]/60 hover:-translate-y-1 transition duration-300 text-sm sm:text-base py-6 sm:py-3 px-6 sm:px-8"
                 >
                   <ShinyText text="Start Planning Free" speed={2.2} />
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
                 <button
                   onClick={onShowAuth}
-                  className="rounded-full border-2 border-white/20 bg-white/5 px-8 py-3 text-white font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
+                  className="w-full sm:w-auto rounded-full border-2 border-white/20 bg-white/5 px-6 sm:px-8 py-3 text-sm sm:text-base text-white font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
                 >
                   View Demo
                 </button>
@@ -770,12 +770,12 @@ const LandingPage = ({ onShowAuth }) => {
 
               {/* Metrics */}
               <div
-                className={`mt-12 grid grid-cols-3 gap-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-5' : 'opacity-0'}`}
+                className={`mt-8 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-5' : 'opacity-0'}`}
               >
                 {highlightMetrics.map(({ icon: Icon, label, value }) => (
                   <div key={label} className="text-center">
-                    <p className="text-2xl sm:text-3xl font-bold text-white">{value}</p>
-                    <p className="text-xs sm:text-sm text-[#e5dbf1] uppercase tracking-wide">{label}</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{value}</p>
+                    <p className="text-[10px] sm:text-xs md:text-sm text-[#e5dbf1] uppercase tracking-wide mt-1">{label}</p>
                   </div>
                 ))}
               </div>
