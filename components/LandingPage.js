@@ -963,7 +963,9 @@ const LandingPage = ({ onShowAuth }) => {
             <Button
               onClick={() => {
                 setDialogOpen(false)
-                onShowAuth?.()
+                if (onShowAuth) {
+                  onShowAuth()
+                }
               }}
               className="flex-1 bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/30 hover:-translate-y-0.5 text-sm sm:text-base"
             >
