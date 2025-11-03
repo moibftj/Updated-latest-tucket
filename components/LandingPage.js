@@ -277,13 +277,13 @@ const timelineData = [
     content: (
       <div>
         <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
-          Every trip teaches us something new. Capture the wisdom gained from your adventures—what worked brilliantly, what you'd do differently, and the unexpected discoveries that made your journey special. Build your personal travel knowledge base that grows with each adventure. Learn from your network's experiences and skip the trial-and-error phase. Tucker Trips helps you become a smarter traveler with every voyage.
+          Every trip teaches us something new. Capture the wisdom gained from your adventures—what worked brilliantly, what you&apos;d do differently, and the unexpected discoveries that made your journey special. Build your personal travel knowledge base that grows with each adventure. Learn from your network&apos;s experiences and skip the trial-and-error phase. Tucker Trips helps you become a smarter traveler with every voyage.
         </p>
         <div className="mb-8">
           <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
             <span className="text-[#ff34ac] font-bold">💡</span>
             <div>
-              <strong className="text-white">Pro Tips:</strong> Document what worked and what didn't for future reference
+              <strong className="text-white">Pro Tips:</strong> Document what worked and what didn&apos;t for future reference
             </div>
           </div>
           <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
@@ -862,7 +862,7 @@ const LandingPage = ({ onShowAuth }) => {
                   <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Alex Tucker</h4>
                   <p className="text-sm text-[#ff34ac] mb-4 uppercase tracking-wider">Co-Founder & CEO</p>
                   <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
-                    A passionate world traveler who's explored over 50 countries. Alex founded Tucker Trips to help others organize and share their adventures as seamlessly as he wished he could during his journeys across six continents.
+                    A passionate world traveler who&apos;s explored over 50 countries. Alex founded Tucker Trips to help others organize and share their adventures as seamlessly as he wished he could during his journeys across six continents.
                   </p>
                 </div>
               </div>
@@ -883,7 +883,7 @@ const LandingPage = ({ onShowAuth }) => {
                   <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Jordan Miles</h4>
                   <p className="text-sm text-[#7dbbe5] mb-4 uppercase tracking-wider">Co-Founder & CTO</p>
                   <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
-                    A digital nomad and software engineer with a love for building tools that bring people together. Jordan's vision was to create a platform where travel planning meets social connection, making every trip a collaborative masterpiece.
+                    A digital nomad and software engineer with a love for building tools that bring people together. Jordan&apos;s vision was to create a platform where travel planning meets social connection, making every trip a collaborative masterpiece.
                   </p>
                 </div>
               </div>
