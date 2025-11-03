@@ -231,4 +231,14 @@ code {
   .tt-gradient-navy {
     background: linear-gradient(180deg, #343f65 0%, rgba(52, 63, 101, 0.8) 100%);
   }
+  
+  /* Slow spin animation for avatar rings */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
 }
