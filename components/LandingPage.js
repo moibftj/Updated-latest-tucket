@@ -350,19 +350,17 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              {/* Logo Animation Video - Larger Rectangular */}
-              <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg glow-tt-pink">
-                <div className="rounded-md overflow-hidden bg-[#343f65] w-24 h-10 sm:w-32 sm:h-12 md:w-40 md:h-14 flex items-center justify-center">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-contain"
-                  >
-                    <source src="https://cdn.builder.io/o/assets%2F58d6334510b64a3ba328208823c50014%2F299bc08af4624a44a5e844e58a4ba270?alt=media&token=476c8007-60ef-4821-95d8-cd1b2f918b60&apiKey=58d6334510b64a3ba328208823c50014" type="video/webm" />
-                  </video>
-                </div>
+              {/* Logo Animation Video - No Border */}
+              <div className="relative rounded-lg overflow-hidden w-24 h-10 sm:w-32 sm:h-12 md:w-40 md:h-14 flex items-center justify-center">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-contain"
+                >
+                  <source src="https://cdn.builder.io/o/assets%2F58d6334510b64a3ba328208823c50014%2F299bc08af4624a44a5e844e58a4ba270?alt=media&token=476c8007-60ef-4821-95d8-cd1b2f918b60&apiKey=58d6334510b64a3ba328208823c50014" type="video/webm" />
+                </video>
               </div>
             </div>
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-[#e5dbf1]">
