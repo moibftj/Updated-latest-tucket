@@ -836,55 +836,40 @@ const LandingPage = ({ onShowAuth }) => {
             <Globe className="mx-auto" />
           </div>
 
-          {/* Consolidated Founders Section - 2 Columns */}
+          {/* Founder Section - Kristin Stein */}
           <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
             <div className="text-center mb-8 sm:mb-12">
-              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#ff34ac]">Meet the Founders</p>
+              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#ff34ac]">Meet the Founder</p>
               <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-                Built by Travelers, for Travelers
+                Built by a Traveler, for Travelers
               </h3>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Founder 1 */}
-              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 hover:border-[#ff34ac]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(255,52,172,0.3)]">
+            <div className="max-w-3xl mx-auto">
+              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-8 sm:p-10 hover:border-[#ff34ac]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(255,52,172,0.3)]">
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-6">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
-                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
+                    <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
                       <img
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format"
-                        alt="Co-Founder 1"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1ihdBCjlTa6E3r6f66aHlOK7R8l26E.png"
+                        alt="Kristin Stein - Founder"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
                   </div>
-                  <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Alex Tucker</h4>
-                  <p className="text-sm text-[#ff34ac] mb-4 uppercase tracking-wider">Co-Founder & CEO</p>
-                  <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
-                    A passionate world traveler who&apos;s explored over 50 countries. Alex founded Tucker Trips to help others organize and share their adventures as seamlessly as he wished he could during his journeys across six continents.
-                  </p>
-                </div>
-              </div>
-
-              {/* Founder 2 */}
-              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 hover:border-[#7dbbe5]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(125,187,229,0.3)]">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#7dbbe5] to-[#ff34ac] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
-                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#7dbbe5]/30 group-hover:border-[#7dbbe5]/60 transition-all">
-                      <img
-                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format"
-                        alt="Co-Founder 2"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
+                  <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2">Kristin Stein</h4>
+                  <p className="text-sm text-[#ff34ac] mb-6 uppercase tracking-wider">Founder</p>
+                  
+                  <div className="text-left max-w-2xl">
+                    <h5 className="text-lg sm:text-xl font-semibold text-white mb-4">Why I Founded Tucker Trips</h5>
+                    <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed mb-4">
+                      I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure.
+                    </p>
+                    <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
+                      With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
+                    </p>
                   </div>
-                  <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Jordan Miles</h4>
-                  <p className="text-sm text-[#7dbbe5] mb-4 uppercase tracking-wider">Co-Founder & CTO</p>
-                  <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
-                    A digital nomad and software engineer with a love for building tools that bring people together. Jordan&apos;s vision was to create a platform where travel planning meets social connection, making every trip a collaborative masterpiece.
-                  </p>
                 </div>
               </div>
             </div>
