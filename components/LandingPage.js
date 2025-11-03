@@ -650,7 +650,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format" alt="Flight" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
-                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+                <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
               </div>
             </div>
 
@@ -680,7 +680,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400&auto=format" alt="Memory" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
-                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+                <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
               </div>
             </div>
 
@@ -710,7 +710,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format" alt="Collaboration" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
-                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+                <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
               </div>
             </div>
 
@@ -740,7 +740,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format" alt="Stories" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
-                <button className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
+                <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
               </div>
             </div>
           </div>
