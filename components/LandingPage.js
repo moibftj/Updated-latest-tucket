@@ -146,7 +146,10 @@ const Particle = ({ delay = 0 }) => {
         height: `${size}px`,
         left: `${xStart}%`,
         top: `${yStart}%`,
-        animation: `floatParticle ${duration}s linear infinite`,
+        animationName: 'floatParticle',
+        animationDuration: `${duration}s`,
+        animationIterationCount: 'infinite',
+        animationTimingFunction: 'linear',
         animationDelay: `${delay}s`,
         opacity: Math.random() * 0.6 + 0.2,
       }}
