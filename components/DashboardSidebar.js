@@ -11,6 +11,8 @@ import {
   Plane,
   LogOut,
   Settings,
+  Menu,
+  X,
 } from 'lucide-react'
 import ShinyText from '@/components/ShinyText'
 
@@ -43,17 +45,49 @@ const DashboardSidebar = ({
   onSectionChange,
   onNewTrip,
   onProfileSettings,
-  onLogout
+  onLogout,
+  isOpen,
+  onToggle,
+  onClose
 }) => {
+  const handleSectionChange = (section) => {
+    onSectionChange(section)
+    onClose() // Close sidebar on mobile after selection
+  }
+
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 fixed h-full">
-      <div className="p-6">
-        <div className="flex items-center space-x-2 mb-8">
-          <div className="p-2 bg-purple-100 rounded-lg">
-            <Plane className="w-6 h-6 text-purple-600" />
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={onToggle}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-700 transition-colors"
+        aria-label="Toggle menu"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`
+        w-64 bg-white border-r border-gray-200 fixed h-full z-40 transition-transform duration-300
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:translate-x-0
+      `}>
+        <div className="p-6">
+          <div className="flex items-center space-x-2 mb-8">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <Plane className="w-6 h-6 text-purple-600" />
+            </div>
+            <h1 className="text-xl font-bold text-gray-900">TuckerTrips</h1>
           </div>
-          <h1 className="text-xl font-bold text-gray-900">TuckerTrips</h1>
-        </div>
 
         <Button
           onClick={onNewTrip}
@@ -68,7 +102,7 @@ const DashboardSidebar = ({
             <NavItemButton
               key={id}
               isActive={activeSection === id}
-              onClick={() => onSectionChange(id)}
+              onClick={() => handleSectionChange(id)}
               Icon={Icon}
               label={label}
             />
@@ -101,6 +135,7 @@ const DashboardSidebar = ({
         {user.bio && <p className="text-xs text-gray-500 truncate">{user.bio}</p>}
       </div>
     </aside>
+    </>
   )
 }
 

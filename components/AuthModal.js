@@ -37,14 +37,14 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md glow-purple-pink glow-border bg-white relative">
+      <DialogContent className="max-w-[95vw] sm:max-w-md glow-purple-pink glow-border bg-white relative">
         <DialogHeader>
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-lg">
-              <Plane className="w-8 h-8 text-purple-600" />
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-lg">
+              <Plane className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
             </div>
           </div>
-          <DialogTitle className="text-center text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+          <DialogTitle className="text-center text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
             Tucker Trips
           </DialogTitle>
         </DialogHeader>

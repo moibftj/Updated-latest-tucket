@@ -12,11 +12,11 @@ const Loader = () => (
 )
 
 const SectionHeader = ({ title, showCreateButton, onNewTrip }) => (
-  <div className="flex justify-between items-center mb-6">
-    <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{title}</h2>
     {showCreateButton && (
-      <Button onClick={onNewTrip} className="bg-purple-600 hover:bg-purple-700">
-        <PlusCircle className="w-5 h-5 mr-2" />
+      <Button onClick={onNewTrip} className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700">
+        <PlusCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
         <ShinyText text="New Trip" speed={3} />
       </Button>
     )}
@@ -24,15 +24,15 @@ const SectionHeader = ({ title, showCreateButton, onNewTrip }) => (
 )
 
 const EmptyState = ({ message, onNewTrip, showCreateButton }) => (
-  <div className="text-center py-16 bg-gray-50 rounded-lg">
-    <div className="mx-auto mb-4 p-4 bg-gray-100 rounded-full w-fit">
-      <MapPin className="w-12 h-12 text-gray-400" />
+  <div className="text-center py-12 sm:py-16 bg-gray-50 rounded-lg px-4">
+    <div className="mx-auto mb-4 p-3 sm:p-4 bg-gray-100 rounded-full w-fit">
+      <MapPin className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400" />
     </div>
-    <h3 className="text-xl font-semibold text-gray-900 mb-2">No trips yet</h3>
-    <p className="text-gray-500 mb-6">{message}</p>
+    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">No trips yet</h3>
+    <p className="text-sm sm:text-base text-gray-500 mb-6 max-w-md mx-auto">{message}</p>
     {showCreateButton && (
       <Button onClick={onNewTrip} className="bg-purple-600 hover:bg-purple-700">
-        <PlusCircle className="w-5 h-5 mr-2" />
+        <PlusCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
         Create Your First Trip
       </Button>
     )}

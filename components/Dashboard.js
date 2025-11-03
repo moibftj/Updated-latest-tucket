@@ -50,6 +50,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [showNewTripModal, setShowNewTripModal] = useState(false)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const loadTrips = useCallback(
     async (apiMethod, setter) => {
@@ -123,9 +124,12 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         onNewTrip={() => setShowNewTripModal(true)}
         onProfileSettings={() => setShowProfileSettings(true)}
         onLogout={onLogout}
+        isOpen={sidebarOpen}
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+        onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="ml-64 flex-1 p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 lg:ml-64 transition-all duration-300">
         {activeSection === 'home' ? (
           <HomeSection
             user={user}

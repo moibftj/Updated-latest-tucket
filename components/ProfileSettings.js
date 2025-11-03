@@ -40,10 +40,10 @@ const ProfileSettings = ({ open, onClose, user, onUpdate }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-w-[95vw] sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="flex items-center">
-            <User className="w-5 h-5 mr-2" />
+          <DialogTitle className="flex items-center text-lg sm:text-xl">
+            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Profile Settings
           </DialogTitle>
         </DialogHeader>

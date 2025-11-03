@@ -16,6 +16,8 @@ import {
   Calendar,
   Share2,
   MessageCircle,
+  Menu,
+  X,
 } from 'lucide-react'
 import ShinyText from '@/components/ShinyText'
 import Stack from '@/components/Stack'
@@ -189,6 +191,7 @@ const LandingPage = ({ onShowAuth }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [pulseCta, setPulseCta] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { visibleElements, elementsRef } = useScrollAnimation()
 
   useEffect(() => {
@@ -347,8 +350,9 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg hover:shadow-[0_0_30px_rgba(255,52,172,0.5)] transition-shadow duration-500">
-                <div className="rounded-md overflow-hidden bg-[#343f65] w-32 h-12 sm:w-40 sm:h-14 flex items-center justify-center">
+              {/* Logo Animation Video - Larger Rectangular */}
+              <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#ff34ac] via-[#7dbbe5] to-[#e5dbf1] p-0.5 shadow-lg glow-tt-pink">
+                <div className="rounded-md overflow-hidden bg-[#343f65] w-24 h-10 sm:w-32 sm:h-12 md:w-40 md:h-14 flex items-center justify-center">
                   <video
                     autoPlay
                     loop
@@ -366,26 +370,74 @@ const LandingPage = ({ onShowAuth }) => {
               <button className="transition hover:text-white hover:text-[#ff34ac]">Community</button>
               <button className="transition hover:text-white hover:text-[#ff34ac]">About</button>
             </nav>
-            <div className="flex space-x-2 sm:space-x-3">
-              <Button
-                onClick={onShowAuth}
-                variant="ghost"
-                size="sm"
-                className="backdrop-blur-md border border-white/10 bg-white/10 text-white shadow-lg shadow-[#7dbbe5]/30 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 text-xs sm:text-sm"
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="hidden sm:flex space-x-2">
+                <Button
+                  onClick={onShowAuth}
+                  variant="ghost"
+                  size="sm"
+                  className="backdrop-blur-md border border-white/10 bg-white/10 text-white shadow-lg shadow-[#7dbbe5]/30 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 text-xs sm:text-sm"
+                >
+                  <Users className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  Login
+                </Button>
+                <Button
+                  onClick={onShowAuth}
+                  size="sm"
+                  className="bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/40 transition hover:shadow-[#ff34ac]/60 text-xs sm:text-sm"
+                >
+                  Sign Up
+                </Button>
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="sm:hidden p-2 text-white hover:text-[#ff34ac] transition-colors"
+                aria-label="Toggle menu"
               >
-                <Users className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                Login
-              </Button>
-              <Button
-                onClick={onShowAuth}
-                size="sm"
-                className="bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/40 transition hover:shadow-[#ff34ac]/60 text-xs sm:text-sm"
-              >
-                Sign Up
-              </Button>
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="sm:hidden border-t border-white/10 bg-[#343f65]/95 backdrop-blur-xl">
+            <nav className="flex flex-col space-y-2 p-4">
+              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+                Features
+              </button>
+              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+                Community
+              </button>
+              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+                About
+              </button>
+              <div className="flex flex-col space-y-2 pt-2 border-t border-white/10">
+                <Button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onShowAuth()
+                  }}
+                  variant="ghost"
+                  className="w-full justify-start border border-white/10 bg-white/10 text-white hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10"
+                >
+                  <Users className="mr-2 h-4 w-4" />
+                  Login
+                </Button>
+                <Button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onShowAuth()
+                  }}
+                  className="w-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white"
+                >
+                  Sign Up
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero Section - 21st.dev Style */}

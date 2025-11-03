@@ -203,16 +203,16 @@ const TripModal = ({ open, onClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Create New Trip</DialogTitle>
-          <DialogDescription>Step {currentStep} of 5</DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">Create New Trip</DialogTitle>
+          <DialogDescription className="text-sm">Step {currentStep} of 5</DialogDescription>
         </DialogHeader>
 
         {/* Step 1: Trip Details */}
         {currentStep === 1 && (
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Trip Details</h3>
+            <h3 className="font-semibold text-base sm:text-lg">Trip Details</h3>
 
             <div>
               <Label>Trip Name *</Label>
@@ -232,21 +232,23 @@ const TripModal = ({ open, onClose, onSuccess }) => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label>Start Date *</Label>
+                <Label className="text-sm">Start Date *</Label>
                 <Input
                   type="date"
                   value={tripForm.startDate}
                   onChange={(e) => setTripForm({ ...tripForm, startDate: e.target.value })}
+                  className="text-sm"
                 />
               </div>
               <div>
-                <Label>End Date</Label>
+                <Label className="text-sm">End Date</Label>
                 <Input
                   type="date"
                   value={tripForm.endDate}
                   onChange={(e) => setTripForm({ ...tripForm, endDate: e.target.value })}
+                  className="text-sm"
                 />
               </div>
             </div>
@@ -300,8 +302,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
         {/* Step 2: Transportation */}
         {currentStep === 2 && (
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg flex items-center">
-              <Plane className="w-5 h-5 mr-2" />
+            <h3 className="font-semibold text-base sm:text-lg flex items-center">
+              <Plane className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Transportation
             </h3>
 
@@ -322,40 +324,44 @@ const TripModal = ({ open, onClose, onSuccess }) => {
 
             {currentTransport.type === 'flight' && (
               <>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label>Airline</Label>
+                    <Label className="text-sm">Airline</Label>
                     <Input
                       placeholder="Delta Airlines"
                       value={currentTransport.airline}
                       onChange={(e) => setCurrentTransport({ ...currentTransport, airline: e.target.value })}
+                      className="text-sm"
                     />
                   </div>
                   <div>
-                    <Label>Flight Number</Label>
+                    <Label className="text-sm">Flight Number</Label>
                     <Input
                       placeholder="DL123"
                       value={currentTransport.flightNumber}
                       onChange={(e) => setCurrentTransport({ ...currentTransport, flightNumber: e.target.value })}
+                      className="text-sm"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label>Departure Time</Label>
+                    <Label className="text-sm">Departure Time</Label>
                     <Input
                       type="datetime-local"
                       value={currentTransport.departureTime}
                       onChange={(e) => setCurrentTransport({ ...currentTransport, departureTime: e.target.value })}
+                      className="text-sm"
                     />
                   </div>
                   <div>
-                    <Label>Arrival Time</Label>
+                    <Label className="text-sm">Arrival Time</Label>
                     <Input
                       type="datetime-local"
                       value={currentTransport.arrivalTime}
                       onChange={(e) => setCurrentTransport({ ...currentTransport, arrivalTime: e.target.value })}
+                      className="text-sm"
                     />
                   </div>
                 </div>
@@ -442,8 +448,8 @@ const TripModal = ({ open, onClose, onSuccess }) => {
         {/* Step 3: Accommodation */}
         {currentStep === 3 && (
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg flex items-center">
-              <HotelIcon className="w-5 h-5 mr-2" />
+            <h3 className="font-semibold text-base sm:text-lg flex items-center">
+              <HotelIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Accommodation
             </h3>
 
@@ -480,21 +486,23 @@ const TripModal = ({ open, onClose, onSuccess }) => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label>Check-in Date</Label>
+                <Label className="text-sm">Check-in Date</Label>
                 <Input
                   type="date"
                   value={currentAccommodation.checkIn}
                   onChange={(e) => setCurrentAccommodation({ ...currentAccommodation, checkIn: e.target.value })}
+                  className="text-sm"
                 />
               </div>
               <div>
-                <Label>Check-out Date</Label>
+                <Label className="text-sm">Check-out Date</Label>
                 <Input
                   type="date"
                   value={currentAccommodation.checkOut}
                   onChange={(e) => setCurrentAccommodation({ ...currentAccommodation, checkOut: e.target.value })}
+                  className="text-sm"
                 />
               </div>
             </div>
@@ -584,7 +592,7 @@ const TripModal = ({ open, onClose, onSuccess }) => {
         {/* Step 4: Media & Context */}
         {currentStep === 4 && (
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Photos & Context</h3>
+            <h3 className="font-semibold text-base sm:text-lg">Photos & Context</h3>
 
             <div>
               <Label>Cover Photo URL</Label>
@@ -630,7 +638,7 @@ const TripModal = ({ open, onClose, onSuccess }) => {
         {/* Step 5: Review & Submit */}
         {currentStep === 5 && (
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Review & Submit</h3>
+            <h3 className="font-semibold text-base sm:text-lg">Review & Submit</h3>
 
             {isTaken && (
               <div>
