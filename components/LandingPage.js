@@ -512,7 +512,7 @@ const LandingPage = ({ onShowAuth }) => {
               if (el) elementsRef.current['hero-center'] = el
             }}
           >
-            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-[#ff34ac]/20">
+            <div className="rounded-3xl bg-white/5 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-[#ff34ac]/20">
               {/* Tucker Logo */}
               <div className={`flex justify-center mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
                 <img
