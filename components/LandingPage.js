@@ -608,226 +608,41 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </section>
 
-      {/* Partner Grid */}
-      <section 
-        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/95"
-        id="partners-section"
+      {/* Founder Story Section */}
+      <section
+        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/95"
+        id="founder-section"
         ref={(el) => {
-          if (el) elementsRef.current['partners-section'] = el
-        }}
-      >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.12),_transparent_65%)]" />
-        <div className="relative mx-auto max-w-6xl text-center">
-          <div className={`${visibleElements['partners-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Integrations</p>
-            <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
-              Seamlessly connect with your favorite travel platforms
-            </h2>
-          </div>
-          <div className="mt-8 sm:mt-12 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-6">
-            {partnerLogos.map((name, idx) => (
-              <div
-                key={name}
-                className={`group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-6 sm:px-6 sm:py-8 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/70 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60 hover:text-white cursor-pointer ${visibleElements['partners-section'] ? 'animate-in-up' : 'opacity-0'}`}
-                style={{
-                  animation: visibleElements['partners-section'] ? `fadeInUp 0.8s ease-out ${0.05 + idx * 0.08}s forwards` : 'none',
-                }}
-              >
-                <div className="absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
-                  <div className="animate-shimmer absolute inset-0 bg-gradient-to-r from-[#ff34ac]/30 via-transparent to-[#7dbbe5]/30" />
-                </div>
-                <span className="relative">{name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Highlights */}
-      <section 
-        className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-8 bg-[#343f65]"
-        id="experience-section"
-        ref={(el) => {
-          if (el) elementsRef.current['experience-section'] = el
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#e5dbf1]/5 to-transparent opacity-30" />
-        <div className={`relative mx-auto flex max-w-6xl flex-col gap-6 sm:gap-10 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 sm:p-8 ${visibleElements['experience-section'] ? 'animate-scale-in' : 'opacity-0'}`}>
-          <div className="flex flex-col gap-4 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Features</p>
-              <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-                Everything you need for the perfect trip
-              </h2>
-            </div>
-            <Button
-              variant="ghost"
-              onClick={onShowAuth}
-              className="rounded-full border border-white/20 bg-white/5 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base text-white/80 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 hover:text-white"
-            >
-              Explore Dashboard
-              <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
-            </Button>
-          </div>
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
-            {experienceHighlights.map(({ title, subtitle, icon: Icon }, idx) => (
-              <div
-                key={title}
-                className={`group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-[#343f65]/70 backdrop-blur-sm p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60 cursor-pointer ${visibleElements['experience-section'] ? 'animate-in-up' : 'opacity-0'}`}
-                style={{
-                  animation: visibleElements['experience-section'] ? `fadeInUp 0.8s ease-out ${0.1 + idx * 0.12}s forwards` : 'none',
-                }}
-              >
-                <div className="mb-4 sm:mb-5 inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 text-[#e5dbf1] group-hover:scale-110 transition duration-300">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm text-[#e5dbf1]">{subtitle}</p>
-                <div className="pointer-events-none absolute -bottom-10 right-0 h-28 w-28 rounded-full bg-[#ff34ac]/20 blur-3xl transition duration-500 group-hover:bottom-0" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section 
-        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/90"
-        id="features-section"
-        ref={(el) => {
-          if (el) elementsRef.current['features-section'] = el
+          if (el) elementsRef.current['founder-section'] = el
         }}
       >
         <div className="relative mx-auto max-w-6xl">
-          <div className={`text-center mb-8 sm:mb-12 ${visibleElements['features-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Powerful Tools</p>
-            <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-              Built for every type of traveler
-            </h2>
+          {/* Top Image */}
+          <div className={`mb-8 sm:mb-12 ${visibleElements['founder-section'] ? 'animate-scale-in' : 'opacity-0'}`}>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F8b3689a463744ae8b9e3ce8d681365e2?format=webp&width=800"
+              alt="Tucker and me"
+              className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
+            />
           </div>
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(({ icon: Icon, title, description }, idx) => (
-              <div
-                key={title}
-                className={`group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 sm:p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/50 hover:bg-[#ff34ac]/10 cursor-pointer ${visibleElements['features-section'] ? 'animate-in-up' : 'opacity-0'}`}
-                style={{
-                  animation: visibleElements['features-section'] ? `fadeInUp 0.8s ease-out ${0.1 + idx * 0.08}s forwards` : 'none',
-                }}
-              >
-                <div className="mb-3 sm:mb-4 inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#ff34ac]/20 text-[#e5dbf1] group-hover:scale-110 transition duration-300">
-                  <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{title}</h3>
-                <p className="text-xs sm:text-sm text-[#e5dbf1]">{description}</p>
-                <span className="pointer-events-none absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-[#7dbbe5]/20 blur-3xl group-hover:right-0 transition duration-500" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Magic Bento Section */}
-      <section 
-        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/90 to-[#343f65]"
-        id="bento-section"
-        ref={(el) => {
-          if (el) elementsRef.current['bento-section'] = el
-        }}
-      >
-        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-b from-transparent via-[#7dbbe5]/20 to-[#ff34ac]/30" />
-        <div className="relative mx-auto max-w-7xl text-center">
-          <div className={`${visibleElements['bento-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
-              Interactive trip planning dashboard
+          {/* Content */}
+          <div className={`text-center max-w-3xl mx-auto mb-8 sm:mb-12 ${visibleElements['founder-section'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+              Why I Founded Tucker Trips
             </h2>
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#e5dbf1] px-4">
-              Organize your entire trip visually. Drag, drop, and arrange every detail with our intuitive interface.
+            <p className="text-base sm:text-lg text-[#e5dbf1] leading-relaxed">
+              I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure. With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
             </p>
           </div>
-          <div className={`mt-8 sm:mt-12 flex justify-center overflow-hidden ${visibleElements['bento-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
-            <div className="scale-75 sm:scale-90 md:scale-100">
-              <MagicBento glowColor="255, 52, 172" enableTilt particleCount={16} />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials */}
-      <section 
-        className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#343f65]"
-        id="testimonials-section"
-        ref={(el) => {
-          if (el) elementsRef.current['testimonials-section'] = el
-        }}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(125,187,229,0.3),_transparent_65%)]" />
-        <div className="relative mx-auto max-w-6xl text-center">
-          <div className={`${visibleElements['testimonials-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Testimonials</p>
-            <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
-              Loved by travelers worldwide
-            </h2>
-          </div>
-          <div className="mt-8 sm:mt-12 grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-3">
-            {testimonials.map(({ name, role, quote, avatar }, idx) => (
-              <div
-                key={name}
-                className={`relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 sm:p-8 text-left transition duration-300 hover:-translate-y-1 hover:border-[#ff34ac]/60 cursor-pointer group ${visibleElements['testimonials-section'] ? 'animate-in-up' : 'opacity-0'}`}
-                style={{
-                  animation: visibleElements['testimonials-section'] ? `fadeInUp 0.8s ease-out ${0.1 + idx * 0.12}s forwards` : 'none',
-                }}
-              >
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <img
-                    src={avatar}
-                    alt={name}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-[#7dbbe5]/30 object-cover group-hover:scale-110 transition duration-300"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-white">{name}</p>
-                    <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#7dbbe5]">{role}</p>
-                  </div>
-                </div>
-                <p className="mt-4 sm:mt-6 text-sm sm:text-base text-[#e5dbf1]">{quote}</p>
-                <div className="pointer-events-none absolute -right-10 top-0 h-28 w-28 sm:h-36 sm:w-36 rounded-full bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/20 blur-3xl transition duration-500 group-hover:right-0" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section 
-        className="relative py-16 sm:py-20 md:py-24 px-4 text-center bg-gradient-to-b from-[#343f65] to-[#343f65]/80"
-        id="cta-section"
-        ref={(el) => {
-          if (el) elementsRef.current['cta-section'] = el
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#7dbbe5]/30 via-[#ff34ac]/20 to-transparent" />
-        <div className={`relative mx-auto max-w-3xl space-y-5 sm:space-y-6 ${visibleElements['cta-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white px-4">
-            Ready to plan your next adventure?
-          </h2>
-          <p className="text-base sm:text-lg text-[#e5dbf1] px-4">
-            Join thousands of travelers using Tucker Trips to create unforgettable journeys.
-            Start planning for free today.
-          </p>
-          <div className={`flex flex-col items-center justify-center gap-3 sm:gap-4 sm:flex-row px-4 ${visibleElements['cta-section'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}>
-            <Button
-              onClick={onShowAuth}
-              size="lg"
-              className="w-full sm:w-auto rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] px-8 sm:px-10 py-5 sm:py-6 text-base sm:text-lg font-semibold text-white shadow-[0_22px_50px_rgba(255,52,172,0.4)] transition hover:-translate-y-0.5 hover:shadow-[0_25px_60px_rgba(255,52,172,0.5)]"
-            >
-              <ShinyText text="Create Free Account" speed={2.4} />
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={onShowAuth}
-              className="w-full sm:w-auto rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-6 sm:px-8 py-4 text-sm sm:text-base text-white/80 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/10 hover:text-white hover:scale-105 duration-300"
-            >
-              Explore Features
-            </Button>
+          {/* Bottom Image */}
+          <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F4a0c624cc66e41999eaefba4dadf5be3?format=webp&width=800"
+              alt="Tucker in nature"
+              className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
+            />
           </div>
         </div>
       </section>
