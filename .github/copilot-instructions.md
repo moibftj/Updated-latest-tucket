@@ -1,44 +1,108 @@
 # Tucker Trips - AI Coding Instructions
 
 ## Project Overview
-Tucker Trips is a Next.js 14 travel planning application with a complete full-stack architecture. The app allows users to plan, document, and share travel adventures with features including trip management, live chat, and social interactions.
+Tucker Trips is a Next.js 14 travel planning application with full-stack architecture. Users can plan trips, chat with other travelers, and share their adventures. Built with Next.js 14, MongoDB, JWT auth, and shadcn/ui components.
 
-## Critical Design Constraints
-- **Landing Page**: DO NOT modify the landing page design (`app/page.js` unauthenticated state)
-- All improvements should focus on authenticated features, backend logic, performance, and code quality
+## Critical Constraints
+- **DO NOT modify**: Landing page design (`LandingPage.js` component) - it's locked
+- **Focus areas**: Authenticated features, backend APIs, performance, code quality
 
-## Architecture & Key Patterns
+## Architecture Overview
 
+### Single-File API Pattern (`app/api/[[...path]]/route.js`)
+**Critical**: All API routes live in ONE file using Next.js catch-all routes `[[...path]]`
 
-### Single-File API Handler (`app/api/[[...path]]/route.js`)
-- **Critical**: All API routes are handled in one monolithic file using Next.js catch-all routes
-- Routes are determined by parsing `params.path` array (e.g., `/api/auth/login` → `path = ['auth', 'login']`)
-- All HTTP methods (GET, POST, PATCH, DELETE) route through `handleRoute()` function
-- Each route section is clearly commented (AUTH ROUTES, USER ROUTES, MESSAGE ROUTES, TRIP ROUTES)
-- MongoDB operations use direct client calls, not an ORM
-- Always handle CORS with `handleCORS()` wrapper for all responses
+**How routes work:**
+- `/api/auth/login` → `params.path = ['auth', 'login']`
+- Parse path array in `handleRoute()` to determine which code to execute
+- All HTTP methods (GET/POST/PATCH/DELETE) funnel through single `handleRoute()` function
+- Sections clearly marked: `// ============ AUTH ROUTES ============`
+
+**Adding a new endpoint:**
+```javascript
+// In app/api/[[...path]]/route.js, inside handleRoute()
+
+// POST /api/trips/share
+if (route === '/trips/share' && method === 'POST') {
+  const decoded = verifyToken(request) // if protected
+  if (!decoded) return handleCORS(NextResponse.json({ error: 'Unauthorized' }, { status: 401 }))
+  
+  const body = await request.json()
+  // ... your logic
+  const { _id, ...result } = data  // Strip MongoDB _id
+  return handleCORS(NextResponse.json(result))
+}
+```
+
+**Never split into separate route files** - monolithic by design for this project.
+
+### MongoDB Patterns
+- **Connection**: Singleton pattern via `connectToMongo()` - reuses one client
+- **Custom IDs**: All documents use `id: uuidv4()` instead of MongoDB `_id`
+- **Response pattern**: Always strip `_id` → `const { _id, ...data } = result`
+- **Collections**: `users`, `trips`, `messages`
+
+**Data models:**
+```javascript
+// User
+{ id, email, password, name, bio, lastSeen, isOnline, createdAt }
+
+// Trip
+{ id, userId, title, destination, startDate, endDate, status: 'future'|'taken', 
+  visibility: 'private'|'public', segments: [], description, coverPhoto, 
+  tripImages, weather, overallComment, airlines: [], accommodations: [], 
+  sharedWith: [], createdAt, updatedAt }
+
+// Message
+{ id, senderId, recipientId, content, read: boolean, createdAt }
+```
 
 ### Authentication Flow
-- JWT tokens stored in localStorage on client side
-- Token verification via `verifyToken()` helper extracts `userId` from JWT payload
-- Protected routes check `Authorization: Bearer <token>` header
-- User authentication state managed in main `app/page.js` with `checkAuth()` on mount
-- Online presence tracking via heartbeat system (`POST /api/users/heartbeat`)
+1. Client stores JWT in `localStorage.getItem('token')`
+2. Server verifies via `verifyToken(request)` → extracts `userId` from JWT payload
+3. Protected routes check `Authorization: Bearer <token>` header
+4. `app/page.js` manages auth state on mount with `authApi.getMe()`
+5. Heartbeat system: `userApi.heartbeat()` keeps user online (5-min window)
 
-### MongoDB Data Patterns
-- Collections: `users`, `trips`, `messages`
-- All documents use custom `id` field (UUID v4) instead of MongoDB `_id`
-- Responses always strip MongoDB `_id` with destructuring: `const { _id, ...data } = result`
-- Connection singleton pattern: `connectToMongo()` reuses client instance
-- **User Model**: `{ id, email, password, name, bio, lastSeen, isOnline }`
-- **Trip Model**: `{ id, userId, title, destination, startDate, endDate, status: 'future'|'taken', visibility: 'private'|'public', segments: [], description, coverPhoto }`
-- **Message Model**: `{ id, senderId, recipientId, content, read: boolean, createdAt }`
+### Client-Side API Layer (`lib/api.js`)
+Centralized API client with automatic auth headers:
+
+```javascript
+import { tripApi, authApi, userApi, messageApi } from '@/lib/api'
+
+// Usage examples
+const trips = await tripApi.getAll()
+await authApi.login({ email, password })
+await userApi.updateProfile({ name, bio })
+await messageApi.send({ recipientId, content })
+```
+
+**Never use raw `fetch()`** - always use these helpers for consistency.
 
 ### UI Component Architecture
-- **shadcn/ui + Radix**: All UI components in `/components/ui/` follow shadcn patterns
-- **CVA Pattern**: Components use `class-variance-authority` for variant-based styling (see `button.jsx`)
-- **Utility Function**: `cn()` in `/lib/utils.js` combines `clsx` and `tailwind-merge`
-- **Component Structure**: Business components in `/components/`, UI primitives in `/components/ui/`
+- **shadcn/ui + Radix**: Primitives in `/components/ui/` (buttons, dialogs, inputs)
+- **Business logic**: `/components/` (Dashboard, EnhancedTripModal, ChatPanel)
+- **CVA styling**: Use `class-variance-authority` for variants (see `button.jsx`)
+- **Utility**: `cn()` from `lib/utils.js` merges Tailwind classes (clsx + tailwind-merge)
+- **Client components**: Mark with `'use client'` for interactivity
+
+**Component pattern:**
+```javascript
+'use client'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
+export default function MyComponent() {
+  return <Button variant="outline" className={cn("extra-class")}>Click</Button>
+}
+```
+
+### Dashboard Structure
+- **Main**: `Dashboard.js` - orchestrates sections and state
+- **Sidebar**: `DashboardSidebar.js` - navigation (Home, My Trips, Future, Shared, Discover)
+- **Sections**: `HomeSection.js`, `TripsSection.js` - render trip grids
+- **Modals**: `EnhancedTripModal.js` - multi-step trip creation (5 steps with segments)
+- **Trip metadata**: `TRIP_SECTION_META` object defines section behavior (titles, empty states, permissions)
 
 ## Tucker Trips — concise AI coding instructions
 
