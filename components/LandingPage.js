@@ -22,6 +22,7 @@ import {
 import ShinyText from '@/components/ShinyText'
 import Stack from '@/components/Stack'
 import MagicBento from '@/components/MagicBento'
+import { Timeline } from '@/components/ui/timeline'
 
 const heroImages = [
   { id: 1, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format' },
@@ -186,6 +187,149 @@ const useScrollAnimation = () => {
 
   return { visibleElements, elementsRef }
 }
+
+const timelineData = [
+  {
+    title: "LOG YOUR TRIP",
+    content: (
+      <div>
+        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+          Document every detail of your journey in one beautiful place. From flight bookings and hotel reservations to restaurant recommendations and hidden gems, Tucker Trips helps you organize all the essential information that makes your trip memorable. Never lose track of confirmation numbers, addresses, or those perfect spots you discovered along the way.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          <img
+            src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format"
+            alt="Flight planning"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800&auto=format"
+            alt="Hotel booking"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format"
+            alt="Restaurant experiences"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=800&auto=format"
+            alt="Local discoveries"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "SHARE YOUR TRIP",
+    content: (
+      <div>
+        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+          Your adventures deserve an audience! Share your meticulously planned itineraries with friends and family, or make them public to inspire fellow travelers. Collaborate in real-time with your travel companions, exchange tips, and build excitement together. Tucker Trips transforms solo planning into a shared experience, making every journey a collective adventure.
+        </p>
+        <div className="mb-8">
+          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+            <Share2 className="h-5 w-5 text-[#ff34ac]" />
+            Public or private sharing options
+          </div>
+          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+            <Users className="h-5 w-5 text-[#ff34ac]" />
+            Real-time collaboration with travel buddies
+          </div>
+          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+            <MessageCircle className="h-5 w-5 text-[#ff34ac]" />
+            Built-in chat for seamless communication
+          </div>
+          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+            <Stars className="h-5 w-5 text-[#ff34ac]" />
+            Inspire others with your travel stories
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <img
+            src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=800&auto=format"
+            alt="Group travel"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format"
+            alt="Travel community"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format"
+            alt="Collaboration"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=800&auto=format"
+            alt="Shared experiences"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+          />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "LESSONS LEARNED",
+    content: (
+      <div>
+        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+          Every trip teaches us something new. Capture the wisdom gained from your adventures—what worked brilliantly, what you'd do differently, and the unexpected discoveries that made your journey special. Build your personal travel knowledge base that grows with each adventure. Learn from your network's experiences and skip the trial-and-error phase. Tucker Trips helps you become a smarter traveler with every voyage.
+        </p>
+        <div className="mb-8">
+          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+            <span className="text-[#ff34ac] font-bold">💡</span>
+            <div>
+              <strong className="text-white">Pro Tips:</strong> Document what worked and what didn't for future reference
+            </div>
+          </div>
+          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+            <span className="text-[#7dbbe5] font-bold">🎯</span>
+            <div>
+              <strong className="text-white">Smart Planning:</strong> Learn from your network instead of anonymous reviews
+            </div>
+          </div>
+          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+            <span className="text-[#ff34ac] font-bold">📈</span>
+            <div>
+              <strong className="text-white">Continuous Growth:</strong> Build travel expertise with each journey
+            </div>
+          </div>
+          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+            <span className="text-[#7dbbe5] font-bold">🌟</span>
+            <div>
+              <strong className="text-white">Hidden Gems:</strong> Preserve those unexpected discoveries for your next visit
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format"
+            alt="Beach reflection"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format"
+            alt="Mountain lessons"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format"
+            alt="Travel wisdom"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format"
+            alt="Journey insights"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+          />
+        </div>
+      </div>
+    ),
+  },
+];
 
 const LandingPage = ({ onShowAuth }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -660,45 +804,9 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </section>
 
-      {/* Founder Story Section */}
-      <section
-        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/95"
-        id="founder-section"
-        ref={(el) => {
-          if (el) elementsRef.current['founder-section'] = el
-        }}
-      >
-        <div className="relative mx-auto max-w-6xl">
-          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center ${visibleElements['founder-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            {/* Images Column */}
-            <div className="space-y-6 sm:space-y-8">
-              <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-1' : 'opacity-0'}`}>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F8b3689a463744ae8b9e3ce8d681365e2?format=webp&width=800"
-                  alt="Tucker and me"
-                  className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
-                />
-              </div>
-              <div className={`${visibleElements['founder-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F4a0c624cc66e41999eaefba4dadf5be3?format=webp&width=800"
-                  alt="Tucker in nature"
-                  className="w-full h-auto rounded-2xl border border-white/10 shadow-2xl shadow-[#ff34ac]/20 hover:shadow-[#ff34ac]/40 transition duration-500"
-                />
-              </div>
-            </div>
-
-            {/* Content Column */}
-            <div className={`${visibleElements['founder-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-                Why I Founded Tucker Trips
-              </h2>
-              <p className="text-base sm:text-lg text-[#e5dbf1] leading-relaxed">
-                I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure. With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* Why Choose Tucker Trips Timeline Section */}
+      <section className="relative bg-[#343f65]">
+        <Timeline data={timelineData} />
       </section>
 
       {/* Footer */}
