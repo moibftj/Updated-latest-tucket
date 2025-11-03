@@ -524,18 +524,16 @@ const LandingPage = ({ onShowAuth }) => {
               <h1
                 className={`text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
               >
-                Plan Your Dream Trip.
-                <br className="hidden sm:block" />
-                <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent">
-                  Share Every Moment.
-                </span>
+                Welcome to Tucker Trips
               </h1>
 
               {/* Subtitle */}
               <p
                 className={`text-base sm:text-lg text-[#e5dbf1] mb-8 max-w-xl mx-auto ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
               >
-                The ultimate travel planning platform for modern adventurers. Create detailed itineraries, collaborate with friends, and turn every trip into an unforgettable story.
+                <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent">
+                  Experience the world, one voyage at a time.
+                </span>
               </p>
 
               {/* CTA Buttons */}
