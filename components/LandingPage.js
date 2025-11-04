@@ -874,65 +874,69 @@ const LandingPage = ({ onShowAuth }) => {
         <Timeline data={timelineData} />
       </section>
 
-      {/* Global Travelers Community Section with Globe */}
+      {/* Global Travelers Community Section with Globe - Redesigned */}
       <section
-        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white border-t border-gray-200"
+        className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden"
         id="globe-section"
         ref={(el) => {
           if (el) elementsRef.current['globe-section'] = el
         }}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.08),_transparent_65%)]" />
-        <div className="relative mx-auto max-w-7xl">
-          <div className={`text-center mb-12 sm:mb-16 ${visibleElements['globe-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Community</p>
-            <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 px-4">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.12),_transparent_70%)]" />
+
+        <div className="relative mx-auto max-w-6xl">
+          {/* Combined Header and Globe */}
+          <div className={`text-center mb-12 ${visibleElements['globe-section'] ? 'animate-in-up' : 'opacity-0'}`}>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#7dbbe5] font-semibold mb-4">Global Community</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 px-4">
               <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
-                Travelers Around the World
+                Join Travelers Worldwide
               </span>
             </h2>
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600 px-4 max-w-2xl mx-auto">
-              Join thousands of adventurers sharing their journeys and planning their next escapes
-            </p>
           </div>
 
-          <div className={`mb-16 sm:mb-20 ${visibleElements['globe-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
+          {/* Globe centered and more compact */}
+          <div className={`mb-16 max-w-2xl mx-auto ${visibleElements['globe-section'] ? 'animate-scale-in stagger-1' : 'opacity-0'}`}>
             <Globe className="mx-auto" />
           </div>
 
-          {/* Founder Section - Kristin Stein */}
-          <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
-            <div className="text-center mb-8 sm:mb-12">
-              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#ff34ac]">Meet the Founder</p>
-              <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900">
-                Built by a Traveler, for Travelers
-              </h3>
-            </div>
+          {/* Founder Section - More Compact */}
+          <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}>
+            <div className="max-w-4xl mx-auto">
+              <div className="relative rounded-3xl bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 p-8 md:p-12 shadow-xl">
+                {/* Decorative gradient background */}
+                <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-[#ff34ac]/20 to-[#7dbbe5]/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-[#7dbbe5]/20 to-[#ff34ac]/20 rounded-full blur-3xl" />
 
-            <div className="max-w-3xl mx-auto">
-              <div className="group relative rounded-2xl bg-white backdrop-blur-md border border-gray-200 p-8 sm:p-10 hover:border-[#ff34ac]/50 transition-all duration-300 shadow-lg hover:shadow-xl">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-20 blur-xl group-hover:opacity-30 transition-opacity" />
-                    <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
-                      <img
-                        src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLmpwZyIsImlhdCI6MTc2MjE5MjYxMiwiZXhwIjoxNzkzNzI4NjEyfQ.NtQT70gQB0V0oFH4n0-Vb96ZACFFXOSSS4rY5hwYtYM"
-                        alt="Kristin Stein - Founder"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                <div className="relative flex flex-col md:flex-row items-center gap-8">
+                  {/* Founder Image */}
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-2xl" />
+                      <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                        <img
+                          src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLmpwZyIsImlhdCI6MTc2MjE5MjYxMiwiZXhwIjoxNzkzNzI4NjEyfQ.NtQT70gQB0V0oFH4n0-Vb96ZACFFXOSSS4rY5hwYtYM"
+                          alt="Kristin Stein - Founder"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <h4 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Kristin Stein</h4>
-                  <p className="text-sm text-[#ff34ac] mb-6 uppercase tracking-wider">Founder</p>
 
-                  <div className="text-left max-w-2xl">
-                    <h5 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Why I Founded Tucker Trips</h5>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                      I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure.
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
-                    </p>
+                  {/* Founder Content */}
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="mb-4">
+                      <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Kristin Stein</h4>
+                      <p className="text-sm text-[#ff34ac] font-semibold uppercase tracking-wider">Founder & CEO</p>
+                    </div>
+                    <div className="space-y-3">
+                      <p className="text-gray-700 font-medium text-base md:text-lg">
+                        <span className="text-[#ff34ac] font-bold">&ldquo;</span>Built by a traveler, for travelers.<span className="text-[#ff34ac] font-bold">&rdquo;</span>
+                      </p>
+                      <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                        Frustrated by endless stranger reviews, I created Tucker Trips to help you plan the perfect trip with insights from people you trust.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
