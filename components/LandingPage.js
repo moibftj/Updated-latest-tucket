@@ -194,29 +194,29 @@ const timelineData = [
     title: "LOG YOUR TRIP",
     content: (
       <div>
-        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
           Document every detail of your journey in one beautiful place. From flight bookings and hotel reservations to restaurant recommendations and hidden gems, Tucker Trips helps you organize all the essential information that makes your trip memorable. Never lose track of confirmation numbers, addresses, or those perfect spots you discovered along the way.
         </p>
         <div className="grid grid-cols-2 gap-4">
           <img
             src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format"
             alt="Flight planning"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800&auto=format"
             alt="Hotel booking"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format"
             alt="Restaurant experiences"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=800&auto=format"
             alt="Local discoveries"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
         </div>
       </div>
@@ -226,23 +226,23 @@ const timelineData = [
     title: "SHARE YOUR TRIP",
     content: (
       <div>
-        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
           Your adventures deserve an audience! Share your meticulously planned itineraries with friends and family, or make them public to inspire fellow travelers. Collaborate in real-time with your travel companions, exchange tips, and build excitement together. Tucker Trips transforms solo planning into a shared experience, making every journey a collective adventure.
         </p>
         <div className="mb-8">
-          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+          <div className="flex gap-2 items-center text-gray-900 text-sm md:text-base mb-3">
             <Share2 className="h-5 w-5 text-[#ff34ac]" />
             Public or private sharing options
           </div>
-          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+          <div className="flex gap-2 items-center text-gray-900 text-sm md:text-base mb-3">
             <Users className="h-5 w-5 text-[#ff34ac]" />
             Real-time collaboration with travel buddies
           </div>
-          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+          <div className="flex gap-2 items-center text-gray-900 text-sm md:text-base mb-3">
             <MessageCircle className="h-5 w-5 text-[#ff34ac]" />
             Built-in chat for seamless communication
           </div>
-          <div className="flex gap-2 items-center text-[#e5dbf1] text-sm md:text-base mb-3">
+          <div className="flex gap-2 items-center text-gray-900 text-sm md:text-base mb-3">
             <Stars className="h-5 w-5 text-[#ff34ac]" />
             Inspire others with your travel stories
           </div>
@@ -251,22 +251,22 @@ const timelineData = [
           <img
             src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=800&auto=format"
             alt="Group travel"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format"
             alt="Travel community"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format"
             alt="Collaboration"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=800&auto=format"
             alt="Shared experiences"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#7dbbe5]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
         </div>
       </div>
@@ -276,32 +276,32 @@ const timelineData = [
     title: "LESSONS LEARNED",
     content: (
       <div>
-        <p className="text-[#e5dbf1] text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
           Every trip teaches us something new. Capture the wisdom gained from your adventures—what worked brilliantly, what you&apos;d do differently, and the unexpected discoveries that made your journey special. Build your personal travel knowledge base that grows with each adventure. Learn from your network&apos;s experiences and skip the trial-and-error phase. Tucker Trips helps you become a smarter traveler with every voyage.
         </p>
         <div className="mb-8">
-          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+          <div className="flex gap-2 items-start text-gray-900 text-sm md:text-base mb-4">
             <span className="text-[#ff34ac] font-bold">💡</span>
             <div>
-              <strong className="text-white">Pro Tips:</strong> Document what worked and what didn&apos;t for future reference
+              <strong className="text-gray-900">Pro Tips:</strong> Document what worked and what didn&apos;t for future reference
             </div>
           </div>
-          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+          <div className="flex gap-2 items-start text-gray-900 text-sm md:text-base mb-4">
             <span className="text-[#7dbbe5] font-bold">🎯</span>
             <div>
-              <strong className="text-white">Smart Planning:</strong> Learn from your network instead of anonymous reviews
+              <strong className="text-gray-900">Smart Planning:</strong> Learn from your network instead of anonymous reviews
             </div>
           </div>
-          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+          <div className="flex gap-2 items-start text-gray-900 text-sm md:text-base mb-4">
             <span className="text-[#ff34ac] font-bold">📈</span>
             <div>
-              <strong className="text-white">Continuous Growth:</strong> Build travel expertise with each journey
+              <strong className="text-gray-900">Continuous Growth:</strong> Build travel expertise with each journey
             </div>
           </div>
-          <div className="flex gap-2 items-start text-[#e5dbf1] text-sm md:text-base mb-4">
+          <div className="flex gap-2 items-start text-gray-900 text-sm md:text-base mb-4">
             <span className="text-[#7dbbe5] font-bold">🌟</span>
             <div>
-              <strong className="text-white">Hidden Gems:</strong> Preserve those unexpected discoveries for your next visit
+              <strong className="text-gray-900">Hidden Gems:</strong> Preserve those unexpected discoveries for your next visit
             </div>
           </div>
         </div>
@@ -309,22 +309,22 @@ const timelineData = [
           <img
             src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format"
             alt="Beach reflection"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format"
             alt="Mountain lessons"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format"
             alt="Travel wisdom"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
           <img
             src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format"
             alt="Journey insights"
-            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-2xl shadow-[#ff34ac]/20 border border-white/10"
+            className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-lg border border-gray-200"
           />
         </div>
       </div>
@@ -506,9 +506,9 @@ const LandingPage = ({ onShowAuth }) => {
   )
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#343f65] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-white text-gray-900">
       <style>{animationStyles}</style>
-      
+
       {/* Animated background particles */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         {[...Array(8)].map((_, i) => (
@@ -517,11 +517,11 @@ const LandingPage = ({ onShowAuth }) => {
       </div>
 
       {/* Gradient overlays */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,52,172,0.15),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-full md:w-1/2 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.2),_transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,52,172,0.08),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-full md:w-1/2 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.12),_transparent_65%)] blur-3xl" />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#343f65]/80 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-xl shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3">
@@ -538,10 +538,10 @@ const LandingPage = ({ onShowAuth }) => {
                 </video>
               </div>
             </div>
-            <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-[#e5dbf1]">
-              <button className="transition hover:text-white hover:text-[#ff34ac]">Features</button>
-              <button className="transition hover:text-white hover:text-[#ff34ac]">Community</button>
-              <button className="transition hover:text-white hover:text-[#ff34ac]">About</button>
+            <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
+              <button className="transition hover:text-gray-900 hover:text-[#ff34ac]">Features</button>
+              <button className="transition hover:text-gray-900 hover:text-[#ff34ac]">Community</button>
+              <button className="transition hover:text-gray-900 hover:text-[#ff34ac]">About</button>
             </nav>
             <div className="flex items-center space-x-2 sm:space-x-3">
               <div className="hidden sm:flex space-x-2">
@@ -549,7 +549,7 @@ const LandingPage = ({ onShowAuth }) => {
                   onClick={onShowAuth}
                   variant="ghost"
                   size="sm"
-                  className="backdrop-blur-md border border-white/10 bg-white/10 text-white shadow-lg shadow-[#7dbbe5]/30 transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 text-xs sm:text-sm"
+                  className="border border-gray-300 bg-white text-gray-900 shadow-sm transition hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 text-xs sm:text-sm"
                 >
                   <Users className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                   Login
@@ -564,7 +564,7 @@ const LandingPage = ({ onShowAuth }) => {
               </div>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="sm:hidden p-2 text-white hover:text-[#ff34ac] transition-colors"
+                className="sm:hidden p-2 text-gray-900 hover:text-[#ff34ac] transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -575,25 +575,25 @@ const LandingPage = ({ onShowAuth }) => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="sm:hidden border-t border-white/10 bg-[#343f65]/95 backdrop-blur-xl">
+          <div className="sm:hidden border-t border-gray-200 bg-white/98 backdrop-blur-xl">
             <nav className="flex flex-col space-y-2 p-4">
-              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+              <button className="text-left px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
                 Features
               </button>
-              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+              <button className="text-left px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
                 Community
               </button>
-              <button className="text-left px-4 py-3 text-[#e5dbf1] hover:text-white hover:bg-white/5 rounded-lg transition">
+              <button className="text-left px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
                 About
               </button>
-              <div className="flex flex-col space-y-2 pt-2 border-t border-white/10">
+              <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
                 <Button
                   onClick={() => {
                     setMobileMenuOpen(false)
                     onShowAuth()
                   }}
                   variant="ghost"
-                  className="w-full justify-start border border-white/10 bg-white/10 text-white hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10"
+                  className="w-full justify-start border border-gray-300 bg-white text-gray-900 hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10"
                 >
                   <Users className="mr-2 h-4 w-4" />
                   Login
@@ -614,7 +614,7 @@ const LandingPage = ({ onShowAuth }) => {
       </header>
 
       {/* Hero Section - 21st.dev Style */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-10 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65]/50 to-[#343f65]">
+      <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-10 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,52,172,0.08),transparent_50%)]" />
           <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-[#ff34ac]/40 via-[#7dbbe5]/30 to-[#ff34ac]/40 blur-3xl" />
@@ -626,7 +626,7 @@ const LandingPage = ({ onShowAuth }) => {
           <div className="hidden lg:block absolute inset-0 w-full h-full perspective">
             {/* Top Left Card */}
             <div
-              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute -top-20 -left-12 w-72 h-48 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-1'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-1"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-1'] = el
@@ -642,8 +642,8 @@ const LandingPage = ({ onShowAuth }) => {
                   <Plane className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Flight Booking</p>
-                  <p className="text-xs text-[#e5dbf1]">Seamless flight planning</p>
+                  <p className="text-sm font-semibold text-gray-900">Flight Booking</p>
+                  <p className="text-xs text-gray-600">Seamless flight planning</p>
                 </div>
               </div>
               <div className="w-full h-24 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
@@ -656,7 +656,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Top Right Card */}
             <div
-              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-2'] ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute -top-32 -right-8 w-80 h-52 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-2'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-2"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-2'] = el
@@ -672,8 +672,8 @@ const LandingPage = ({ onShowAuth }) => {
                   <Camera className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Photo Memories</p>
-                  <p className="text-xs text-[#e5dbf1]">Capture every moment</p>
+                  <p className="text-sm font-semibold text-gray-900">Photo Memories</p>
+                  <p className="text-xs text-gray-600">Capture every moment</p>
                 </div>
               </div>
               <div className="w-full h-28 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
@@ -686,7 +686,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Left Card */}
             <div
-              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-3'] ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute -bottom-16 -left-16 w-64 h-44 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-3'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-3"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-3'] = el
@@ -702,8 +702,8 @@ const LandingPage = ({ onShowAuth }) => {
                   <Users className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Collaborate</p>
-                  <p className="text-xs text-[#e5dbf1]">Plan together</p>
+                  <p className="text-sm font-semibold text-gray-900">Collaborate</p>
+                  <p className="text-xs text-gray-600">Plan together</p>
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
@@ -716,7 +716,7 @@ const LandingPage = ({ onShowAuth }) => {
 
             {/* Bottom Right Card */}
             <div
-              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/5 backdrop-blur-md p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-4'] ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute -bottom-20 -right-12 w-72 h-48 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-4 will-change-transform hover:scale-105 transition-transform duration-700 ease-out cursor-pointer group ${visibleElements['hero-card-4'] ? 'opacity-100' : 'opacity-0'}`}
               id="hero-card-4"
               ref={(el) => {
                 if (el) elementsRef.current['hero-card-4'] = el
@@ -732,8 +732,8 @@ const LandingPage = ({ onShowAuth }) => {
                   <Share2 className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Share Stories</p>
-                  <p className="text-xs text-[#e5dbf1]">Document adventures</p>
+                  <p className="text-sm font-semibold text-gray-900">Share Stories</p>
+                  <p className="text-xs text-gray-600">Document adventures</p>
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
@@ -753,7 +753,7 @@ const LandingPage = ({ onShowAuth }) => {
               if (el) elementsRef.current['hero-center'] = el
             }}
           >
-            <div className="rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-xl p-6 sm:p-8 md:p-12 shadow-2xl shadow-[#ff34ac]/20">
+            <div className="rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xl p-6 sm:p-8 md:p-12 shadow-2xl border border-gray-200">
               {/* Tucker Logo */}
               <div className={`flex justify-center mb-4 sm:mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
                 <img
@@ -765,16 +765,16 @@ const LandingPage = ({ onShowAuth }) => {
 
               {/* Title */}
               <h1
-                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-tight ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
               >
                 Welcome to<br className="sm:hidden" /> Tucker Trips
               </h1>
 
               {/* Subtitle */}
               <p
-                className={`text-sm sm:text-base md:text-lg text-[#e5dbf1] mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
+                className={`text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
               >
-                <span className="bg-gradient-to-r from-[#ff34ac] via-[#e5dbf1] to-[#7dbbe5] bg-clip-text text-transparent font-medium">
+                <span className="bg-gradient-to-r from-[#ff34ac] via-gray-700 to-[#7dbbe5] bg-clip-text text-transparent font-medium">
                   Experience the world, one voyage at a time.
                 </span>
               </p>
@@ -793,7 +793,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </Button>
                 <button
                   onClick={onShowAuth}
-                  className="w-full sm:w-auto rounded-full border-2 border-white/20 bg-white/5 px-6 sm:px-8 py-3 text-sm sm:text-base text-white font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
+                  className="w-full sm:w-auto rounded-full border-2 border-gray-300 bg-white px-6 sm:px-8 py-3 text-sm sm:text-base text-gray-900 font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
                 >
                   View Demo
                 </button>
@@ -805,8 +805,8 @@ const LandingPage = ({ onShowAuth }) => {
               >
                 {highlightMetrics.map(({ icon: Icon, label, value }) => (
                   <div key={label} className="text-center">
-                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{value}</p>
-                    <p className="text-[10px] sm:text-xs md:text-sm text-[#e5dbf1] uppercase tracking-wide mt-1">{label}</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">{value}</p>
+                    <p className="text-[10px] sm:text-xs md:text-sm text-gray-700 uppercase tracking-wide mt-1">{label}</p>
                   </div>
                 ))}
               </div>
@@ -816,26 +816,26 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Video Section */}
-      <section 
-        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#343f65]/95"
+      <section
+        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50"
         id="video-section"
         ref={(el) => {
           if (el) elementsRef.current['video-section'] = el
         }}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,52,172,0.15),_transparent_65%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,52,172,0.08),_transparent_65%)]" />
         <div className="relative mx-auto max-w-6xl">
           <div className={`text-center mb-8 sm:mb-12 ${visibleElements['video-section'] ? 'animate-in-up' : 'opacity-0'}`}>
             <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Experience</p>
-            <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-white px-4">
+            <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 px-4">
               See Tucker Trips in Action
             </h2>
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#e5dbf1] px-4 max-w-2xl mx-auto">
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600 px-4 max-w-2xl mx-auto">
               Watch how easy it is to plan your perfect adventure
             </p>
           </div>
-          
-          <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#ff34ac]/30 shadow-[0_20px_60px_rgba(255,52,172,0.3)] bg-[#343f65]/50 backdrop-blur-sm transition duration-500 hover:border-[#ff34ac]/60 hover:shadow-[0_20px_80px_rgba(255,52,172,0.5)] cursor-pointer ${visibleElements['video-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
+
+          <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#ff34ac]/30 shadow-xl bg-white backdrop-blur-sm transition duration-500 hover:border-[#ff34ac]/60 hover:shadow-2xl cursor-pointer ${visibleElements['video-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
             <video
               id="feature-video"
               loop
@@ -845,39 +845,39 @@ const LandingPage = ({ onShowAuth }) => {
             >
               <source src="https://cdn.builder.io/o/assets%2F58d6334510b64a3ba328208823c50014%2Fce3f91af23404f229e8d5749e18ce320?alt=media&token=b1fb1eaf-237b-4262-a29e-1f9451b5319c&apiKey=58d6334510b64a3ba328208823c50014" type="video/webm" />
             </video>
-            
+
             <div className="pointer-events-none absolute -inset-2 bg-gradient-to-r from-[#ff34ac]/20 via-transparent to-[#7dbbe5]/20 blur-xl" />
           </div>
         </div>
       </section>
 
       {/* Why Choose Tucker Trips Timeline Section */}
-      <section className="relative bg-[#343f65]">
+      <section className="relative bg-white border-t border-gray-200">
         <Timeline data={timelineData} />
       </section>
 
       {/* Global Travelers Community Section with Globe */}
-      <section 
-        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#343f65] to-[#2a3454]"
+      <section
+        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white border-t border-gray-200"
         id="globe-section"
         ref={(el) => {
           if (el) elementsRef.current['globe-section'] = el
         }}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.15),_transparent_65%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.08),_transparent_65%)]" />
         <div className="relative mx-auto max-w-7xl">
           <div className={`text-center mb-12 sm:mb-16 ${visibleElements['globe-section'] ? 'animate-in-up' : 'opacity-0'}`}>
             <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#7dbbe5]">Community</p>
-            <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white px-4">
-              <span className="bg-gradient-to-r from-[#ff34ac] via-white to-[#7dbbe5] bg-clip-text text-transparent">
+            <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 px-4">
+              <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
                 Travelers Around the World
               </span>
             </h2>
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#e5dbf1] px-4 max-w-2xl mx-auto">
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600 px-4 max-w-2xl mx-auto">
               Join thousands of adventurers sharing their journeys and planning their next escapes
             </p>
           </div>
-          
+
           <div className={`mb-16 sm:mb-20 ${visibleElements['globe-section'] ? 'animate-scale-in stagger-2' : 'opacity-0'}`}>
             <Globe className="mx-auto" />
           </div>
@@ -886,16 +886,16 @@ const LandingPage = ({ onShowAuth }) => {
           <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
             <div className="text-center mb-8 sm:mb-12">
               <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[#ff34ac]">Meet the Founder</p>
-              <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
+              <h3 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900">
                 Built by a Traveler, for Travelers
               </h3>
             </div>
-            
+
             <div className="max-w-3xl mx-auto">
-              <div className="group relative rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 p-8 sm:p-10 hover:border-[#ff34ac]/50 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(255,52,172,0.3)]">
+              <div className="group relative rounded-2xl bg-white backdrop-blur-md border border-gray-200 p-8 sm:p-10 hover:border-[#ff34ac]/50 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-6">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-xl group-hover:opacity-50 transition-opacity" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-20 blur-xl group-hover:opacity-30 transition-opacity" />
                     <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-[#ff34ac]/30 group-hover:border-[#ff34ac]/60 transition-all">
                       <img
                         src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLmpwZyIsImlhdCI6MTc2MjE5MjYxMiwiZXhwIjoxNzkzNzI4NjEyfQ.NtQT70gQB0V0oFH4n0-Vb96ZACFFXOSSS4rY5hwYtYM"
@@ -904,15 +904,15 @@ const LandingPage = ({ onShowAuth }) => {
                       />
                     </div>
                   </div>
-                  <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2">Kristin Stein</h4>
+                  <h4 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Kristin Stein</h4>
                   <p className="text-sm text-[#ff34ac] mb-6 uppercase tracking-wider">Founder</p>
-                  
+
                   <div className="text-left max-w-2xl">
-                    <h5 className="text-lg sm:text-xl font-semibold text-white mb-4">Why I Founded Tucker Trips</h5>
-                    <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed mb-4">
+                    <h5 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Why I Founded Tucker Trips</h5>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
                       I started Tucker Trips after becoming frustrated with the endless search for reviews from strangers while trying to plan the perfect family vacation. As someone who loves exploring new places, I believe in the value of being well-informed before setting out on any adventure.
                     </p>
-                    <p className="text-sm sm:text-base text-[#e5dbf1] leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       With practical information at hand, I can focus on enjoying my time rather than hunting for activities or attractions once I arrive.
                     </p>
                   </div>
@@ -924,7 +924,7 @@ const LandingPage = ({ onShowAuth }) => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-[#343f65]/95 py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-white/60">
+      <footer className="border-t border-gray-200 bg-white py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-gray-500">
         <div className="max-w-7xl mx-auto">
           {/* Logo Animation */}
           <div className="flex justify-center mb-4">
@@ -934,10 +934,10 @@ const LandingPage = ({ onShowAuth }) => {
               className="h-12 sm:h-16 w-auto"
             />
           </div>
-          <p>
+          <p className="text-gray-600">
             &copy; {new Date().getFullYear()} Tucker Trips. Plan smarter. Travel better. Live fully.
           </p>
-          <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-white/50">
+          <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
             <button className="hover:text-[#ff34ac] transition">Privacy Policy</button>
             <button className="hover:text-[#ff34ac] transition">Terms of Service</button>
             <button className="hover:text-[#ff34ac] transition">Contact Us</button>
@@ -948,13 +948,13 @@ const LandingPage = ({ onShowAuth }) => {
 
       {/* Welcome Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="border border-[#ff34ac]/30 bg-[#343f65]/95 text-white backdrop-blur-xl mx-4 sm:mx-auto">
+        <DialogContent className="border border-gray-200 bg-white text-gray-900 backdrop-blur-xl shadow-xl mx-4 sm:mx-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-white">
+            <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-gray-900">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#ff34ac]" />
               Welcome to Tucker Trips
             </DialogTitle>
-            <DialogDescription className="text-xs sm:text-sm text-[#e5dbf1]">
+            <DialogDescription className="text-xs sm:text-sm text-gray-600">
               Start planning your dream trip today. Create detailed itineraries, collaborate with friends,
               and make every journey unforgettable.
             </DialogDescription>
@@ -974,7 +974,7 @@ const LandingPage = ({ onShowAuth }) => {
             <Button
               variant="ghost"
               onClick={() => setDialogOpen(false)}
-              className="flex-1 border border-white/10 bg-white/5 text-white/80 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/10 hover:text-white text-sm sm:text-base"
+              className="flex-1 border border-gray-300 bg-white text-gray-700 transition hover:border-[#7dbbe5]/60 hover:bg-[#7dbbe5]/10 hover:text-gray-900 text-sm sm:text-base"
             >
               Maybe Later
             </Button>
