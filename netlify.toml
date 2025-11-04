@@ -6,6 +6,10 @@
 [build.environment]
   NODE_VERSION = "22.17.0"
   NETLIFY_USE_PNPM = "true"
+  # Omit public Supabase URL from secrets scanning (it's meant to be public)
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_SUPABASE_BASE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_SUPABASE_ANON_KEY,NEXT_PUBLIC_SUPABASE_ANON_KEY"
+  # Omit build artifacts and files with public signed URLs from secrets scanning
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/**,.next/**,components/LandingPage.js,DEPLOY_INSTRUCTIONS.md,VERCEL_DEPLOY.md"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

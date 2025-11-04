@@ -23,18 +23,31 @@ After running the schema, verify in the Supabase dashboard:
 2. Go to **Database** → **Functions** → Verify `update_updated_at_column` exists
 3. Go to **Database** → **Triggers** → Verify `update_trips_updated_at` exists
 
-## Step 3: Deploy to Netlify
+## Step 3: Configure Environment Variables in Netlify
 
-The application will be deployed to Netlify with the following environment variables:
+Before deploying, you need to configure environment variables in your Netlify dashboard:
+
+1. Go to your Netlify site dashboard
+2. Navigate to **Site settings** → **Environment variables**
+3. Add the following variables:
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://ugxzjmzrmvbnhfejwjse.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHpqbXpybXZibmhmZWp3anNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTE3MjMsImV4cCI6MjA3NjAyNzcyM30.Y3NpD7piNUGGFb69wUbr2KofHyIXkvIfct0Z9XXz8Bw
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHpqbXpybXZibmhmZWp3anNlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDQ1MTcyMywiZXhwIjoyMDc2MDI3NzIzfQ.6EX6uG1YWEIUfgccXAm_ni8csR0jKMbY5FnPfGxjtak
-JWT_SECRET=jQL3k+NkwrDHI6t5efaVlX/b+lmeUAWuXc4MuUJ7rKT7n3+MYUb+Qdrlkc/9Tkj1MneTqRSqH7pBlbnJVTY9hQ==
+NEXT_PUBLIC_SUPABASE_URL=<your-supabase-project-url>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-role-key>
+JWT_SECRET=<your-jwt-secret>
 ```
 
-These must be configured in Netlify before deployment.
+### Where to find these values:
+
+- **NEXT_PUBLIC_SUPABASE_URL**: Go to your Supabase project → Settings → API → Project URL
+- **NEXT_PUBLIC_SUPABASE_ANON_KEY**: Go to your Supabase project → Settings → API → Project API keys → anon/public key
+- **SUPABASE_SERVICE_ROLE_KEY**: Go to your Supabase project → Settings → API → Project API keys → service_role key (keep this secret!)
+- **JWT_SECRET**: Generate a secure random string using: `node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"`
+
+### Deploy to Netlify
+
+Once environment variables are configured, deploy using the Netlify CLI or connect your Git repository for automatic deployments.
 
 ## Done!
 

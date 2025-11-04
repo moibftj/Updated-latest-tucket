@@ -31,6 +31,12 @@ dist/
 dist
 
 # Environment files (comprehensive coverage)
+.env
+.env.local
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
 *token.json*
 *credentials.json*
 
@@ -80,18 +86,6 @@ agenthub/agents/youtube/db
 android-sdk/ node_modules/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node
 node_modules/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node
 node_modules/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
 
 # Local Netlify folder
 .netlify

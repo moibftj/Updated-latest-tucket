@@ -45,14 +45,20 @@ After deployment, you need to add environment variables in the Vercel Dashboard 
 
 1. Go to your project on https://vercel.com
 2. Click **Settings** → **Environment Variables**
-3. Add these variables:
+3. Add these variables with your actual values:
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://ugxzjmzrmvbnhfejwjse.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHpqbXpybXZibmhmZWp3anNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTE3MjMsImV4cCI6MjA3NjAyNzcyM30.Y3NpD7piNUGGFb69wUbr2KofHyIXkvIfct0Z9XXz8Bw
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHpqbXpybXZibmhmZWp3anNlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDQ1MTcyMywiZXhwIjoyMDc2MDI3NzIzfQ.6EX6uG1YWEIUfgccXAm_ni8csR0jKMbY5FnPfGxjtak
-JWT_SECRET=jQL3k+NkwrDHI6t5efaVlX/b+lmeUAWuXc4MuUJ7rKT7n3+MYUb+Qdrlkc/9Tkj1MneTqRSqH7pBlbnJVTY9hQ==
+NEXT_PUBLIC_SUPABASE_URL=<your-supabase-project-url>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-role-key>
+JWT_SECRET=<your-jwt-secret>
 ```
+
+**Where to find these values:**
+- **NEXT_PUBLIC_SUPABASE_URL**: Supabase Dashboard → Settings → API → Project URL
+- **NEXT_PUBLIC_SUPABASE_ANON_KEY**: Supabase Dashboard → Settings → API → anon/public key
+- **SUPABASE_SERVICE_ROLE_KEY**: Supabase Dashboard → Settings → API → service_role key
+- **JWT_SECRET**: Generate with: `node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"`
 
 4. Click **Save**
 5. Redeploy for changes to take effect
@@ -61,16 +67,16 @@ JWT_SECRET=jQL3k+NkwrDHI6t5efaVlX/b+lmeUAWuXc4MuUJ7rKT7n3+MYUb+Qdrlkc/9Tkj1MneTq
 
 ```bash
 vercel env add NEXT_PUBLIC_SUPABASE_URL production
-# Paste: https://ugxzjmzrmvbnhfejwjse.supabase.co
+# When prompted, paste your Supabase project URL
 
 vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production
-# Paste the anon key
+# When prompted, paste your Supabase anon key
 
 vercel env add SUPABASE_SERVICE_ROLE_KEY production
-# Paste the service role key
+# When prompted, paste your Supabase service role key
 
 vercel env add JWT_SECRET production
-# Paste the JWT secret
+# When prompted, paste your generated JWT secret
 ```
 
 Then redeploy:
