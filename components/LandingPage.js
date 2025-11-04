@@ -406,11 +406,19 @@ const LandingPage = ({ onShowAuth }) => {
 
       @keyframes inflateFromBottom {
         0% {
-          transform: translateY(100px) scale(0.8);
+          transform: translateY(200px) scale(0.5);
           opacity: 0;
         }
-        60% {
-          transform: translateY(-10px) scale(1.02);
+        50% {
+          transform: translateY(100px) scale(0.75);
+          opacity: 0.3;
+        }
+        70% {
+          transform: translateY(30px) scale(0.95);
+          opacity: 0.7;
+        }
+        85% {
+          transform: translateY(-5px) scale(1.02);
           opacity: 1;
         }
         100% {
@@ -633,7 +641,7 @@ const LandingPage = ({ onShowAuth }) => {
               }}
               style={{
                 animation: visibleElements['hero-card-1']
-                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards, floatCard 8s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite`
+                  ? `inflateFromBottom 3s ease-out 0s forwards, floatCard 8s cubic-bezier(0.4, 0, 0.2, 1) 3s infinite`
                   : 'none'
               }}
             >
@@ -663,7 +671,7 @@ const LandingPage = ({ onShowAuth }) => {
               }}
               style={{
                 animation: visibleElements['hero-card-2']
-                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards, floatCard 10s cubic-bezier(0.4, 0, 0.2, 1) 1.4s infinite`
+                  ? `inflateFromBottom 3s ease-out 0.4s forwards, floatCard 10s cubic-bezier(0.4, 0, 0.2, 1) 3.4s infinite`
                   : 'none'
               }}
             >
@@ -693,7 +701,7 @@ const LandingPage = ({ onShowAuth }) => {
               }}
               style={{
                 animation: visibleElements['hero-card-3']
-                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards, floatCard 9s cubic-bezier(0.4, 0, 0.2, 1) 1.6s infinite`
+                  ? `inflateFromBottom 3s ease-out 0.8s forwards, floatCard 9s cubic-bezier(0.4, 0, 0.2, 1) 3.8s infinite`
                   : 'none'
               }}
             >
@@ -723,7 +731,7 @@ const LandingPage = ({ onShowAuth }) => {
               }}
               style={{
                 animation: visibleElements['hero-card-4']
-                  ? `inflateFromBottom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards, floatCard 11s cubic-bezier(0.4, 0, 0.2, 1) 1.8s infinite`
+                  ? `inflateFromBottom 3s ease-out 1.2s forwards, floatCard 11s cubic-bezier(0.4, 0, 0.2, 1) 4.2s infinite`
                   : 'none'
               }}
             >
