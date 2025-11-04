@@ -2,11 +2,20 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { MapPin, Calendar, Plane, Hotel, Car, Trash2, Eye, EyeOff } from 'lucide-react'
+import { MapPin, Calendar, Plane, Hotel, Car, Trash2, Eye, EyeOff, ArrowRight } from 'lucide-react'
 
-const TripCard = ({ trip, onDelete, showUserName = false }) => {
+const TripCard = ({ trip, onDelete, onClick, showUserName = false }) => {
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick(trip)
+    }
+  }
+
   return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden w-full">
+    <Card 
+      className="hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden w-full hover:scale-[1.02]"
+      onClick={handleCardClick}
+    >
       {/* Cover Image */}
       <div className="h-36 sm:h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 relative">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -33,6 +42,13 @@ const TripCard = ({ trip, onDelete, showUserName = false }) => {
           <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 flex-shrink-0" />
           <span className="truncate">{new Date(trip.startDate).toLocaleDateString()} - {new Date(trip.endDate).toLocaleDateString()}</span>
         </div>
+        
+        {/* Preview Description */}
+        {trip.description && (
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+            {trip.description}
+          </p>
+        )}
         
         {trip.segments && trip.segments.length > 0 ? (
           <div className="space-y-2">
@@ -63,9 +79,14 @@ const TripCard = ({ trip, onDelete, showUserName = false }) => {
         )}
 
         <div className="mt-3 sm:mt-4 flex justify-between items-center pt-3 sm:pt-4 border-t">
-          <span className="text-xs text-gray-500">
-            {trip.status === 'future' ? '📅 Future Trip' : '✓ Trip Taken'}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500">
+              {trip.status === 'future' ? '📅 Future Trip' : '✓ Trip Taken'}
+            </span>
+            <span className="text-xs text-purple-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+              View details <ArrowRight className="w-3 h-3" />
+            </span>
+          </div>
           {onDelete && (
             <Button
               variant="ghost"
@@ -74,7 +95,7 @@ const TripCard = ({ trip, onDelete, showUserName = false }) => {
                 e.stopPropagation()
                 onDelete(trip.id)
               }}
-              className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 p-0 sm:h-auto sm:w-auto sm:p-2"
+              className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 p-0 sm:h-auto sm:w-auto sm:p-2 hover:bg-red-50"
             >
               <Trash2 className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
             </Button>

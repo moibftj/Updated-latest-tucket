@@ -6,6 +6,7 @@ import DashboardSidebar from '@/components/DashboardSidebar'
 import HomeSection from '@/components/home/HomeSection'
 import TripsSection from '@/components/trips/TripsSection'
 import NewTripModal from '@/components/NewTripModal'
+import TripDetailModal from '@/components/TripDetailModal'
 import ProfileSettings from '@/components/ProfileSettings'
 import ChatPanel from '@/components/ChatPanel'
 import { tripApi } from '@/lib/api'
@@ -49,6 +50,8 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [sharedTrips, setSharedTrips] = useState([])
   const [showNewTripModal, setShowNewTripModal] = useState(false)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
+  const [showTripDetail, setShowTripDetail] = useState(false)
+  const [selectedTrip, setSelectedTrip] = useState(null)
   const [loading, setLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -113,6 +116,16 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
     setUser(updatedUser)
   }
 
+  const handleTripClick = (trip) => {
+    setSelectedTrip(trip)
+    setShowTripDetail(true)
+  }
+
+  const handleCloseTripDetail = () => {
+    setShowTripDetail(false)
+    setSelectedTrip(null)
+  }
+
   const activeConfig = sectionConfig[activeSection]
 
   return (
@@ -143,6 +156,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
             isLoading={loading}
             onNewTrip={() => setShowNewTripModal(true)}
             onDelete={deleteTrip}
+            onTripClick={handleTripClick}
           />
         )}
       </main>
@@ -151,6 +165,13 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         open={showNewTripModal}
         onClose={() => setShowNewTripModal(false)}
         onSuccess={handleTripCreated}
+      />
+
+      <TripDetailModal
+        trip={selectedTrip}
+        isOpen={showTripDetail}
+        onClose={handleCloseTripDetail}
+        showUserName={activeSection === 'shared' || activeSection === 'discover'}
       />
 
       <ProfileSettings

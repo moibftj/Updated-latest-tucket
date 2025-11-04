@@ -39,7 +39,7 @@ const EmptyState = ({ message, onNewTrip, showCreateButton }) => (
   </div>
 )
 
-const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete }) => {
+const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripClick }) => {
   if (!config) {
     return null
   }
@@ -59,6 +59,7 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete }) => {
             <TripCard
               key={trip.id}
               trip={trip}
+              onClick={onTripClick}
               onDelete={canDelete ? onDelete : undefined}
               showUserName={showUserName}
             />
