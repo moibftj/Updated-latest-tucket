@@ -194,7 +194,7 @@ const timelineData = [
     title: "LOG YOUR TRIP",
     content: (
       <div>
-        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-[#ed5a9b] text-sm md:text-base font-normal mb-8 leading-relaxed">
           Document every detail of your journey in one beautiful place. From flight bookings and hotel reservations to restaurant recommendations and hidden gems, Tucker Trips helps you organize all the essential information that makes your trip memorable. Never lose track of confirmation numbers, addresses, or those perfect spots you discovered along the way.
         </p>
         <div className="grid grid-cols-2 gap-4">
@@ -226,7 +226,7 @@ const timelineData = [
     title: "SHARE YOUR TRIP",
     content: (
       <div>
-        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-[#ed5a9b] text-sm md:text-base font-normal mb-8 leading-relaxed">
           Your adventures deserve an audience! Share your meticulously planned itineraries with friends and family, or make them public to inspire fellow travelers. Collaborate in real-time with your travel companions, exchange tips, and build excitement together. Tucker Trips transforms solo planning into a shared experience, making every journey a collective adventure.
         </p>
         <div className="mb-8">
@@ -276,7 +276,7 @@ const timelineData = [
     title: "LESSONS LEARNED",
     content: (
       <div>
-        <p className="text-gray-800 text-sm md:text-base font-normal mb-8 leading-relaxed">
+        <p className="text-[#ed5a9b] text-sm md:text-base font-normal mb-8 leading-relaxed">
           Every trip teaches us something new. Capture the wisdom gained from your adventures—what worked brilliantly, what you&apos;d do differently, and the unexpected discoveries that made your journey special. Build your personal travel knowledge base that grows with each adventure. Learn from your network&apos;s experiences and skip the trial-and-error phase. Tucker Trips helps you become a smarter traveler with every voyage.
         </p>
         <div className="mb-8">
