@@ -1,0 +1,42 @@
+# Linear GitHub Integration Configuration
+# Automatically sync issues, PRs, and commits with Linear
+
+# Auto-create Linear issues from GitHub issues
+auto_create_issues: true
+
+# Link PRs to Linear issues when PR title/description contains issue ID
+auto_link_prs: true
+
+# Update Linear issue status based on PR status
+pr_status_sync:
+  opened: "In Progress"
+  merged: "Done"
+  closed: "Canceled"
+
+# Auto-close Linear issues when PR is merged
+auto_close_issues: true
+
+# Branch naming convention
+branch_format: "{team-key}-{issue-number}-{issue-title}"
+
+# Commit message format
+commit_format: "{team-key}-{issue-number}: {commit-message}"
+
+# Team configuration
+teams:
+  - name: "Tucker Trips Development"
+    key: "TUCKER"
+    repository: "aqeelwebbing/New-latest-Tucker-1"
+    
+# Label mapping between GitHub and Linear
+label_mapping:
+  bug: "Bug"
+  feature: "Feature"
+  enhancement: "Enhancement"
+  backend: "Backend"
+  frontend: "Frontend"
+  database: "Database"
+  deployment: "Deployment"
+  documentation: "Documentation"
+  supabase: "Supabase"
+  netlify: "Netlify"
