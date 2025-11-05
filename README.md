@@ -89,6 +89,7 @@ lib/
 ## Development
 
 ### Running the Application
+
 ```bash
 # Standard development
 pnpm dev
@@ -99,6 +100,7 @@ pnpm dev:webpack       # Webpack polling mode
 ```
 
 ### API Development
+
 All API routes are in `app/api/[[...path]]/route.js`. To add a new endpoint:
 
 1. Add route logic inside `handleRoute()` function
@@ -106,6 +108,7 @@ All API routes are in `app/api/[[...path]]/route.js`. To add a new endpoint:
 3. Follow the Supabase pattern: UUID `id` fields, camelCase conversion
 
 ### Testing
+
 ```bash
 # Run backend tests
 python backend_test.py
@@ -117,7 +120,9 @@ python backend_test.py
 ## Deployment
 
 ### Environment Variables
+
 Required environment variables (set in `.env.local` and Netlify):
+
 ```bash
 VITE_SUPABASE_BASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -125,6 +130,7 @@ SERVICE_ROLE_KEY=your_service_role_key
 ```
 
 ### Netlify Deployment
+
 1. Configure environment variables in Netlify dashboard
 2. Deploy automatically via GitHub integration
 3. Build configuration is in `netlify.toml`
