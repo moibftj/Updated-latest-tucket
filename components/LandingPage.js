@@ -716,7 +716,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-28 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400&auto=format" alt="Memory" width={400} height={112} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+                <Image src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/IMG_20201024_120435-scaled.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL0lNR18yMDIwMTAyNF8xMjA0MzUtc2NhbGVkLnBuZyIsImlhdCI6MTc2MjM4MDcxMSwiZXhwIjoxNzkzOTE2NzExfQ.jxCQrVgcEdBS0j9dOr-45ht_-ckxGBOZ4Y364WmH9Zo" alt="Tucker Memory" width={400} height={112} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -746,7 +746,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format" alt="Collaboration" width={400} height={80} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+                <Image src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXIucG5nIiwiaWF0IjoxNzYyMzgwNzMxLCJleHAiOjE3OTM5MTY3MzF9.DeiqjCCVAahTZf2BNm0Tg5Feels46CYxqUMGi_DDdt8" alt="Tucker Collaboration" width={400} height={80} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -776,7 +776,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format" alt="Stories" width={400} height={80} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+                <Image src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1-264x300.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLTI2NHgzMDAucG5nIiwiaWF0IjoxNzYyMzgwNzg5LCJleHAiOjE3OTM5MTY3ODl9.3tXPSUCCYD9u0jiH7Q7SzgKVy8JjMLRAgCJc5rKr-iA" alt="Tucker Stories" width={264} height={300} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
