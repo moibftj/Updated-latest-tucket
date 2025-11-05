@@ -91,7 +91,7 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
           <div className="absolute inset-0 bg-black/20"></div>
           {trip.coverPhoto && (
             <>
-              {imageLoadingStates['cover'] && <ImageSkeleton />}
+              {imageLoadingStates['cover'] !== false && <ImageSkeleton />}
               <Image 
                 src={trip.coverPhoto} 
                 alt={trip.title}
@@ -281,7 +281,7 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {trip.tripImages.split(',').filter(Boolean).map((image, index) => (
                 <div key={index} className="relative w-full h-32 rounded-lg overflow-hidden bg-gray-100">
-                  {imageLoadingStates[`trip-${index}`] && <ImageSkeleton />}
+                  {imageLoadingStates[`trip-${index}`] !== false && <ImageSkeleton />}
                   <Image
                     src={image.trim()}
                     alt={`Trip photo ${index + 1}`}
