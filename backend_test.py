@@ -10,8 +10,9 @@ import sys
 import time
 from datetime import datetime
 
-# Get base URL from environment
-BASE_URL = "https://color-refresh-6.preview.emergentagent.com/api"
+# Get base URL from environment - use local dev server for testing
+import os
+BASE_URL = os.getenv("BASE_URL", "http://localhost:3000/api")
 
 class TuckerTripsBackendTester:
     def __init__(self):
