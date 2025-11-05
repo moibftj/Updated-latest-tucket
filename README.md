@@ -152,15 +152,18 @@ SERVICE_ROLE_KEY=your_service_role_key
 ## Troubleshooting
 
 ### Git Issues
+
 - Run `./setup-git.sh` for automated configuration
 - Check `.gitconfig.template` for manual setup
 
 ### Development Issues
+
 - Use `pnpm dev:webpack` if file watching doesn't work
 - Check environment variables in `.env.local`
 - Verify Supabase connection in API routes
 
 ### Deployment Issues
+
 - Ensure all environment variables are set in Netlify
 - Check `netlify.toml` configuration
 - Verify build process with `pnpm build`
