@@ -10,7 +10,8 @@
         "start": "next start",
         "lint": "next lint",
         "mcp:webflow": "npx -y webflow-mcp-server@latest",
-        "mcp:webflow:help": "echo 'Set WEBFLOW_TOKEN in .env.local and run: pnpm mcp:webflow'"
+        "mcp:webflow:help": "echo 'Set WEBFLOW_TOKEN in .env.local and run: pnpm mcp:webflow'",
+        "test:webflow": "node test-webflow-sdk.js"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.1.1",
