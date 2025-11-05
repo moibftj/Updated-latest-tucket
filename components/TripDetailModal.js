@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -70,10 +70,10 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
               <DialogTitle className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 {trip.title}
               </DialogTitle>
-              <div className="flex items-center gap-2 text-gray-600">
+              <DialogDescription className="flex items-center gap-2 text-gray-600">
                 <MapPin className="w-4 h-4" />
                 <span className="text-lg">{trip.destination}</span>
-              </div>
+              </DialogDescription>
             </div>
             <Button
               variant="ghost"

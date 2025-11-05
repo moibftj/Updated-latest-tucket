@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -46,6 +46,9 @@ const ProfileSettings = ({ open, onClose, user, onUpdate }) => {
             <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Profile Settings
           </DialogTitle>
+          <DialogDescription className="text-xs sm:text-sm">
+            Update your profile information and preferences
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">

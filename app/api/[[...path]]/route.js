@@ -90,6 +90,28 @@ async function handleRoute(request, { params }) {
   const method = request.method
 
   try {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      logger.error('Missing Supabase environment variables')
+      return handleCORS(NextResponse.json(
+        {
+          error: 'Server configuration error',
+          code: 'CONFIG_ERROR'
+        },
+        { status: 500 }
+      ), request)
+    }
+
+    if (!process.env.JWT_SECRET) {
+      logger.error('Missing JWT_SECRET environment variable')
+      return handleCORS(NextResponse.json(
+        {
+          error: 'Server configuration error',
+          code: 'CONFIG_ERROR'
+        },
+        { status: 500 }
+      ), request)
+    }
+
     const supabase = getSupabase()
 
     // ============ AUTH ROUTES ============
