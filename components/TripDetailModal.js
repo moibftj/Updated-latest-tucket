@@ -24,8 +24,7 @@ import { useState } from 'react'
 // Loading skeleton component for images
 const ImageSkeleton = () => (
   <div className="absolute inset-0 bg-gray-200 animate-pulse">
-    <div className="w-full h-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer" 
-         style={{ backgroundSize: '200% 100%' }} />
+    <div className="w-full h-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer" />
   </div>
 )
 
@@ -92,7 +91,7 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
           <div className="absolute inset-0 bg-black/20"></div>
           {trip.coverPhoto && (
             <>
-              {imageLoadingStates['cover'] !== false && <ImageSkeleton />}
+              {imageLoadingStates['cover'] && <ImageSkeleton />}
               <Image 
                 src={trip.coverPhoto} 
                 alt={trip.title}
@@ -282,7 +281,7 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {trip.tripImages.split(',').filter(Boolean).map((image, index) => (
                 <div key={index} className="relative w-full h-32 rounded-lg overflow-hidden bg-gray-100">
-                  {imageLoadingStates[`trip-${index}`] !== false && <ImageSkeleton />}
+                  {imageLoadingStates[`trip-${index}`] && <ImageSkeleton />}
                   <Image
                     src={image.trim()}
                     alt={`Trip photo ${index + 1}`}
