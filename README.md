@@ -55,7 +55,7 @@ git config --local commit.gpgsign false
 
 - **Frontend**: Next.js 14, React, Tailwind CSS
 - **Backend**: Next.js API Routes (single-file pattern)
-- **Database**: MongoDB with custom UUID IDs
+- **Database**: Supabase (PostgreSQL) with UUID IDs
 - **Authentication**: JWT tokens
 - **UI Components**: shadcn/ui + Radix UI
 - **Deployment**: Netlify

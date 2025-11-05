@@ -27,18 +27,32 @@ function getSupabase() {
   return supabase
 }
 
-// Helper function to handle CORS
+// Helper function to handle CORS - improved security
 function handleCORS(response, request = null) {
+  // Define allowed origins - avoid wildcard when credentials are used
   const allowedOrigins = process.env.CORS_ORIGINS ? 
     process.env.CORS_ORIGINS.split(',').map(o => o.trim()) : 
-    ['http://localhost:3000', 'https://*.netlify.app']
+    ['http://localhost:3000', 'https://localhost:3000', 'https://*.netlify.app', 'https://*.vercel.app']
   
   const origin = request?.headers.get('origin')
   
-  if (origin && (allowedOrigins.includes('*') || allowedOrigins.includes(origin) || 
-      allowedOrigins.some(allowed => allowed.includes('*') && origin.includes(allowed.replace('*', ''))))) {
-    response.headers.set('Access-Control-Allow-Origin', origin)
+  // If we have an origin header and credentials are allowed, be specific about CORS
+  if (origin) {
+    const isAllowed = allowedOrigins.includes('*') || 
+                     allowedOrigins.includes(origin) ||
+                     allowedOrigins.some(allowed => {
+                       if (allowed.includes('*')) {
+                         const pattern = allowed.replace('*', '.*')
+                         return new RegExp(pattern).test(origin)
+                       }
+                       return false
+                     })
+    
+    if (isAllowed) {
+      response.headers.set('Access-Control-Allow-Origin', origin)
+    }
   } else if (allowedOrigins.includes('*')) {
+    // Only use wildcard if no specific origin and explicitly allowed
     response.headers.set('Access-Control-Allow-Origin', '*')
   }
   

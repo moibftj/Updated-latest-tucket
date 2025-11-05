@@ -6,10 +6,7 @@ const nextConfig = {
       'tuckertrips.com'
     ],
   },
-  experimental: {
-    // Remove if not using Server Components
-    serverComponentsExternalPackages: ['mongodb'],
-  },
+  // Experimental features removed - using Supabase instead of MongoDB
   webpack(config, { dev }) {
     if (dev) {
       // Reduce CPU/memory from file watching
