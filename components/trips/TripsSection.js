@@ -13,6 +13,8 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from '@/components/ui/pagination'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import { TripsSectionErrorFallback } from '@/components/ErrorFallbacks'
 
 const Loader = () => (
   <div className="flex items-center justify-center h-64">
@@ -48,12 +50,20 @@ const EmptyState = ({ message, onNewTrip, showCreateButton }) => (
   </div>
 )
 
-const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripClick }) => {
+const TripsSection = ({ config, trips = [], isLoading = false, onNewTrip, onDelete, onTripClick }) => {
   if (!config) {
     return null
   }
 
-  const { title, emptyMessage, showCreateButton, canDelete, showUserName, pagination, onPageChange } = config
+  const {
+    title = 'Trips',
+    emptyMessage = 'You don\'t have any trips yet.',
+    showCreateButton = false,
+    canDelete = false,
+    showUserName = false,
+    pagination,
+    onPageChange,
+  } = config
 
   const renderPagination = () => {
     if (!pagination || pagination.totalPages <= 1) return null
@@ -81,7 +91,7 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripCli
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+              onClick={() => currentPage > 1 && onPageChange?.(currentPage - 1)}
               className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
             />
           </PaginationItem>
@@ -94,7 +104,7 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripCli
             ) : (
               <PaginationItem key={page}>
                 <PaginationLink
-                  onClick={() => onPageChange(page)}
+                  onClick={() => onPageChange?.(page)}
                   isActive={page === currentPage}
                   className="cursor-pointer"
                 >
@@ -106,7 +116,7 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripCli
 
           <PaginationItem>
             <PaginationNext
-              onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
+              onClick={() => currentPage < totalPages && onPageChange?.(currentPage + 1)}
               className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
             />
           </PaginationItem>
@@ -116,29 +126,31 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripCli
   }
 
   return (
-    <div>
-      <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
-      {isLoading ? (
-        <Loader />
-      ) : trips.length === 0 ? (
-        <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
-      ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trips.map((trip) => (
-              <TripCard
-                key={trip.id}
-                trip={trip}
-                onClick={onTripClick}
-                onDelete={canDelete ? onDelete : undefined}
-                showUserName={showUserName}
-              />
-            ))}
-          </div>
-          {renderPagination()}
-        </>
-      )}
-    </div>
+    <ErrorBoundary fallback={TripsSectionErrorFallback}>
+      <div>
+        <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
+        {isLoading ? (
+          <Loader />
+        ) : trips.length === 0 ? (
+          <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {trips.map((trip) => (
+                <TripCard
+                  key={trip.id}
+                  trip={trip}
+                  onClick={onTripClick}
+                  onDelete={canDelete ? onDelete : undefined}
+                  showUserName={showUserName}
+                />
+              ))}
+            </div>
+            {renderPagination()}
+          </>
+        )}
+      </div>
+    </ErrorBoundary>
   )
 }
 

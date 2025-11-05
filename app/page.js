@@ -5,6 +5,7 @@ import LandingPage from '@/components/LandingPage'
 import AuthModal from '@/components/AuthModal'
 import Dashboard from '@/components/Dashboard'
 import { authApi } from '@/lib/api'
+import { logger } from '@/lib/logger'
 
 const LoadingState = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
@@ -33,7 +34,7 @@ const App = () => {
         const data = await authApi.getMe()
         setUser(data.user)
       } catch (error) {
-        console.error('Auth check failed:', error)
+        logger.error('Auth check failed:', error)
         localStorage.removeItem('token')
       } finally {
         setLoading(false)
