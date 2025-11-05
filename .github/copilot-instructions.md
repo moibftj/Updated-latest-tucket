@@ -104,17 +104,16 @@ if (route === '/trips/share' && method === 'POST') {
       - **Modals**: `EnhancedTripModal.js` - multi-step trip creation (5 steps with segments)
       - **Trip metadata**: `TRIP_SECTION_META` object defines section behavior (titles, empty states, permissions)
 
-      ## Tucker Trips — concise AI coding instructions
+## Tucker Trips — concise AI coding instructions
 
-      This short guide helps an AI coding agent become productive quickly in the Tucker Trips repository.
-      Keep guidance short, actionable and reference real files below.
+This short guide helps an AI coding agent become productive quickly in the Tucker Trips repository.
+Keep guidance short, actionable and reference real files below.
 
-      ## High-level architecture (why it matters)
-      - Next.js 14 frontend + API routes. Single-file API handler: `app/api/[[...path]]/route.js` — all backend routes and methods live here. Modify carefully: new endpoints are added as new branches inside `handleRoute()`.
-      - MongoDB used directly via a `connectToMongo()` singleton. Documents use a custom `id` (UUID v4) instead of `_id`.
-      - Client stores JWT in localStorage; server extracts userId with `verifyToken()` and checks Authorization header.
-
-      ## Key files to read before coding
+## High-level architecture (why it matters)
+- **Next.js 14** full-stack application with API routes and server components.
+- Single-file API handler: `app/api/[[...path]]/route.js` — all backend routes and methods live here. Modify carefully: new endpoints are added as new branches inside `handleRoute()`.
+- **Supabase** backend (PostgreSQL database + Auth). All database operations use Supabase client with row-level security (RLS) policies.
+- Client stores JWT in localStorage; server extracts userId with `verifyToken()` and checks Authorization header.      ## Key files to read before coding
       - `app/api/[[...path]]/route.js` — monolithic API router and DB usage examples.
       - `app/page.js` — top-level auth check and bootstrapping (checkAuth, heartbeat logic).
       - `components/` and `components/ui/` — business components vs shadcn/Radix UI primitives.
@@ -122,13 +121,11 @@ if (route === '/trips/share' && method === 'POST') {
       - `next.config.js` — webpack polling and dev-container optimizations.
       - `backend_test.py` and `test_result.md` — testing protocol and agent coordination.
 
-      ## Project-specific conventions (follow these exactly)
-      - Package manager: pnpm. Use `pnpm dev` / `pnpm build && pnpm start` (see `package.json`).
-      - API pattern: add route logic inside `handleRoute()` and return via `handleCORS(NextResponse.json(...))`.
-      - Use UUID `id` fields on all documents (users, trips, messages). When returning DB results, existing code strips `_id` — follow that pattern.
-      - UI: use `'use client'` for interactive components. Import shadcn components from `@/components/ui/*`.
-
-      ## How to add an API endpoint (example)
+## Project-specific conventions (follow these exactly)
+- Package manager: **pnpm**. Use `pnpm dev` / `pnpm build && pnpm start` (see `package.json`).
+- API pattern: add route logic inside `handleRoute()` and return via `handleCORS(NextResponse.json(...))`.
+- **Supabase integration**: Use Supabase client for all database operations. Tables: `users`, `trips`, `messages`. All tables use UUID primary keys (`id`).
+- UI: Next.js 14 client components with `'use client'` directive. Import shadcn components from `@/components/ui/*`.      ## How to add an API endpoint (example)
       1. Edit `app/api/[[...path]]/route.js`.
       2. Follow existing route sections (look for comment headers: AUTH, USERS, MESSAGES, TRIPS).
       3. If protected, call `verifyToken(request)` and get userId.
