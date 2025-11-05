@@ -48,10 +48,13 @@ This guide helps AI coding agents become productive quickly in the Tucker Trips 
 
 **Supabase Configuration:**
 ```bash
-VITE_SUPABASE_BASE_URL=https://wcnguiercwrdhsielhno.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indjbmd1aWVyY3dyZGhzaWVsaG5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxMDI5MjIsImV4cCI6MjA3NzY3ODkyMn0.YUBNAfNLrG5Gnh_Om1I7DQgtDBv3p27YjjO4ZiFHMl4
-SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indjbmd1aWVyY3dyZGhzaWVsaG5vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjEwMjkyMiwiZXhwIjoyMDc3Njc4OTIyfQ.ECkuKr0AUtM9Ra8AICiHGt7EH5EQY_H8zSPWAoIxuTI
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+JWT_SECRET=your_jwt_secret
 ```
+
+**⚠️ SECURITY NOTE: Never commit actual secrets to the repository! Use .env.local for development.**
 
 **Deployment:**
 - Netlify deployment configured via `netlify.toml`

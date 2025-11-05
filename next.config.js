@@ -1,9 +1,13 @@
 const nextConfig = {
   images: {
-    unoptimized: true,
+    unoptimized: false, // Enable Next.js image optimization
+    formats: ['image/webp', 'image/avif'], // Modern formats
+    minimumCacheTTL: 60, // Cache for 1 minute
     domains: [
       'images.unsplash.com',
-      'tuckertrips.com'
+      'tuckertrips.com',
+      'supabase.com',
+      '*.supabase.co'
     ],
   },
   // Experimental features removed - using Supabase instead of MongoDB
