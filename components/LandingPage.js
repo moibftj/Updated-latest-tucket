@@ -217,9 +217,11 @@ const timelineData = [
           </ul>
         </div>
         <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&auto=format"
             alt="Travel planning and organization"
+            width={1200}
+            height={384}
             className="w-full h-64 md:h-96 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -271,16 +273,20 @@ const timelineData = [
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative rounded-2xl overflow-hidden shadow-xl">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=800&auto=format"
               alt="Group travel planning"
+              width={800}
+              height={288}
               className="w-full h-56 md:h-72 object-cover"
             />
           </div>
           <div className="relative rounded-2xl overflow-hidden shadow-xl">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format"
               alt="Travel collaboration"
+              width={800}
+              height={288}
               className="w-full h-56 md:h-72 object-cover"
             />
           </div>
