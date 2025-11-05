@@ -9,6 +9,8 @@ import NewTripModal from '@/components/NewTripModal'
 import TripDetailModal from '@/components/TripDetailModal'
 import ProfileSettings from '@/components/ProfileSettings'
 import ChatPanel from '@/components/ChatPanel'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import { DashboardErrorFallback } from '@/components/ErrorFallbacks'
 import { tripApi } from '@/lib/api'
 
 const TRIP_SECTION_META = {
@@ -129,60 +131,62 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const activeConfig = sectionConfig[activeSection]
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <DashboardSidebar
-        user={user}
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-        onNewTrip={() => setShowNewTripModal(true)}
-        onProfileSettings={() => setShowProfileSettings(true)}
-        onLogout={onLogout}
-        isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen(!sidebarOpen)}
-        onClose={() => setSidebarOpen(false)}
-      />
+    <ErrorBoundary fallback={DashboardErrorFallback}>
+      <div className="min-h-screen bg-gray-50 flex">
+        <DashboardSidebar
+          user={user}
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+          onNewTrip={() => setShowNewTripModal(true)}
+          onProfileSettings={() => setShowProfileSettings(true)}
+          onLogout={onLogout}
+          isOpen={sidebarOpen}
+          onToggle={() => setSidebarOpen(!sidebarOpen)}
+          onClose={() => setSidebarOpen(false)}
+        />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 lg:ml-64 transition-all duration-300">
-        {activeSection === 'home' ? (
-          <HomeSection
-            user={user}
-            onSelectSection={setActiveSection}
-            onNewTrip={() => setShowNewTripModal(true)}
-          />
-        ) : (
-          <TripsSection
-            config={activeConfig}
-            trips={activeConfig?.trips ?? []}
-            isLoading={loading}
-            onNewTrip={() => setShowNewTripModal(true)}
-            onDelete={deleteTrip}
-            onTripClick={handleTripClick}
-          />
-        )}
-      </main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 lg:ml-64 transition-all duration-300">
+          {activeSection === 'home' ? (
+            <HomeSection
+              user={user}
+              onSelectSection={setActiveSection}
+              onNewTrip={() => setShowNewTripModal(true)}
+            />
+          ) : (
+            <TripsSection
+              config={activeConfig}
+              trips={activeConfig?.trips ?? []}
+              isLoading={loading}
+              onNewTrip={() => setShowNewTripModal(true)}
+              onDelete={deleteTrip}
+              onTripClick={handleTripClick}
+            />
+          )}
+        </main>
 
-      <NewTripModal
-        open={showNewTripModal}
-        onClose={() => setShowNewTripModal(false)}
-        onSuccess={handleTripCreated}
-      />
+        <NewTripModal
+          open={showNewTripModal}
+          onClose={() => setShowNewTripModal(false)}
+          onSuccess={handleTripCreated}
+        />
 
-      <TripDetailModal
-        trip={selectedTrip}
-        isOpen={showTripDetail}
-        onClose={handleCloseTripDetail}
-        showUserName={activeSection === 'shared' || activeSection === 'discover'}
-      />
+        <TripDetailModal
+          trip={selectedTrip}
+          isOpen={showTripDetail}
+          onClose={handleCloseTripDetail}
+          showUserName={activeSection === 'shared' || activeSection === 'discover'}
+        />
 
-      <ProfileSettings
-        open={showProfileSettings}
-        onClose={() => setShowProfileSettings(false)}
-        user={user}
-        onUpdate={handleUserUpdate}
-      />
+        <ProfileSettings
+          open={showProfileSettings}
+          onClose={() => setShowProfileSettings(false)}
+          user={user}
+          onUpdate={handleUserUpdate}
+        />
 
-      <ChatPanel currentUser={user} />
-    </div>
+        <ChatPanel currentUser={user} />
+      </div>
+    </ErrorBoundary>
   )
 }
 
