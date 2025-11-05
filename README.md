@@ -2,6 +2,21 @@
 
 A Next.js 14 travel planning application with full-stack architecture. Users can plan trips, chat with other travelers, and share their adventures.
 
+## 📚 Documentation
+
+- [Quick Start](#quick-start) - Get the app running locally
+- [Webflow MCP Integration](#webflow-mcp-integration) - AI-powered content management ⭐ NEW
+- [Tech Stack](#tech-stack) - Technologies used
+- [Development](#development) - Development workflows
+- [Deployment](#deployment) - Deploy to production
+- [Troubleshooting](#troubleshooting) - Common issues and solutions
+
+📖 **Detailed Guides:**
+
+- [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md) - Complete Webflow MCP setup and usage guide
+- [SECURITY.md](./SECURITY.md) - Security best practices
+- [DEPLOY_INSTRUCTIONS.md](./DEPLOY_INSTRUCTIONS.md) - Detailed deployment guide
+
 ## Quick Start
 
 ### Prerequisites
