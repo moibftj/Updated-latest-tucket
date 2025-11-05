@@ -1,6 +1,7 @@
 const nextConfig = {
   images: {
     unoptimized: true,
+    domains: ['images.unsplash.com'],
   },
   experimental: {
     // Remove if not using Server Components
