@@ -15,9 +15,15 @@ const nextConfig = {
     if (dev) {
       // Reduce CPU/memory from file watching
       config.watchOptions = {
-        poll: 2000, // check every 2 seconds
-        aggregateTimeout: 300, // wait before rebuilding
-        ignored: ['**/node_modules'],
+        poll: 5000, // check every 5 seconds (less aggressive)
+        aggregateTimeout: 600, // wait longer before rebuilding
+        ignored: [
+          '**/node_modules',
+          '**/.git',
+          '**/.next',
+          '**/dist',
+          '**/build'
+        ],
       };
     }
     return config;
