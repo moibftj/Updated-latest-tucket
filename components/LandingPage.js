@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState, useRef } from 'react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
