@@ -147,7 +147,7 @@ SERVICE_ROLE_KEY=your_service_role_key
 ### Development Issues
 - Use `pnpm dev:webpack` if file watching doesn't work
 - Check environment variables in `.env.local`
-- Verify MongoDB connection in API routes
+- Verify Supabase connection in API routes
 
 ### Deployment Issues
 - Ensure all environment variables are set in Netlify
