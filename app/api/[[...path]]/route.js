@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
+import { logger } from '@/lib/logger'
 
 // Validation schemas
 const registerSchema = z.object({
@@ -785,7 +786,7 @@ async function handleRoute(request, { params }) {
 
   } catch (error) {
     // Log full error details server-side only
-    console.error('API Error:', {
+    logger.error('API Error:', {
       message: error.message,
       stack: error.stack,
       route,

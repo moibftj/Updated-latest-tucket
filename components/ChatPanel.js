@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { MessageCircle, X, Send, Circle } from 'lucide-react'
 import { toast } from 'sonner'
 import { userApi, messageApi } from '@/lib/api'
+import { logger } from '@/lib/logger'
 
 const ChatPanel = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,7 +31,7 @@ const ChatPanel = ({ currentUser }) => {
       try {
         await userApi.heartbeat()
       } catch (error) {
-        console.error('Heartbeat failed:', error)
+        logger.error('Heartbeat failed:', error)
       }
     }, 60000) // Every minute
 
@@ -46,7 +47,7 @@ const ChatPanel = ({ currentUser }) => {
         const users = await userApi.getOnlineUsers()
         setOnlineUsers(users)
       } catch (error) {
-        console.error('Failed to fetch online users:', error)
+        logger.error('Failed to fetch online users:', error)
       }
     }
 
@@ -65,7 +66,7 @@ const ChatPanel = ({ currentUser }) => {
         const msgs = await messageApi.getConversation(selectedUser.id)
         setMessages(msgs)
       } catch (error) {
-        console.error('Failed to fetch messages:', error)
+        logger.error('Failed to fetch messages:', error)
       }
     }
 
