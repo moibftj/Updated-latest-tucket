@@ -1018,10 +1018,10 @@ const LandingPage = ({ onShowAuth }) => {
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-white py-6 sm:py-8 px-4 text-center text-xs sm:text-sm text-gray-500">
         <div className="max-w-7xl mx-auto">
-          {/* Logo Animation */}
+          {/* Logo */}
           <div className="flex justify-center mb-4">
             <img
-              src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Untitled%20(Logo).gif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL1VudGl0bGVkIChMb2dvKS5naWYiLCJpYXQiOjE3NjIxOTIwODMsImV4cCI6MTc5MzcyODA4M30.5N-G57YWF2rv8vjQ9QxjUqZj0dNdDzmOa7tuqJG2ffc"
+              src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-192x192.png"
               alt="Tucker Trips Logo"
               className="h-12 sm:h-16 w-auto"
             />
