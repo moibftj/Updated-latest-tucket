@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion, useMotionValue, useTransform } from 'motion/react'
 import { useState } from 'react'
 
@@ -96,7 +97,7 @@ export default function Stack({
                 backgroundColor: '#ddd',
               }}
             >
-              <img src={card.img} alt={`card-${card.id}`} className="w-full h-full object-cover pointer-events-none" />
+              <Image src={card.img} alt={`card-${card.id}`} fill className="object-cover pointer-events-none" />
             </motion.div>
           </CardRotate>
         )

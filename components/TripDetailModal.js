@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -79,10 +80,11 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
         <div className="h-64 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-lg relative overflow-hidden -mt-2">
           <div className="absolute inset-0 bg-black/20"></div>
           {trip.coverPhoto && (
-            <img 
+            <Image 
               src={trip.coverPhoto} 
-              alt={trip.title} 
-              className="absolute inset-0 w-full h-full object-cover"
+              alt={trip.title}
+              fill
+              className="object-cover"
             />
           )}
         </div>
@@ -261,12 +263,14 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
             <h3 className="text-lg font-semibold mb-2">Trip Photos</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {trip.tripImages.split(',').filter(Boolean).map((image, index) => (
-                <img
-                  key={index}
-                  src={image.trim()}
-                  alt={`Trip photo ${index + 1}`}
-                  className="w-full h-32 object-cover rounded-lg"
-                />
+                <div key={index} className="relative w-full h-32">
+                  <Image
+                    src={image.trim()}
+                    alt={`Trip photo ${index + 1}`}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
               ))}
             </div>
           </div>
