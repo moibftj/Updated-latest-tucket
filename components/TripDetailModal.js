@@ -19,8 +19,19 @@ import {
   MessageSquare,
   X
 } from 'lucide-react'
+import { useState } from 'react'
+
+// Loading skeleton component for images
+const ImageSkeleton = () => (
+  <div className="absolute inset-0 bg-gray-200 animate-pulse">
+    <div className="w-full h-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer" 
+         style={{ backgroundSize: '200% 100%' }} />
+  </div>
+)
 
 const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
+  const [imageLoadingStates, setImageLoadingStates] = useState({})
+  
   if (!trip) return null
 
   const formatDate = (date) => {
@@ -80,12 +91,19 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
         <div className="h-64 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-lg relative overflow-hidden -mt-2">
           <div className="absolute inset-0 bg-black/20"></div>
           {trip.coverPhoto && (
-            <Image 
-              src={trip.coverPhoto} 
-              alt={trip.title}
-              fill
-              className="object-cover"
-            />
+            <>
+              {imageLoadingStates['cover'] !== false && <ImageSkeleton />}
+              <Image 
+                src={trip.coverPhoto} 
+                alt={trip.title}
+                fill
+                className="object-cover"
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                onLoad={() => setImageLoadingStates(prev => ({ ...prev, cover: false }))}
+              />
+            </>
           )}
         </div>
 
@@ -263,12 +281,17 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false }) => {
             <h3 className="text-lg font-semibold mb-2">Trip Photos</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {trip.tripImages.split(',').filter(Boolean).map((image, index) => (
-                <div key={index} className="relative w-full h-32">
+                <div key={index} className="relative w-full h-32 rounded-lg overflow-hidden bg-gray-100">
+                  {imageLoadingStates[`trip-${index}`] !== false && <ImageSkeleton />}
                   <Image
                     src={image.trim()}
                     alt={`Trip photo ${index + 1}`}
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-cover"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                    onLoad={() => setImageLoadingStates(prev => ({ ...prev, [`trip-${index}`]: false }))}
                   />
                 </div>
               ))}
