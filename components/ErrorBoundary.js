@@ -32,6 +32,8 @@ class ErrorBoundary extends React.Component {
   }
 
   handleGoHome = () => {
+    // Intentionally use full page reload to reset application state after error
+    // This ensures a clean slate rather than attempting to navigate with potentially corrupted state
     window.location.href = '/'
   }
 
