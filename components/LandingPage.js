@@ -883,9 +883,11 @@ const LandingPage = ({ onShowAuth }) => {
                     I wanted a place where I could trust recommendations from people who actually know me.
                   </p>
                   <footer className="flex items-center gap-3">
-                    <img 
+                    <Image 
                       src="https://tuckertrips.com/wp-content/uploads/2024/09/FB_IMG_1494034557555-225x300.jpg" 
                       alt="Kristin Stein"
+                      width={225}
+                      height={300}
                       className="w-12 h-12 rounded-full object-cover border-2 border-[#ff34ac] shadow-md"
                     />
                     <div>
@@ -923,9 +925,11 @@ const LandingPage = ({ onShowAuth }) => {
               <div className="grid grid-cols-2 gap-4">
                 {/* Large featured image */}
                 <div className="col-span-2 relative rounded-2xl overflow-hidden shadow-2xl group">
-                  <img 
+                  <Image 
                     src="https://tuckertrips.com/wp-content/uploads/2024/09/IMG_20171229_173644-scaled.jpg"
                     alt="Kristin's Travel Adventure"
+                    width={2560}
+                    height={1920}
                     className="w-full h-80 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -937,9 +941,11 @@ const LandingPage = ({ onShowAuth }) => {
 
                 {/* Mountain adventure */}
                 <div className="relative rounded-xl overflow-hidden shadow-xl group">
-                  <img 
+                  <Image 
                     src="https://tuckertrips.com/wp-content/uploads/2024/05/men-stand-watch-mountains-tropical-forests-with-backpacks-forest-adventure-traveling-climbing-1536x1024.jpg"
                     alt="Mountain Adventure"
+                    width={1536}
+                    height={1024}
                     className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
