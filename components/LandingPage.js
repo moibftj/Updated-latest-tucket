@@ -686,7 +686,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-24 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format" alt="Flight" width={400} height={96} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+                <Image src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/FB_IMG_1494034557555-225x300.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL0ZCX0lNR18xNDk0MDM0NTU3NTU1LTIyNXgzMDAucG5nIiwiaWF0IjoxNzYyMzgwNjM4LCJleHAiOjE3OTM5MTY2Mzh9.Y9nseDyS5Qxt3kB-6xHiwpgum0e263yj9Z4PJN5rUgw" alt="Tucker Adventure" width={225} height={300} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -1073,10 +1073,10 @@ const LandingPage = ({ onShowAuth }) => {
           {/* Logo */}
           <div className="flex justify-center mb-4">
             <Image
-              src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-192x192.png"
+              src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/cropped-Tucker-180x180.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL2Nyb3BwZWQtVHVja2VyLTE4MHgxODAucG5nIiwiaWF0IjoxNzYyMzgwNjEwLCJleHAiOjE3OTM5MTY2MTB9.nN6jPsTnHqoHTrJ5oDlYjrscPdkCW5Jrwjlpy-CUyrM"
               alt="Tucker Trips Logo"
-              width={192}
-              height={192}
+              width={180}
+              height={180}
               className="h-12 sm:h-16 w-auto"
               loading="lazy"
               placeholder="blur"
