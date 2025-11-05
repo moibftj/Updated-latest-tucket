@@ -8,7 +8,9 @@
         "dev:webpack": "next dev --hostname 0.0.0.0 --port 3000",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "mcp:webflow": "npx -y webflow-mcp-server@latest",
+        "mcp:webflow:help": "echo 'Set WEBFLOW_TOKEN in .env.local and run: pnpm mcp:webflow'"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.1.1",
