@@ -28,8 +28,20 @@ function getSupabase() {
 }
 
 // Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
+function handleCORS(response, request = null) {
+  const allowedOrigins = process.env.CORS_ORIGINS ? 
+    process.env.CORS_ORIGINS.split(',').map(o => o.trim()) : 
+    ['http://localhost:3000', 'https://*.netlify.app']
+  
+  const origin = request?.headers.get('origin')
+  
+  if (origin && (allowedOrigins.includes('*') || allowedOrigins.includes(origin) || 
+      allowedOrigins.some(allowed => allowed.includes('*') && origin.includes(allowed.replace('*', ''))))) {
+    response.headers.set('Access-Control-Allow-Origin', origin)
+  } else if (allowedOrigins.includes('*')) {
+    response.headers.set('Access-Control-Allow-Origin', '*')
+  }
+  
   response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
   response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   response.headers.set('Access-Control-Allow-Credentials', 'true')
@@ -52,8 +64,8 @@ function verifyToken(request) {
 }
 
 // OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
+export async function OPTIONS(request) {
+  return handleCORS(new NextResponse(null, { status: 200 }), request)
 }
 
 // Route handler function
@@ -758,21 +770,23 @@ async function handleRoute(request, { params }) {
     ))
 
   } catch (error) {
+    // Log full error details server-side only
     console.error('API Error:', {
       message: error.message,
       stack: error.stack,
       route,
-      method
+      method,
+      timestamp: new Date().toISOString()
     })
+    
+    // Return sanitized error to client - no sensitive info
     return handleCORS(NextResponse.json(
       {
         error: 'Internal server error',
-        message: error.message,
-        route: route,
-        method: method
+        code: 'INTERNAL_ERROR'
       },
       { status: 500 }
-    ))
+    ), request)
   }
 }
 
