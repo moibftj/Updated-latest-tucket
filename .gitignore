@@ -64,6 +64,11 @@ chainlit.md
 .ac
 claude.md
 
+# MCP and AI integration
+.mcp-auth/
+~/.mcp-auth
+claude_desktop_config.json
+
 # Deployment
 .vercel
 
