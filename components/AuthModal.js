@@ -37,7 +37,7 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] sm:max-w-md glow-purple-pink glow-border bg-white relative">
+      <DialogContent className="max-w-[95vw] sm:max-w-md glow-purple-pink glow-border bg-white relative" aria-describedby="auth-description">
         <DialogHeader>
           <div className="flex justify-center mb-4">
             <div className="p-2 sm:p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-lg">
@@ -48,6 +48,7 @@ const AuthModal = ({ open, onClose, onSuccess }) => {
             Tucker Trips
           </DialogTitle>
         </DialogHeader>
+        <div id="auth-description" className="sr-only">Login or sign up to access Tucker Trips</div>
         
         <Tabs value={isLogin ? 'login' : 'register'} onValueChange={(v) => setIsLogin(v === 'login')}>
           <TabsList className="grid w-full grid-cols-2">
