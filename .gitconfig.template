@@ -1,0 +1,20 @@
+# Git Configuration Template for Tucker Trips Project
+# Copy this to .git/config or use the setup commands below
+
+[user]
+    name = Aqeel Jamil
+    email = 186092937+aqeelwebbing@users.noreply.github.com
+
+[commit]
+    # Disable GPG signing to avoid Codespaces/GitHub authentication issues
+    gpgsign = false
+
+[core]
+    # Standard settings for cross-platform compatibility
+    autocrlf = input
+    filemode = true
+
+# Setup commands (run these in your terminal if needed):
+# git config --local user.name "Aqeel Jamil"
+# git config --local user.email "186092937+aqeelwebbing@users.noreply.github.com"  
+# git config --local commit.gpgsign false
