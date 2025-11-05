@@ -832,6 +832,148 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </section>
 
+      {/* Founder's Journey - Personalized Section */}
+      <section
+        className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden"
+        id="founder-journey"
+        ref={(el) => {
+          if (el) elementsRef.current['founder-journey'] = el
+        }}
+      >
+        {/* Background decorations */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(255,52,172,0.08),_transparent_50%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(125,187,229,0.08),_transparent_50%)]" />
+
+        <div className="relative mx-auto max-w-7xl">
+          {/* Section Header */}
+          <div className={`text-center mb-12 md:mb-16 ${visibleElements['founder-journey'] ? 'animate-in-up' : 'opacity-0'}`}>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-4">The Heart Behind Tucker Trips</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+              <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
+                Built by a Traveler, For Travelers
+              </span>
+            </h2>
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Every feature, every detail comes from real travel experiences. 
+              This isn&apos;t just an app—it&apos;s a passion project born from countless adventures around the world.
+            </p>
+          </div>
+
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+            {/* Left: Story & Quote */}
+            <div className={`space-y-6 ${visibleElements['founder-journey'] ? 'animate-in-left stagger-2' : 'opacity-0'}`}>
+              <div className="relative">
+                <div className="absolute -left-4 top-0 text-6xl md:text-7xl text-[#ff34ac]/20 font-serif">&ldquo;</div>
+                <blockquote className="pl-8 md:pl-12 pr-4 py-6 border-l-4 border-[#ff34ac] bg-white/60 backdrop-blur-sm rounded-r-2xl shadow-lg">
+                  <p className="text-lg md:text-xl text-gray-800 font-medium italic mb-4 leading-relaxed">
+                    I was tired of endless stranger reviews and generic travel advice. 
+                    I wanted a place where I could trust recommendations from people who actually know me.
+                  </p>
+                  <footer className="flex items-center gap-3">
+                    <img 
+                      src="https://tuckertrips.com/wp-content/uploads/2024/09/FB_IMG_1494034557555-225x300.jpg" 
+                      alt="Kristin Stein"
+                      className="w-12 h-12 rounded-full object-cover border-2 border-[#ff34ac] shadow-md"
+                    />
+                    <div>
+                      <cite className="not-italic font-bold text-gray-900">Kristin Stein</cite>
+                      <p className="text-sm text-[#ff34ac] font-semibold">Founder & CEO</p>
+                    </div>
+                  </footer>
+                </blockquote>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-6 md:p-8 rounded-2xl border border-gray-200 shadow-xl">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="text-2xl">✈️</span>
+                  Why Tucker Trips Exists
+                </h3>
+                <div className="space-y-3 text-gray-700">
+                  <p className="flex items-start gap-3">
+                    <span className="text-[#ff34ac] mt-1">•</span>
+                    <span>Trust insights from your network, not strangers online</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <span className="text-[#7dbbe5] mt-1">•</span>
+                    <span>Keep all your travel memories and lessons in one place</span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <span className="text-[#ff34ac] mt-1">•</span>
+                    <span>Share real experiences that actually help your friends plan better</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Photo Collage */}
+            <div className={`relative ${visibleElements['founder-journey'] ? 'animate-in-right stagger-3' : 'opacity-0'}`}>
+              <div className="grid grid-cols-2 gap-4">
+                {/* Large featured image */}
+                <div className="col-span-2 relative rounded-2xl overflow-hidden shadow-2xl group">
+                  <img 
+                    src="https://tuckertrips.com/wp-content/uploads/2024/09/IMG_20171229_173644-scaled.jpg"
+                    alt="Kristin's Travel Adventure"
+                    className="w-full h-80 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="text-white font-semibold text-lg md:text-xl">Exploring the World</p>
+                    <p className="text-white/90 text-sm">One adventure at a time</p>
+                  </div>
+                </div>
+
+                {/* Mountain adventure */}
+                <div className="relative rounded-xl overflow-hidden shadow-xl group">
+                  <img 
+                    src="https://tuckertrips.com/wp-content/uploads/2024/05/men-stand-watch-mountains-tropical-forests-with-backpacks-forest-adventure-traveling-climbing-1536x1024.jpg"
+                    alt="Mountain Adventure"
+                    className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                </div>
+
+                {/* Scenic travel */}
+                <div className="relative rounded-xl overflow-hidden shadow-xl group">
+                  <img 
+                    src="https://tuckertrips.com/wp-content/uploads/2024/05/young-girl-travels-high-mountain-vang-vieng-laos-scaled.jpg"
+                    alt="Scenic Journey"
+                    className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                </div>
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -top-4 -right-4 bg-white rounded-full p-4 shadow-2xl border-4 border-[#ff34ac]/30 animate-float-slow">
+                <img 
+                  src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-270x270.png"
+                  alt="Tucker Logo"
+                  className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className={`text-center ${visibleElements['founder-journey'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 px-8 py-6 rounded-2xl border-2 border-gray-200 shadow-xl">
+              <p className="text-gray-700 text-lg font-medium">
+                Ready to plan smarter with insights from people you trust?
+              </p>
+              <Button
+                onClick={onShowAuth}
+                size="lg"
+                className="bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg hover:shadow-xl transition-all"
+              >
+                Start Your Journey
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Video Section */}
       <section
         className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50"
