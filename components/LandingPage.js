@@ -774,7 +774,7 @@ const LandingPage = ({ onShowAuth }) => {
               {/* Tucker Logo */}
               <div className={`flex justify-center mb-4 sm:mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F58d6334510b64a3ba328208823c50014%2F1ab2aa9dfe9749deb69cc85a9ee54327?format=webp&width=800"
+                  src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-192x192.png"
                   alt="Tucker Trips Logo"
                   className="h-16 sm:h-20 md:h-24 w-auto"
                 />
