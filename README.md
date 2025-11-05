@@ -32,13 +32,15 @@ pnpm dev
 
 **If you encounter Git commit errors (GPG signing, author invalid):**
 
-#### Quick Fix:
+#### Quick Fix
+
 ```bash
 # Run the automated setup script
 ./setup-git.sh
 ```
 
-#### Manual Setup:
+#### Manual Setup
+
 ```bash
 # Configure user details
 git config --local user.name "Aqeel Jamil"
@@ -48,7 +50,8 @@ git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"
 git config --local commit.gpgsign false
 ```
 
-#### Common Git Issues:
+#### Common Git Issues
+
 - **GPG signing errors**: Run `git config --local commit.gpgsign false`
 - **Author invalid**: Ensure correct email with `git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"`
 - **Authentication issues**: Check `gh auth status` and re-authenticate if needed
@@ -64,7 +67,7 @@ git config --local commit.gpgsign false
 
 ## Project Structure
 
-```
+```text
 app/
 ├── api/[[...path]]/route.js    # All API endpoints (monolithic pattern)
 ├── globals.css                 # Global styles
