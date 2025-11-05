@@ -506,11 +506,25 @@ async function handleRoute(request, { params }) {
         ))
       }
 
+      // Get pagination params from query string
+      const { searchParams } = new URL(request.url)
+      const page = parseInt(searchParams.get('page') || '1', 10)
+      const limit = parseInt(searchParams.get('limit') || '10', 10)
+      const offset = (page - 1) * limit
+
+      // Get total count
+      const { count } = await supabase
+        .from('trips')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', decoded.userId)
+
+      // Get paginated trips
       const { data: trips } = await supabase
         .from('trips')
         .select('*')
         .eq('user_id', decoded.userId)
         .order('created_at', { ascending: false })
+        .range(offset, offset + limit - 1)
 
       // Convert to camelCase
       const formattedTrips = (trips || []).map(trip => ({
@@ -535,7 +549,16 @@ async function handleRoute(request, { params }) {
         updatedAt: trip.updated_at
       }))
 
-      return handleCORS(NextResponse.json(formattedTrips))
+      return handleCORS(NextResponse.json({
+        trips: formattedTrips,
+        pagination: {
+          page,
+          limit,
+          total: count || 0,
+          totalPages: Math.ceil((count || 0) / limit),
+          hasMore: offset + limit < (count || 0)
+        }
+      }))
     }
 
     // GET /api/trips/public/all - Get all public trips
@@ -548,6 +571,19 @@ async function handleRoute(request, { params }) {
         ))
       }
 
+      // Get pagination params from query string
+      const { searchParams } = new URL(request.url)
+      const page = parseInt(searchParams.get('page') || '1', 10)
+      const limit = parseInt(searchParams.get('limit') || '12', 10)
+      const offset = (page - 1) * limit
+
+      // Get total count
+      const { count } = await supabase
+        .from('trips')
+        .select('*', { count: 'exact', head: true })
+        .eq('visibility', 'public')
+
+      // Get paginated trips
       const { data: trips } = await supabase
         .from('trips')
         .select(`
@@ -556,7 +592,7 @@ async function handleRoute(request, { params }) {
         `)
         .eq('visibility', 'public')
         .order('created_at', { ascending: false })
-        .limit(50)
+        .range(offset, offset + limit - 1)
 
       // Convert to camelCase with user info
       const formattedTrips = (trips || []).map(trip => ({
@@ -582,7 +618,16 @@ async function handleRoute(request, { params }) {
         userName: trip.users?.name || 'Unknown User'
       }))
 
-      return handleCORS(NextResponse.json(formattedTrips))
+      return handleCORS(NextResponse.json({
+        trips: formattedTrips,
+        pagination: {
+          page,
+          limit,
+          total: count || 0,
+          totalPages: Math.ceil((count || 0) / limit),
+          hasMore: offset + limit < (count || 0)
+        }
+      }))
     }
 
     // GET /api/trips/shared - Get trips shared with current user
@@ -595,6 +640,18 @@ async function handleRoute(request, { params }) {
         ))
       }
 
+      // Get pagination params from query string
+      const { searchParams } = new URL(request.url)
+      const page = parseInt(searchParams.get('page') || '1', 10)
+      const limit = parseInt(searchParams.get('limit') || '12', 10)
+      const offset = (page - 1) * limit
+
+      // Get total count
+      const { count } = await supabase
+        .from('trips')
+        .select('*', { count: 'exact', head: true })
+        .contains('shared_with', [decoded.userId])
+
       // Find trips where current user is in the shared_with array
       const { data: trips } = await supabase
         .from('trips')
@@ -604,6 +661,7 @@ async function handleRoute(request, { params }) {
         `)
         .contains('shared_with', [decoded.userId])
         .order('created_at', { ascending: false })
+        .range(offset, offset + limit - 1)
 
       // Convert to camelCase with user info
       const formattedTrips = (trips || []).map(trip => ({
@@ -629,7 +687,16 @@ async function handleRoute(request, { params }) {
         userName: trip.users?.name || 'Unknown User'
       }))
 
-      return handleCORS(NextResponse.json(formattedTrips))
+      return handleCORS(NextResponse.json({
+        trips: formattedTrips,
+        pagination: {
+          page,
+          limit,
+          total: count || 0,
+          totalPages: Math.ceil((count || 0) / limit),
+          hasMore: offset + limit < (count || 0)
+        }
+      }))
     }
 
     // GET /api/trips/:id

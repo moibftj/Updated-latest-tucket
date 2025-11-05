@@ -55,12 +55,28 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [loading, setLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
+  // Pagination states
+  const [myTripsPage, setMyTripsPage] = useState(1)
+  const [publicTripsPage, setPublicTripsPage] = useState(1)
+  const [sharedTripsPage, setSharedTripsPage] = useState(1)
+  const [myTripsPagination, setMyTripsPagination] = useState(null)
+  const [publicTripsPagination, setPublicTripsPagination] = useState(null)
+  const [sharedTripsPagination, setSharedTripsPagination] = useState(null)
+
   const loadTrips = useCallback(
-    async (apiMethod, setter) => {
+    async (apiMethod, setter, page, setPagination) => {
       setLoading(true)
       try {
-        const data = await apiMethod()
-        setter(data)
+        const response = await apiMethod(page)
+        // Handle both old format (array) and new format (object with pagination)
+        if (Array.isArray(response)) {
+          setter(response)
+        } else {
+          setter(response.trips || [])
+          if (setPagination) {
+            setPagination(response.pagination)
+          }
+        }
       } catch (error) {
         console.error('Failed to fetch trips:', error)
       } finally {
@@ -70,9 +86,9 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
     []
   )
 
-  const fetchTrips = useCallback(() => loadTrips(tripApi.getAll, setTrips), [loadTrips])
-  const fetchPublicTrips = useCallback(() => loadTrips(tripApi.getPublic, setPublicTrips), [loadTrips])
-  const fetchSharedTrips = useCallback(() => loadTrips(tripApi.getShared, setSharedTrips), [loadTrips])
+  const fetchTrips = useCallback(() => loadTrips(tripApi.getAll, setTrips, myTripsPage, setMyTripsPagination), [loadTrips, myTripsPage])
+  const fetchPublicTrips = useCallback(() => loadTrips(tripApi.getPublic, setPublicTrips, publicTripsPage, setPublicTripsPagination), [loadTrips, publicTripsPage])
+  const fetchSharedTrips = useCallback(() => loadTrips(tripApi.getShared, setSharedTrips, sharedTripsPage, setSharedTripsPagination), [loadTrips, sharedTripsPage])
 
   useEffect(() => {
     fetchTrips()
@@ -100,10 +116,30 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const futureTrips = trips.filter((t) => t.status === 'future')
 
   const sectionConfig = {
-    mytrips: { ...TRIP_SECTION_META.mytrips, trips: myTrips },
-    future: { ...TRIP_SECTION_META.future, trips: futureTrips },
-    shared: { ...TRIP_SECTION_META.shared, trips: sharedTrips },
-    discover: { ...TRIP_SECTION_META.discover, trips: publicTrips },
+    mytrips: {
+      ...TRIP_SECTION_META.mytrips,
+      trips: myTrips,
+      pagination: myTripsPagination,
+      onPageChange: setMyTripsPage,
+    },
+    future: {
+      ...TRIP_SECTION_META.future,
+      trips: futureTrips,
+      pagination: myTripsPagination,
+      onPageChange: setMyTripsPage,
+    },
+    shared: {
+      ...TRIP_SECTION_META.shared,
+      trips: sharedTrips,
+      pagination: sharedTripsPagination,
+      onPageChange: setSharedTripsPage,
+    },
+    discover: {
+      ...TRIP_SECTION_META.discover,
+      trips: publicTrips,
+      pagination: publicTripsPagination,
+      onPageChange: setPublicTripsPage,
+    },
   }
 
   const handleTripCreated = (newTrip) => {
