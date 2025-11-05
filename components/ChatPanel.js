@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { MessageCircle, X, Send, Circle } from 'lucide-react'
 import { toast } from 'sonner'
 import { userApi, messageApi } from '@/lib/api'
+import { logger } from '@/lib/logger'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { ChatPanelErrorFallback } from '@/components/ErrorFallbacks'
 
@@ -32,7 +33,7 @@ const ChatPanel = ({ currentUser }) => {
       try {
         await userApi.heartbeat()
       } catch (error) {
-        console.error('Heartbeat failed:', error)
+        logger?.error?.('Heartbeat failed:', error)
       }
     }, 60000) // Every minute
 
@@ -48,7 +49,7 @@ const ChatPanel = ({ currentUser }) => {
         const users = await userApi.getOnlineUsers()
         setOnlineUsers(users)
       } catch (error) {
-        console.error('Failed to fetch online users:', error)
+        logger?.error?.('Failed to fetch online users:', error)
       }
     }
 
@@ -67,7 +68,7 @@ const ChatPanel = ({ currentUser }) => {
         const msgs = await messageApi.getConversation(selectedUser.id)
         setMessages(msgs)
       } catch (error) {
-        console.error('Failed to fetch messages:', error)
+        logger?.error?.('Failed to fetch messages:', error)
       }
     }
 
@@ -89,10 +90,11 @@ const ChatPanel = ({ currentUser }) => {
       setNewMessage('')
     } catch (error) {
       toast.error('Failed to send message')
+      logger?.error?.('Send message failed:', error)
     }
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       sendMessage()
@@ -219,7 +221,7 @@ const ChatPanel = ({ currentUser }) => {
                       placeholder="Type a message..."
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      onKeyPress={handleKeyPress}
+                      onKeyDown={handleKeyDown}
                       className="flex-1 text-sm sm:text-base"
                     />
                     <Button

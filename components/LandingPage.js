@@ -24,6 +24,7 @@ import ShinyText from '@/components/ShinyText'
 import Stack from '@/components/Stack'
 import MagicBento from '@/components/MagicBento'
 import { Timeline } from '@/components/ui/timeline'
+import { logger } from '@/lib/logger'
 
 const heroImages = [
   { id: 1, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format' },
@@ -381,7 +382,7 @@ const LandingPage = ({ onShowAuth }) => {
         entries.forEach((entry) => {
           const video = entry.target
           if (entry.isIntersecting) {
-            video.play().catch((err) => console.log('Video autoplay failed:', err))
+            video.play().catch((err) => logger.log('Video autoplay failed:', err))
           } else {
             video.pause()
           }

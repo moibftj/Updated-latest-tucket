@@ -12,6 +12,7 @@ import ChatPanel from '@/components/ChatPanel'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { DashboardErrorFallback } from '@/components/ErrorFallbacks'
 import { tripApi } from '@/lib/api'
+import { logger } from '@/lib/logger'
 
 const TRIP_SECTION_META = {
   mytrips: {
@@ -64,7 +65,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
         const data = await apiMethod()
         setter(data)
       } catch (error) {
-        console.error('Failed to fetch trips:', error)
+        logger.error('Failed to fetch trips:', error)
       } finally {
         setLoading(false)
       }
