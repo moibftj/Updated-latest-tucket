@@ -782,10 +782,13 @@ const LandingPage = ({ onShowAuth }) => {
             <div className="rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xl p-6 sm:p-8 md:p-12 shadow-2xl border border-gray-200">
               {/* Tucker Logo */}
               <div className={`flex justify-center mb-4 sm:mb-6 ${visibleElements['hero-center'] ? 'animate-in-up stagger-1' : 'opacity-0'}`}>
-                <img
+                <Image
                   src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-192x192.png"
                   alt="Tucker Trips Logo"
+                  width={192}
+                  height={192}
                   className="h-16 sm:h-20 md:h-24 w-auto"
+                  priority
                 />
               </div>
 
