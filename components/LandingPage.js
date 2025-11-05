@@ -23,7 +23,6 @@ import ShinyText from '@/components/ShinyText'
 import Stack from '@/components/Stack'
 import MagicBento from '@/components/MagicBento'
 import { Timeline } from '@/components/ui/timeline'
-import { Globe } from '@/components/ui/globe'
 
 const heroImages = [
   { id: 1, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format' },
@@ -872,77 +871,6 @@ const LandingPage = ({ onShowAuth }) => {
       {/* Why Choose Tucker Trips Timeline Section */}
       <section className="relative bg-white border-t border-gray-200">
         <Timeline data={timelineData} />
-      </section>
-
-      {/* Global Travelers Community Section with Globe - Redesigned */}
-      <section
-        className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden"
-        id="globe-section"
-        ref={(el) => {
-          if (el) elementsRef.current['globe-section'] = el
-        }}
-      >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,187,229,0.12),_transparent_70%)]" />
-
-        <div className="relative mx-auto max-w-6xl">
-          {/* Combined Header and Globe */}
-          <div className={`text-center mb-12 ${visibleElements['globe-section'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.4em] text-[#7dbbe5] font-semibold mb-4">Global Community</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 px-4">
-              <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
-                Join Travelers Worldwide
-              </span>
-            </h2>
-          </div>
-
-          {/* Globe centered and more compact */}
-          <div className={`mb-16 max-w-2xl mx-auto ${visibleElements['globe-section'] ? 'animate-scale-in stagger-1' : 'opacity-0'}`}>
-            <Globe className="mx-auto" />
-          </div>
-
-          {/* Founder Section - More Compact */}
-          <div className={`${visibleElements['globe-section'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}>
-            <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-3xl bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 p-8 md:p-12 shadow-xl">
-                {/* Decorative gradient background */}
-                <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-[#ff34ac]/20 to-[#7dbbe5]/20 rounded-full blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-[#7dbbe5]/20 to-[#ff34ac]/20 rounded-full blur-3xl" />
-
-                <div className="relative flex flex-col md:flex-row items-center gap-8">
-                  {/* Founder Image */}
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] opacity-30 blur-2xl" />
-                      <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-2xl">
-                        <img
-                          src="https://ugxzjmzrmvbnhfejwjse.supabase.co/storage/v1/object/sign/stoi/Me-and-Tucker-2-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYmE5N2E1ZS04YmMzLTQzODQtYWYyZS1kMzg4MDFjNTY2ZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJzdG9pL01lLWFuZC1UdWNrZXItMi0xLmpwZyIsImlhdCI6MTc2MjE5MjYxMiwiZXhwIjoxNzkzNzI4NjEyfQ.NtQT70gQB0V0oFH4n0-Vb96ZACFFXOSSS4rY5hwYtYM"
-                          alt="Kristin Stein - Founder"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Founder Content */}
-                  <div className="flex-1 text-center md:text-left">
-                    <div className="mb-4">
-                      <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Kristin Stein</h4>
-                      <p className="text-sm text-[#ff34ac] font-semibold uppercase tracking-wider">Founder & CEO</p>
-                    </div>
-                    <div className="space-y-3">
-                      <p className="text-gray-700 font-medium text-base md:text-lg">
-                        <span className="text-[#ff34ac] font-bold">&ldquo;</span>Built by a traveler, for travelers.<span className="text-[#ff34ac] font-bold">&rdquo;</span>
-                      </p>
-                      <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                        Frustrated by endless stranger reviews, I created Tucker Trips to help you plan the perfect trip with insights from people you trust.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Footer */}
