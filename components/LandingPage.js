@@ -194,22 +194,22 @@ const timelineData = [
     content: (
       <div>
         <div className="mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Organize Every Detail
           </h3>
-          <p className="text-gray-700 text-base md:text-lg font-medium mb-4">
+          <p className="text-gray-100 text-base md:text-lg font-medium mb-4">
             Keep flights, hotels, and experiences in one place.
           </p>
           <ul className="space-y-3">
-            <li className="flex items-start gap-3 text-gray-600">
+            <li className="flex items-start gap-3 text-gray-200">
               <Plane className="h-5 w-5 text-[#ff34ac] mt-0.5 flex-shrink-0" />
               <span>Track bookings and confirmations</span>
             </li>
-            <li className="flex items-start gap-3 text-gray-600">
+            <li className="flex items-start gap-3 text-gray-200">
               <MapPin className="h-5 w-5 text-[#7dbbe5] mt-0.5 flex-shrink-0" />
               <span>Save hidden gems and recommendations</span>
             </li>
-            <li className="flex items-start gap-3 text-gray-600">
+            <li className="flex items-start gap-3 text-gray-200">
               <Calendar className="h-5 w-5 text-[#ff34ac] mt-0.5 flex-shrink-0" />
               <span>Build your perfect itinerary</span>
             </li>
@@ -231,39 +231,39 @@ const timelineData = [
     content: (
       <div>
         <div className="mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Plan Together, Travel Better
           </h3>
-          <p className="text-gray-700 text-base md:text-lg font-medium mb-6">
+          <p className="text-gray-100 text-base md:text-lg font-medium mb-6">
             Collaborate with friends and inspire fellow travelers.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#ff34ac]/10 to-transparent border border-[#ff34ac]/20">
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#ff34ac]/20 to-transparent border border-[#ff34ac]/40">
               <Share2 className="h-6 w-6 text-[#ff34ac] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Share Itineraries</p>
-                <p className="text-sm text-gray-600">Public or private</p>
+                <p className="font-semibold text-white">Share Itineraries</p>
+                <p className="text-sm text-gray-200">Public or private</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7dbbe5]/10 to-transparent border border-[#7dbbe5]/20">
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7dbbe5]/20 to-transparent border border-[#7dbbe5]/40">
               <Users className="h-6 w-6 text-[#7dbbe5] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Real-Time Collab</p>
-                <p className="text-sm text-gray-600">Plan with your crew</p>
+                <p className="font-semibold text-white">Real-Time Collab</p>
+                <p className="text-sm text-gray-200">Plan with your crew</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#ff34ac]/10 to-transparent border border-[#ff34ac]/20">
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#ff34ac]/20 to-transparent border border-[#ff34ac]/40">
               <MessageCircle className="h-6 w-6 text-[#ff34ac] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Built-in Chat</p>
-                <p className="text-sm text-gray-600">Stay connected</p>
+                <p className="font-semibold text-white">Built-in Chat</p>
+                <p className="text-sm text-gray-200">Stay connected</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7dbbe5]/10 to-transparent border border-[#7dbbe5]/20">
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7dbbe5]/20 to-transparent border border-[#7dbbe5]/40">
               <Stars className="h-6 w-6 text-[#7dbbe5] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Inspire Others</p>
-                <p className="text-sm text-gray-600">Share your stories</p>
+                <p className="font-semibold text-white">Inspire Others</p>
+                <p className="text-sm text-gray-200">Share your stories</p>
               </div>
             </div>
           </div>
@@ -292,38 +292,38 @@ const timelineData = [
     content: (
       <div>
         <div className="mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Learn & Grow With Every Journey
           </h3>
-          <p className="text-gray-700 text-base md:text-lg font-medium mb-6">
+          <p className="text-gray-100 text-base md:text-lg font-medium mb-6">
             Build your travel expertise. Share what works.
           </p>
           <div className="space-y-4">
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white border-2 border-gray-200 hover:border-[#ff34ac]/30 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white/10 border-2 border-white/20 hover:border-[#ff34ac]/50 transition-colors backdrop-blur-sm">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#ff34ac]/70 flex items-center justify-center flex-shrink-0">
                 <span className="text-2xl">💡</span>
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 mb-1">Document Insights</h4>
-                <p className="text-gray-600 text-sm">What worked, what didn&apos;t—remember it all</p>
+                <h4 className="font-bold text-white mb-1">Document Insights</h4>
+                <p className="text-gray-200 text-sm">What worked, what didn&apos;t—remember it all</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white border-2 border-gray-200 hover:border-[#7dbbe5]/30 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white/10 border-2 border-white/20 hover:border-[#7dbbe5]/50 transition-colors backdrop-blur-sm">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#7dbbe5]/70 flex items-center justify-center flex-shrink-0">
                 <span className="text-2xl">🌟</span>
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 mb-1">Discover Gems</h4>
-                <p className="text-gray-600 text-sm">Save unexpected finds for next time</p>
+                <h4 className="font-bold text-white mb-1">Discover Gems</h4>
+                <p className="text-gray-200 text-sm">Save unexpected finds for next time</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white border-2 border-gray-200 hover:border-[#ff34ac]/30 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white/10 border-2 border-white/20 hover:border-[#ff34ac]/50 transition-colors backdrop-blur-sm">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#ff34ac]/70 flex items-center justify-center flex-shrink-0">
                 <span className="text-2xl">🎯</span>
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 mb-1">Learn from Friends</h4>
-                <p className="text-gray-600 text-sm">Trust your network, not strangers</p>
+                <h4 className="font-bold text-white mb-1">Learn from Friends</h4>
+                <p className="text-gray-200 text-sm">Trust your network, not strangers</p>
               </div>
             </div>
           </div>
