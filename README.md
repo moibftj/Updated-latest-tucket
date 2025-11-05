@@ -14,6 +14,7 @@ A Next.js 14 travel planning application with full-stack architecture. Users can
 📖 **Detailed Guides:**
 
 - [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md) - Complete Webflow MCP setup and usage guide
+- [WEBFLOW_SDK_USAGE.md](./WEBFLOW_SDK_USAGE.md) - Webflow JavaScript SDK integration guide
 - [SECURITY.md](./SECURITY.md) - Security best practices
 - [DEPLOY_INSTRUCTIONS.md](./DEPLOY_INSTRUCTIONS.md) - Detailed deployment guide
 
@@ -74,6 +75,16 @@ git config --local commit.gpgsign false
 ## Webflow MCP Integration
 
 This project includes integration with Webflow's Model Context Protocol (MCP) server, enabling AI agents to interact with Webflow APIs for content management and design operations.
+
+### Quick Reference
+
+- **JavaScript SDK**: For programmatic API access → [WEBFLOW_SDK_USAGE.md](./WEBFLOW_SDK_USAGE.md)
+- **MCP Server**: For AI agent interactions → [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md)
+
+**Already installed:**
+
+- `webflow-api` (v3.2.1) - JavaScript SDK for server-side operations
+- MCP scripts in `package.json` for AI agent integration
 
 ### Webflow Prerequisites
 
