@@ -5,11 +5,13 @@ A Next.js 14 travel planning application with full-stack architecture. Users can
 ## Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm package manager
 - Git configured properly (see Git Setup below)
 
 ### Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/aqeelwebbing/New-latest-Tucker-1
