@@ -1042,9 +1042,11 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="max-w-7xl mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <img
+            <Image
               src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-192x192.png"
               alt="Tucker Trips Logo"
+              width={192}
+              height={192}
               className="h-12 sm:h-16 w-auto"
             />
           </div>
