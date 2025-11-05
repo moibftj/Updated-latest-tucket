@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { MapPin, PlusCircle } from 'lucide-react'
 import TripCard from '@/components/TripCard'
 import ShinyText from '@/components/ShinyText'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import { TripsSectionErrorFallback } from '@/components/ErrorFallbacks'
 
 const Loader = () => (
   <div className="flex items-center justify-center h-64">
@@ -47,26 +49,28 @@ const TripsSection = ({ config, trips, isLoading, onNewTrip, onDelete, onTripCli
   const { title, emptyMessage, showCreateButton, canDelete, showUserName } = config
 
   return (
-    <div>
-      <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
-      {isLoading ? (
-        <Loader />
-      ) : trips.length === 0 ? (
-        <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {trips.map((trip) => (
-            <TripCard
-              key={trip.id}
-              trip={trip}
-              onClick={onTripClick}
-              onDelete={canDelete ? onDelete : undefined}
-              showUserName={showUserName}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <ErrorBoundary fallback={TripsSectionErrorFallback}>
+      <div>
+        <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
+        {isLoading ? (
+          <Loader />
+        ) : trips.length === 0 ? (
+          <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {trips.map((trip) => (
+              <TripCard
+                key={trip.id}
+                trip={trip}
+                onClick={onTripClick}
+                onDelete={canDelete ? onDelete : undefined}
+                showUserName={showUserName}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </ErrorBoundary>
   )
 }
 

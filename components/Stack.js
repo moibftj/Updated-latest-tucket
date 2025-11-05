@@ -97,7 +97,7 @@ export default function Stack({
                 backgroundColor: '#ddd',
               }}
             >
-              <Image src={card.img} alt={`card-${card.id}`} fill className="object-cover pointer-events-none" />
+              <Image src={card.img} alt={`card-${card.id}`} fill className="object-cover pointer-events-none" loading="lazy" placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
             </motion.div>
           </CardRotate>
         )

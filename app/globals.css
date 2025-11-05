@@ -241,4 +241,15 @@ code {
   .animate-spin-slow {
     animation: spin-slow 8s linear infinite;
   }
+  
+  /* Image loading shimmer animation */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
 }

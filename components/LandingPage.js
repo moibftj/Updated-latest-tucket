@@ -224,6 +224,9 @@ const timelineData = [
             width={1200}
             height={384}
             className="w-full h-64 md:h-96 object-cover"
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </div>
@@ -280,6 +283,9 @@ const timelineData = [
               width={800}
               height={288}
               className="w-full h-56 md:h-72 object-cover"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
             />
           </div>
           <div className="relative rounded-2xl overflow-hidden shadow-xl">
@@ -289,6 +295,9 @@ const timelineData = [
               width={800}
               height={288}
               className="w-full h-56 md:h-72 object-cover"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
             />
           </div>
         </div>
@@ -343,6 +352,9 @@ const timelineData = [
             width={1200}
             height={384}
             className="w-full h-64 md:h-96 object-cover"
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </div>
@@ -674,7 +686,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-24 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format" alt="Flight" width={400} height={96} className="w-full h-full object-cover" />
+                <Image src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format" alt="Flight" width={400} height={96} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -704,7 +716,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-28 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400&auto=format" alt="Memory" width={400} height={112} className="w-full h-full object-cover" />
+                <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400&auto=format" alt="Memory" width={400} height={112} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -734,7 +746,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#ff34ac]/30 to-[#7dbbe5]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format" alt="Collaboration" width={400} height={80} className="w-full h-full object-cover" />
+                <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format" alt="Collaboration" width={400} height={80} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -764,7 +776,7 @@ const LandingPage = ({ onShowAuth }) => {
                 </div>
               </div>
               <div className="w-full h-20 bg-gradient-to-br from-[#7dbbe5]/30 to-[#ff34ac]/30 rounded-lg overflow-hidden group-hover:opacity-80 transition">
-                <Image src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format" alt="Stories" width={400} height={80} className="w-full h-full object-cover" />
+                <Image src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format" alt="Stories" width={400} height={80} className="w-full h-full object-cover" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </div>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-sm">
                 <button onClick={onShowAuth} className="px-4 py-2 bg-[#ff34ac] text-white rounded-full text-sm font-semibold hover:bg-[#ff34ac]/90">See live</button>
@@ -790,6 +802,8 @@ const LandingPage = ({ onShowAuth }) => {
                   height={192}
                   className="h-16 sm:h-20 md:h-24 w-auto"
                   priority
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
 
@@ -890,6 +904,9 @@ const LandingPage = ({ onShowAuth }) => {
                       width={225}
                       height={300}
                       className="w-12 h-12 rounded-full object-cover border-2 border-[#ff34ac] shadow-md"
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                     />
                     <div>
                       <cite className="not-italic font-bold text-gray-900">Kristin Stein</cite>
@@ -932,6 +949,9 @@ const LandingPage = ({ onShowAuth }) => {
                     width={2560}
                     height={1920}
                     className="w-full h-80 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
@@ -948,6 +968,9 @@ const LandingPage = ({ onShowAuth }) => {
                     width={1536}
                     height={1024}
                     className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
@@ -960,6 +983,9 @@ const LandingPage = ({ onShowAuth }) => {
                     width={2560}
                     height={1707}
                     className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
@@ -973,6 +999,9 @@ const LandingPage = ({ onShowAuth }) => {
                   width={270}
                   height={270}
                   className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
             </div>
@@ -1049,6 +1078,9 @@ const LandingPage = ({ onShowAuth }) => {
               width={192}
               height={192}
               className="h-12 sm:h-16 w-auto"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
             />
           </div>
           <p className="text-gray-600">
