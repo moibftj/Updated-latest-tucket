@@ -953,9 +953,11 @@ const LandingPage = ({ onShowAuth }) => {
 
                 {/* Scenic travel */}
                 <div className="relative rounded-xl overflow-hidden shadow-xl group">
-                  <img 
+                  <Image 
                     src="https://tuckertrips.com/wp-content/uploads/2024/05/young-girl-travels-high-mountain-vang-vieng-laos-scaled.jpg"
                     alt="Scenic Journey"
+                    width={2560}
+                    height={1707}
                     className="w-full h-48 md:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -964,9 +966,11 @@ const LandingPage = ({ onShowAuth }) => {
 
               {/* Floating badge */}
               <div className="absolute -top-4 -right-4 bg-white rounded-full p-4 shadow-2xl border-4 border-[#ff34ac]/30 animate-float-slow">
-                <img 
+                <Image 
                   src="https://tuckertrips.com/wp-content/uploads/2024/05/cropped-Tucker-270x270.png"
                   alt="Tucker Logo"
+                  width={270}
+                  height={270}
                   className="w-16 h-16 md:w-20 md:h-20 object-contain"
                 />
               </div>
