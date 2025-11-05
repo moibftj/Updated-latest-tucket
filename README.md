@@ -98,7 +98,7 @@ All API routes are in `app/api/[[...path]]/route.js`. To add a new endpoint:
 
 1. Add route logic inside `handleRoute()` function
 2. Use existing patterns for authentication and database access
-3. Follow the MongoDB pattern: custom `id` fields, strip `_id` from responses
+3. Follow the Supabase pattern: UUID `id` fields, camelCase conversion
 
 ### Testing
 ```bash
@@ -127,7 +127,7 @@ SERVICE_ROLE_KEY=your_service_role_key
 ## Architecture Notes
 
 - **Single-file API**: All backend routes in one file for this project
-- **Custom IDs**: Uses UUID v4 instead of MongoDB `_id`
+- **UUID Primary Keys**: Uses UUID v4 for all database tables
 - **JWT Auth**: Stored in localStorage, verified server-side
 - **Monolithic by Design**: Intentionally simple architecture
 
