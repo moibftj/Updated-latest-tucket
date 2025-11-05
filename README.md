@@ -56,6 +56,149 @@ git config --local commit.gpgsign false
 - **Author invalid**: Ensure correct email with `git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"`
 - **Authentication issues**: Check `gh auth status` and re-authenticate if needed
 
+## Webflow MCP Integration
+
+This project includes integration with Webflow's Model Context Protocol (MCP) server, enabling AI agents to interact with Webflow APIs for content management and design operations.
+
+### Webflow Prerequisites
+
+- Node.js 22.3.0 or higher (for MCP server)
+- A Webflow account
+- Webflow API token (for local setup) or OAuth (for remote setup)
+
+### Remote Setup (Recommended)
+
+The remote MCP server uses OAuth for authentication and includes a companion app for live canvas syncing.
+
+#### Cursor Configuration
+
+1. The `.cursor/mcp.json` file is already configured:
+
+   ```json
+   {
+     "mcpServers": {
+       "webflow": {
+         "url": "https://mcp.webflow.com/sse"
+       }
+     }
+   }
+   ```
+
+2. Open Cursor Settings → MCP & Integrations
+3. Cursor will automatically open an OAuth login page to authorize your Webflow sites
+4. Open your site in Webflow Designer
+5. Launch the "Webflow MCP Bridge App" from the Apps panel (press E)
+6. Wait for the app to connect
+
+#### Claude Desktop Configuration
+
+Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "webflow": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.webflow.com/sse"]
+    }
+  }
+}
+```
+
+### Local Setup
+
+For local development, you can run the MCP server with your own Webflow API token.
+
+#### Get Your Webflow API Token
+
+1. Go to [Webflow API Playground](https://developers.webflow.com/data/reference/authorization)
+2. Log in and generate a token
+3. Copy the token and add it to `.env.local`:
+
+```bash
+WEBFLOW_TOKEN=your_webflow_api_token_here
+```
+
+#### Run MCP Server Locally
+
+```bash
+# Using npm script
+pnpm mcp:webflow
+
+# Or directly
+WEBFLOW_TOKEN="your_token" npx -y webflow-mcp-server@latest
+```
+
+#### Cursor Local Configuration
+
+Update `.cursor/mcp.json` for local mode:
+
+```json
+{
+  "mcpServers": {
+    "webflow": {
+      "command": "npx",
+      "args": ["-y", "webflow-mcp-server@latest"],
+      "env": {
+        "WEBFLOW_TOKEN": "your_webflow_token"
+      }
+    }
+  }
+}
+```
+
+### Example Prompts
+
+Once connected, try these AI prompts:
+
+- "Analyze my last 5 blog posts and suggest 3 new topic ideas with SEO keywords"
+- "Find older blog posts that mention similar topics and add internal links to my latest post"
+- "Create a hero section card on my home page with a CTA button and responsive design"
+- "Give me a link to open [MY_SITE_NAME] in the Webflow Designer"
+
+### Troubleshooting Webflow MCP
+
+#### Reset OAuth Token
+
+```bash
+rm -rf ~/.mcp-auth
+```
+
+#### Node.js Version Issues
+
+The MCP server requires Node.js 22.3.0 or higher. Check your version:
+
+```bash
+node -v
+```
+
+If needed, upgrade Node.js or use nvm:
+
+```bash
+nvm install 22.3.0
+nvm use 22.3.0
+```
+
+#### NPM Cache Issues
+
+```bash
+npm cache clean --force
+```
+
+#### Connection Issues
+
+1. Ensure the Webflow MCP Bridge App is published in your workspace
+2. Verify the app is running in the Webflow Designer (Apps panel → E)
+3. Check that your Webflow API token is valid
+4. Restart your AI client (Cursor or Claude Desktop)
+
+### Resources
+
+- [Webflow MCP Documentation](https://github.com/webflow/mcp-server)
+- [Webflow API Documentation](https://developers.webflow.com/data/reference)
+- [Webflow JavaScript SDK](https://www.npmjs.com/package/webflow-api)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
+
 ## Tech Stack
 
 - **Frontend**: Next.js 14, React, Tailwind CSS
