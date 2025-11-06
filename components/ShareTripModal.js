@@ -146,7 +146,7 @@ const ShareTripModal = ({ trip, isOpen, onClose, currentUser, onShareSuccess }) 
               />
             </div>
             <p className="text-xs text-gray-500">
-              They'll receive an email with access to this trip
+              They&apos;ll receive an email with access to this trip
             </p>
           </div>
 
@@ -200,8 +200,8 @@ const ShareTripModal = ({ trip, isOpen, onClose, currentUser, onShareSuccess }) 
 
           {/* Info Section */}
           <div className="text-xs text-gray-500 space-y-1">
-            <p>• If they're not a Tucker Trips user, they'll receive an invitation to join</p>
-            <p>• They'll get full access to all trip details and photos</p>
+            <p>• If they&apos;re not a Tucker Trips user, they&apos;ll receive an invitation to join</p>
+            <p>• They&apos;ll get full access to all trip details and photos</p>
             <p>• You can share this trip with multiple people</p>
           </div>
         </div>
