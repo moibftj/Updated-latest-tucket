@@ -1,0 +1,1 @@
+- this is netlify token use it and cli to deploy app nfp_opLsgtBAKtcLRiKvXjLncYtPdLSgHUUTa74b
