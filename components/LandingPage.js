@@ -652,8 +652,8 @@ const LandingPage = ({ onShowAuth }) => {
         )}
       </header>
 
-      {/* Hero Section - 21st.dev Style */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 sm:pt-24 md:pt-32 pb-10 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+      {/* Hero Section - Optimized Spacing */}
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 md:pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,52,172,0.08),transparent_50%)]" />
           <div className="animate-shimmer absolute -top-32 left-1/3 h-64 w-64 rounded-full bg-gradient-to-r from-[#ff34ac]/40 via-[#7dbbe5]/30 to-[#ff34ac]/40 blur-3xl" />
@@ -859,9 +859,9 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </section>
 
-      {/* Founder's Journey - Personalized Section */}
+      {/* Founder's Journey - Optimized Spacing */}
       <section
-        className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden"
+        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden"
         id="founder-journey"
         ref={(el) => {
           if (el) elementsRef.current['founder-journey'] = el
@@ -1026,9 +1026,9 @@ const LandingPage = ({ onShowAuth }) => {
         </div>
       </section>
 
-      {/* Video Section */}
+      {/* Video Section - Optimized Spacing */}
       <section
-        className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50"
+        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50"
         id="video-section"
         ref={(el) => {
           if (el) elementsRef.current['video-section'] = el
