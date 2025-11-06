@@ -28,9 +28,9 @@ const HOME_LINKS = [
 ]
 
 const TRIP_TIPS = [
-  'Clone popular trips as a starting point for your own adventures',
-  'Break down your itinerary by day for easier planning',
-  'Track expenses for each day to manage your travel budget',
+  'Invite one friend who travels a lot—your feed gets 10× better',
+  'Log what future-you will forget: links, prices, timings, and those tiny hacks',
+  'Share trips with your circle only. No internet strangers.',
 ]
 
 const QuickLinkCard = ({ title, image, onClick }) => (
@@ -48,10 +48,10 @@ const QuickLinkCard = ({ title, image, onClick }) => (
 
 const HomeSection = ({ user, onSelectSection, onNewTrip }) => (
   <div>
-    <div className="mb-6 sm:mb-8 bg-gradient-to-r from-purple-50 to-pink-50 p-4 sm:p-6 rounded-lg">
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Welcome, {user.name}!</h2>
+    <div className="mb-6 sm:mb-8 bg-gradient-to-r from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-4 sm:p-6 rounded-lg border border-gray-200">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Welcome back, {user.name}</h2>
       <p className="text-sm sm:text-base text-gray-600">
-        Explore the different sections of TuckerTrips to plan, share, and discover travel adventures.
+        Time to plan with people you actually know. Your circle is here.
       </p>
     </div>
 
@@ -79,9 +79,12 @@ const HomeSection = ({ user, onSelectSection, onNewTrip }) => (
         </ul>
       </div>
 
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Active Users</h3>
-        <p className="text-sm sm:text-base text-gray-500">This feature will show active users in your network.</p>
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow border border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Your Circle</h3>
+        <p className="text-sm sm:text-base text-gray-500 mb-3">Quiet for now.</p>
+        <p className="text-sm sm:text-base text-gray-600">
+          Invite one friend who travels a lot—your feed gets 10× better.
+        </p>
       </div>
     </div>
   </div>

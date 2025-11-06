@@ -17,28 +17,28 @@ import { logger } from '@/lib/logger'
 const TRIP_SECTION_META = {
   mytrips: {
     title: 'My Trips',
-    emptyMessage: "You haven't taken any trips yet. Start planning your first adventure!",
+    emptyMessage: "Quiet for now. Invite one friend who travels a lot—your feed gets 10× better.",
     showCreateButton: true,
     canDelete: true,
     showUserName: false,
   },
   future: {
     title: 'Future Trips',
-    emptyMessage: 'No future trips planned yet. Create your first trip!',
+    emptyMessage: 'No future trips planned yet. Time to dream with your circle?',
     showCreateButton: true,
     canDelete: true,
     showUserName: false,
   },
   shared: {
     title: 'Shared Trips',
-    emptyMessage: 'No trips have been shared with you yet.',
+    emptyMessage: 'No trips have been shared with you yet. Your circle is waiting!',
     showCreateButton: false,
     canDelete: false,
     showUserName: true,
   },
   discover: {
     title: 'Discover Public Trips',
-    emptyMessage: 'No public trips available yet. Be the first to share a trip!',
+    emptyMessage: 'No public trips available yet. Your circle only. No internet strangers.',
     showCreateButton: false,
     canDelete: false,
     showUserName: true,
@@ -52,6 +52,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const [publicTrips, setPublicTrips] = useState([])
   const [sharedTrips, setSharedTrips] = useState([])
   const [showNewTripModal, setShowNewTripModal] = useState(false)
+  const [tripToCopy, setTripToCopy] = useState(null)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
   const [showTripDetail, setShowTripDetail] = useState(false)
   const [selectedTrip, setSelectedTrip] = useState(null)
@@ -148,7 +149,19 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
   const handleTripCreated = (newTrip) => {
     setTrips((prev) => [newTrip, ...prev])
     setShowNewTripModal(false)
+    setTripToCopy(null)
     toast.success('Trip created successfully!')
+  }
+
+  const handleCopyTrip = (trip) => {
+    // Double-check that this is a public trip before allowing copy
+    if (trip.visibility !== 'public') {
+      toast.error('Only public trips can be copied')
+      return
+    }
+    setTripToCopy(trip)
+    setShowNewTripModal(true)
+    setShowTripDetail(false)
   }
 
   const handleUserUpdate = (updatedUser) => {
@@ -203,8 +216,12 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
 
         <NewTripModal
           open={showNewTripModal}
-          onClose={() => setShowNewTripModal(false)}
+          onClose={() => {
+            setShowNewTripModal(false)
+            setTripToCopy(null)
+          }}
           onSuccess={handleTripCreated}
+          tripToCopy={tripToCopy}
         />
 
         <TripDetailModal
@@ -212,6 +229,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           isOpen={showTripDetail}
           onClose={handleCloseTripDetail}
           showUserName={activeSection === 'shared' || activeSection === 'discover'}
+          onCopyTrip={activeSection === 'discover' ? handleCopyTrip : null}
         />
 
         <ProfileSettings

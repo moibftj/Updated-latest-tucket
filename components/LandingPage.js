@@ -811,7 +811,7 @@ const LandingPage = ({ onShowAuth }) => {
               <h1
                 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight ${visibleElements['hero-center'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}
               >
-                Welcome to<br className="sm:hidden" /> Tucker Trips
+                Trip planning from<br className="sm:hidden" /> people you actually know
               </h1>
 
               {/* Subtitle */}
@@ -819,7 +819,7 @@ const LandingPage = ({ onShowAuth }) => {
                 className={`text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed ${visibleElements['hero-center'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}
               >
                 <span className="bg-gradient-to-r from-[#ff34ac] via-gray-700 to-[#7dbbe5] bg-clip-text text-transparent font-medium">
-                  Experience the world, one voyage at a time.
+                  Tucker Trips helps you log real trips and get advice from your circle—friends and family whose experiences you trust.
                 </span>
               </p>
 
@@ -832,14 +832,14 @@ const LandingPage = ({ onShowAuth }) => {
                   size="lg"
                   className="w-full sm:w-auto rounded-full bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white font-semibold shadow-lg shadow-[#ff34ac]/40 hover:shadow-[#ff34ac]/60 hover:-translate-y-1 transition duration-300 text-sm sm:text-base py-6 sm:py-3 px-6 sm:px-8"
                 >
-                  <ShinyText text="Start Planning Free" speed={2.2} />
+                  Start a Trip
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
                 <button
                   onClick={onShowAuth}
                   className="w-full sm:w-auto rounded-full border-2 border-gray-300 bg-white px-6 sm:px-8 py-3 text-sm sm:text-base text-gray-900 font-semibold hover:border-[#ff34ac]/60 hover:bg-[#ff34ac]/10 transition duration-300"
                 >
-                  View Demo
+                  Explore Your Circle
                 </button>
               </div>
 
@@ -854,6 +854,113 @@ const LandingPage = ({ onShowAuth }) => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* From Your Circle Section */}
+      <section
+        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden"
+        id="from-circle-section"
+        ref={(el) => {
+          if (el) elementsRef.current['from-circle-section'] = el
+        }}
+      >
+        {/* Background decorations */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(125,187,229,0.08),_transparent_50%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(255,52,172,0.08),_transparent_50%)]" />
+
+        <div className="relative mx-auto max-w-7xl">
+          {/* Section Header */}
+          <div className={`text-center mb-8 md:mb-12 ${visibleElements['from-circle-section'] ? 'animate-in-up' : 'opacity-0'}`}>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#7dbbe5] font-semibold mb-3">YOUR COMMUNITY</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              From your circle
+            </h2>
+            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+              Trips and tips shared by people you actually know.
+            </p>
+          </div>
+
+          {/* Circle Examples */}
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 ${visibleElements['from-circle-section'] ? 'animate-in-up stagger-2' : 'opacity-0'}`}>
+            <div className="group bg-gradient-to-br from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">J</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Jamie's Maui week</h3>
+                  <p className="text-sm text-gray-600">Car rental surprise fees</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "Don't book the airport rental—saved $200 using Turo and avoided the hidden resort fees they hit you with at checkout."
+              </p>
+            </div>
+
+            <div className="group bg-gradient-to-br from-[#7dbbe5]/10 via-white to-[#ff34ac]/10 p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#ff34ac] flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">AS</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Aunt Sara's Rome with teens</h3>
+                  <p className="text-sm text-gray-600">Day-by-day map</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "Skip the morning Colosseum—go at 4pm. Teens actually engaged, no crowds, and perfect lighting for photos."
+              </p>
+            </div>
+
+            <div className="group bg-gradient-to-br from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#7dbbe5] flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">U</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Usman's Hunza budget breakdown</h3>
+                  <p className="text-sm text-gray-600">Where to splurge</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "Budget hotels: $15/night. Splurge on the private driver—worth every rupee for those mountain roads."
+              </p>
+            </div>
+          </div>
+
+          {/* Value Props */}
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 ${visibleElements['from-circle-section'] ? 'animate-in-up stagger-3' : 'opacity-0'}`}>
+            <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-md">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#ff34ac]/70 flex items-center justify-center">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Real people, not random reviews</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Tips from your circle—reliable, bias-checked by folks you know.
+              </p>
+            </div>
+
+            <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-md">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#7dbbe5] to-[#7dbbe5]/70 flex items-center justify-center">
+                <Calendar className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Log once, help forever</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Capture routes, budgets, gotchas; future you (and your friends) say thanks.
+              </p>
+            </div>
+
+            <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-md">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#ff34ac] to-[#ff34ac]/70 flex items-center justify-center">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Plan smarter</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Build itineraries faster with trusted recaps and logistics.
+              </p>
             </div>
           </div>
         </div>
@@ -874,67 +981,51 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="relative mx-auto max-w-7xl">
           {/* Section Header - Compact */}
           <div className={`text-center mb-8 md:mb-12 ${visibleElements['founder-journey'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-3">The Heart Behind Tucker Trips</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-3">FOUNDER'S STORY</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
-                Built by a Traveler, For Travelers
+                Why I started Tucker Trips
               </span>
             </h2>
-            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Every feature, every detail comes from real travel experiences. 
-              This isn&apos;t just an app—it&apos;s a passion project born from countless adventures around the world.
-            </p>
           </div>
 
           {/* Main Content Grid - Reduced Margin */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
             {/* Left: Story & Quote */}
             <div className={`space-y-6 ${visibleElements['founder-journey'] ? 'animate-in-left stagger-2' : 'opacity-0'}`}>
-              <div className="relative">
-                <div className="absolute -left-4 top-0 text-6xl md:text-7xl text-[#ff34ac]/20 font-serif">&ldquo;</div>
-                <blockquote className="pl-8 md:pl-12 pr-4 py-6 border-l-4 border-[#ff34ac] bg-white/60 backdrop-blur-sm rounded-r-2xl shadow-lg">
-                  <p className="text-lg md:text-xl text-gray-800 font-medium italic mb-4 leading-relaxed">
-                    I was tired of endless stranger reviews and generic travel advice. 
-                    I wanted a place where I could trust recommendations from people who actually know me.
-                  </p>
-                  <footer className="flex items-center gap-3">
-                    <Image 
-                      src="https://tuckertrips.com/wp-content/uploads/2024/09/FB_IMG_1494034557555-225x300.jpg" 
-                      alt="Kristin Stein"
-                      width={225}
-                      height={300}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-[#ff34ac] shadow-md"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-                    />
-                    <div>
-                      <cite className="not-italic font-bold text-gray-900">Kristin Stein</cite>
-                      <p className="text-sm text-[#ff34ac] font-semibold">Founder & CEO</p>
-                    </div>
-                  </footer>
-                </blockquote>
+              <div className="bg-gradient-to-br from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-6 md:p-8 rounded-2xl border border-gray-200 shadow-xl">
+                <p className="text-lg md:text-xl text-gray-800 leading-relaxed mb-6">
+                  I built Tucker Trips after getting tired of planning vacations off reviews from strangers.
+                  I wanted a place where my own circle—family and friends—could swap honest notes, logistics,
+                  and "what I'd do differently next time." Now it's yours too: real trips, real people,
+                  fewer guesswork headaches.
+                </p>
+                <footer className="flex items-center gap-3">
+                  <Image
+                    src="https://tuckertrips.com/wp-content/uploads/2024/09/FB_IMG_1494034557555-225x300.jpg"
+                    alt="Kristin Stein"
+                    width={225}
+                    height={300}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-[#ff34ac] shadow-md"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                  />
+                  <div>
+                    <cite className="not-italic font-bold text-gray-900">Kristin Stein</cite>
+                    <p className="text-sm text-[#ff34ac] font-semibold">Founder</p>
+                  </div>
+                </footer>
               </div>
 
-              <div className="bg-gradient-to-br from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 p-6 md:p-8 rounded-2xl border border-gray-200 shadow-xl">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="text-2xl">✈️</span>
-                  Why Tucker Trips Exists
+              <div className="bg-white p-6 rounded-2xl border-2 border-gray-200 shadow-lg">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                  Tucker Trips organizes your travel logistics—log it, share it, love it.
                 </h3>
-                <div className="space-y-3 text-gray-700">
-                  <p className="flex items-start gap-3">
-                    <span className="text-[#ff34ac] mt-1">•</span>
-                    <span>Trust insights from your network, not strangers online</span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <span className="text-[#7dbbe5] mt-1">•</span>
-                    <span>Keep all your travel memories and lessons in one place</span>
-                  </p>
-                  <p className="flex items-start gap-3">
-                    <span className="text-[#ff34ac] mt-1">•</span>
-                    <span>Share real experiences that actually help your friends plan better</span>
-                  </p>
-                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  Capture the route, costs, timing, and "next time do this instead."
+                  Your circle learns from your trip; you plan the next one in half the time.
+                </p>
               </div>
             </div>
 
@@ -1011,14 +1102,14 @@ const LandingPage = ({ onShowAuth }) => {
           <div className={`text-center ${visibleElements['founder-journey'] ? 'animate-in-up stagger-4' : 'opacity-0'}`}>
             <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-[#ff34ac]/10 via-white to-[#7dbbe5]/10 px-8 py-6 rounded-2xl border-2 border-gray-200 shadow-xl">
               <p className="text-gray-700 text-lg font-medium">
-                Ready to plan smarter with insights from people you trust?
+                Ready to plan with people you actually know?
               </p>
               <Button
                 onClick={onShowAuth}
                 size="lg"
                 className="bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg hover:shadow-xl transition-all"
               >
-                Start Your Journey
+                Log a Trip
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -1083,8 +1174,11 @@ const LandingPage = ({ onShowAuth }) => {
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
             />
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-3">
             &copy; {new Date().getFullYear()} Tucker Trips. Plan smarter. Travel better. Live fully.
+          </p>
+          <p className="text-[#ff34ac] font-medium mb-4">
+            Occasional, useful, zero fluff—trip checklists and 'wish-I-knew' notes.
           </p>
           <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
             <button className="hover:text-[#ff34ac] transition">Privacy Policy</button>
@@ -1101,11 +1195,11 @@ const LandingPage = ({ onShowAuth }) => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-gray-900">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-[#ff34ac]" />
-              Welcome to Tucker Trips
+              Your circle is waiting
             </DialogTitle>
             <DialogDescription className="text-xs sm:text-sm text-gray-600">
-              Start planning your dream trip today. Create detailed itineraries, collaborate with friends,
-              and make every journey unforgettable.
+              Log what future-you will forget: links, prices, timings, and those tiny hacks.
+              Your circle only. No internet strangers.
             </DialogDescription>
           </DialogHeader>
           <div className="mt-4 sm:mt-6 flex flex-col gap-3 sm:flex-row">
@@ -1118,7 +1212,7 @@ const LandingPage = ({ onShowAuth }) => {
               }}
               className="flex-1 bg-gradient-to-r from-[#ff34ac] to-[#7dbbe5] text-white shadow-lg shadow-[#ff34ac]/30 hover:-translate-y-0.5 text-sm sm:text-base"
             >
-              Get Started Free
+              Start a Trip
             </Button>
             <Button
               variant="ghost"
