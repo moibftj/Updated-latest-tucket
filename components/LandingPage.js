@@ -872,10 +872,10 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(125,187,229,0.08),_transparent_50%)]" />
 
         <div className="relative mx-auto max-w-7xl">
-          {/* Section Header */}
-          <div className={`text-center mb-12 md:mb-16 ${visibleElements['founder-journey'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-4">The Heart Behind Tucker Trips</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          {/* Section Header - Compact */}
+          <div className={`text-center mb-8 md:mb-12 ${visibleElements['founder-journey'] ? 'animate-in-up' : 'opacity-0'}`}>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-3">The Heart Behind Tucker Trips</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
                 Built by a Traveler, For Travelers
               </span>
@@ -886,8 +886,8 @@ const LandingPage = ({ onShowAuth }) => {
             </p>
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+          {/* Main Content Grid - Reduced Margin */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
             {/* Left: Story & Quote */}
             <div className={`space-y-6 ${visibleElements['founder-journey'] ? 'animate-in-left stagger-2' : 'opacity-0'}`}>
               <div className="relative">
