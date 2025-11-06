@@ -1,107 +1,176 @@
-# Netlify Environment Variables Update Required
+# Netlify Environment Variables - Complete Setup Guide
 
-## Issue
+## Overview
 
-Your current Netlify environment variables use different names than what the code expects.
+Tucker Trips uses Netlify for deployment and environment variable management. This guide covers setting up all required environment variables including Supabase and Z.AI Claude integration.
 
-### Current Netlify Variables:
-```
-NEXT_SUPABASE_BASE_URL
-NEXT_SUPABASE_ANON_KEY
-SERVICE_ROLE_KEY
-JWT_SECRET
-```
+## Required Environment Variables
 
-### Required Variable Names (Used by Code):
-```
-NEXT_PUBLIC_SUPABASE_URL
-NEXT_PUBLIC_SUPABASE_ANON_KEY
-SUPABASE_SERVICE_ROLE_KEY
-JWT_SECRET ✓ (correct)
+### Supabase Configuration (Required)
+
+Set these in **Netlify Dashboard** → **Site settings** → **Environment variables**:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+JWT_SECRET=your_jwt_secret_key
 ```
 
-## How to Fix
+### Z.AI Claude Integration (Optional)
 
-You need to update your Netlify environment variables to match what the code expects.
+For AI-assisted development with Claude Code:
 
-### Option 1: Using Netlify Dashboard
+```bash
+ZAI_API_KEY=f1a00b2514824f838f15cbffe114745d.zQMDs9jK66ILAsvT
+```
+
+**Note:** The Z.AI API key is only needed for local development with Claude Code, not for production deployment.
+
+## Setup Methods
+
+### Option 1: Netlify Dashboard (Recommended)
 
 1. Go to your Netlify site dashboard
 2. Navigate to **Site settings** → **Environment variables**
-3. **Delete or rename** the old variables:
-   - Delete `NEXT_SUPABASE_BASE_URL`
-   - Delete `NEXT_SUPABASE_ANON_KEY`
-   - Delete `SERVICE_ROLE_KEY`
-4. **Add** the correct variables with the same values:
-   - `NEXT_PUBLIC_SUPABASE_URL` = (same value as old NEXT_SUPABASE_BASE_URL)
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = (same value as old NEXT_SUPABASE_ANON_KEY)
-   - `SUPABASE_SERVICE_ROLE_KEY` = (same value as old SERVICE_ROLE_KEY)
-   - Keep `JWT_SECRET` as is
-5. Save and redeploy your site
+3. Click **Add a variable** for each required variable
+4. Select **Same value for all deploy contexts** (or customize per environment)
+5. Save and trigger a new deployment
 
-### Option 2: Using Netlify CLI
+### Option 2: Netlify CLI
 
 ```bash
-# Install Netlify CLI if you haven't already
-npm install -g netlify-cli
-
 # Login to Netlify
 netlify login
 
 # Link to your site (if not already linked)
 netlify link
 
-# Set the correct environment variables
-netlify env:set NEXT_PUBLIC_SUPABASE_URL "your_supabase_url_here"
-netlify env:set NEXT_PUBLIC_SUPABASE_ANON_KEY "your_supabase_anon_key_here"
+# Set environment variables
+netlify env:set NEXT_PUBLIC_SUPABASE_URL "https://your-project.supabase.co"
+netlify env:set NEXT_PUBLIC_SUPABASE_ANON_KEY "your_anon_key_here"
 netlify env:set SUPABASE_SERVICE_ROLE_KEY "your_service_role_key_here"
+netlify env:set JWT_SECRET "your_jwt_secret_here"
+
+# Optional: Z.AI API key for local development
+netlify env:set ZAI_API_KEY "f1a00b2514824f838f15cbffe114745d.zQMDs9jK66ILAsvT"
 
 # Trigger a new deploy
 netlify deploy --prod
 ```
 
-### Quick Script Using Your Existing Values
+### Option 3: Using the Update Script
 
-Run this script to automatically update your Netlify environment variables using the Netlify CLI:
+We've included a helper script in the repository:
 
 ```bash
-#!/bin/bash
+# Make the script executable
+chmod +x update-netlify-env.sh
 
-# Get your Supabase credentials from Supabase Dashboard
-# Settings → API
-
-echo "Setting Netlify environment variables..."
-
-# Set the variables (replace with your actual values)
-NETLIFY_AUTH_TOKEN=nfp_opLsgtBAKtcLRiKvXjLncYtPdLSgHUUTa74b netlify env:set NEXT_PUBLIC_SUPABASE_URL "https://ugxzjmzrmvbnhfejwjse.supabase.co"
-NETLIFY_AUTH_TOKEN=nfp_opLsgtBAKtcLRiKvXjLncYtPdLSgHUUTa74b netlify env:set NEXT_PUBLIC_SUPABASE_ANON_KEY "your_anon_key"
-NETLIFY_AUTH_TOKEN=nfp_opLsgtBAKtcLRiKvXjLncYtPdLSgHUUTa74b netlify env:set SUPABASE_SERVICE_ROLE_KEY "your_service_role_key"
-
-echo "Environment variables updated! Redeploy your site to apply changes."
+# Run the script
+./update-netlify-env.sh
 ```
 
-## Why This Matters
+## Local Development
 
-- `NEXT_PUBLIC_*` prefix is a Next.js convention that makes these variables available to client-side code
-- The code explicitly looks for these exact variable names in [lib/supabase.js:6-7](lib/supabase.js#L6-L7) and [lib/supabase.js:24-25](lib/supabase.js#L24-L25)
-- Without the correct names, your application won't be able to connect to Supabase
+For local development, create a `.env.local` file (already gitignored):
 
-## Secrets Scanning Note
+```bash
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+JWT_SECRET=your_jwt_secret_here
 
-The `netlify.toml` file has been updated to omit both the old and new variable names from secrets scanning since:
-- These Supabase public keys and URLs are **meant to be public** (they're protected by Row Level Security)
-- Next.js includes `NEXT_PUBLIC_*` variables in the client bundle by design
-- The actual secrets (SERVICE_ROLE_KEY, JWT_SECRET) are only used server-side
+# Z.AI Claude Code (Local Development Only)
+ZAI_API_KEY=f1a00b2514824f838f15cbffe114745d.zQMDs9jK66ILAsvT
+ANTHROPIC_AUTH_TOKEN=d1dcbd4b831a44caa6fb1749a3be0444.6c2hi0jaLKN1aQyp
+```
 
-## After Updating
+**Important:** Never commit `.env.local` to version control!
 
-Once you've updated the environment variables:
+## Getting Your Supabase Credentials
 
-1. Trigger a new Netlify deployment
-2. The secrets scanning should pass (with the updated `netlify.toml`)
-3. Your application will properly connect to Supabase
-4. All authentication and database operations will work correctly
+1. Go to your [Supabase Dashboard](https://app.supabase.com)
+2. Select your project
+3. Navigate to **Settings** → **API**
+4. Copy the following:
+   - **Project URL** → `NEXT_PUBLIC_SUPABASE_URL`
+   - **anon/public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - **service_role key** → `SUPABASE_SERVICE_ROLE_KEY`
+5. Generate a secure JWT secret:
+   ```bash
+   openssl rand -base64 32
+   ```
+   Use this for `JWT_SECRET`
 
-## Need Help?
+## Environment Variable Security
 
-Check [SECURITY.md](SECURITY.md) for more information about environment variable best practices.
+### Public Variables
+These are safe to include in client-side code:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+### Secret Variables
+These must NEVER be exposed to client-side code:
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `JWT_SECRET`
+
+The `netlify.toml` configuration ensures proper secrets scanning while allowing public variables.
+
+## Netlify Secrets Scanning
+
+The `netlify.toml` file is configured to:
+- Allow `NEXT_PUBLIC_*` variables (they're meant to be public)
+- Protect actual secrets (SERVICE_ROLE_KEY, JWT_SECRET)
+- Omit build artifacts from scanning
+
+## Troubleshooting
+
+### "Cannot connect to Supabase"
+- Verify all environment variables are set in Netlify Dashboard
+- Check that variable names exactly match (including `NEXT_PUBLIC_` prefix)
+- Trigger a new deployment after updating variables
+
+### "Secrets scanning failed"
+- The `netlify.toml` is already configured correctly
+- Public Supabase URLs/keys are intentionally omitted from scanning
+- If issues persist, verify `SECRETS_SCAN_OMIT_KEYS` in `netlify.toml`
+
+### "Claude Code not working"
+- Claude Code uses local configuration file (`~/.claude/settings.json`)
+- Z.AI API key is for local development only
+- See `ZAI_CLAUDE_SETUP.md` for Claude Code configuration
+
+## Migration from Old Variable Names
+
+If you previously used different variable names:
+
+| Old Name | New Name |
+|----------|----------|
+| `NEXT_SUPABASE_BASE_URL` | `NEXT_PUBLIC_SUPABASE_URL` |
+| `NEXT_SUPABASE_ANON_KEY` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+| `SERVICE_ROLE_KEY` | `SUPABASE_SERVICE_ROLE_KEY` |
+| `JWT_SECRET` | `JWT_SECRET` (unchanged) |
+
+Use Netlify CLI or Dashboard to update to the new names.
+
+## Deployment Checklist
+
+Before deploying to Netlify:
+
+- [ ] All required environment variables set in Netlify Dashboard
+- [ ] Supabase credentials verified and working
+- [ ] JWT_SECRET is a strong, randomly generated key
+- [ ] `.env.local` exists locally but is gitignored
+- [ ] Test deployment successful
+- [ ] Authentication flows working
+- [ ] Database connections successful
+
+## Additional Resources
+
+- [SECURITY.md](SECURITY.md) - Security best practices
+- [ZAI_CLAUDE_SETUP.md](ZAI_CLAUDE_SETUP.md) - Claude Code configuration
+- [DEPLOY_INSTRUCTIONS.md](DEPLOY_INSTRUCTIONS.md) - Deployment guide
+- [Netlify Environment Variables Docs](https://docs.netlify.com/environment-variables/overview/)
+- [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
