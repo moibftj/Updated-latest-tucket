@@ -892,12 +892,12 @@ const LandingPage = ({ onShowAuth }) => {
                   <span className="text-white font-bold text-lg">J</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Jamie's Maui week</h3>
+                  <h3 className="font-semibold text-gray-900">Jamie&apos;s Maui week</h3>
                   <p className="text-sm text-gray-600">Car rental surprise fees</p>
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "Don't book the airport rental—saved $200 using Turo and avoided the hidden resort fees they hit you with at checkout."
+                &quot;Don&apos;t book the airport rental—saved $200 using Turo and avoided the hidden resort fees they hit you with at checkout.&quot;
               </p>
             </div>
 
@@ -907,12 +907,12 @@ const LandingPage = ({ onShowAuth }) => {
                   <span className="text-white font-bold text-lg">AS</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Aunt Sara's Rome with teens</h3>
+                  <h3 className="font-semibold text-gray-900">Aunt Sara&apos;s Rome with teens</h3>
                   <p className="text-sm text-gray-600">Day-by-day map</p>
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "Skip the morning Colosseum—go at 4pm. Teens actually engaged, no crowds, and perfect lighting for photos."
+                &quot;Skip the morning Colosseum—go at 4pm. Teens actually engaged, no crowds, and perfect lighting for photos.&quot;
               </p>
             </div>
 
@@ -922,12 +922,12 @@ const LandingPage = ({ onShowAuth }) => {
                   <span className="text-white font-bold text-lg">U</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Usman's Hunza budget breakdown</h3>
+                  <h3 className="font-semibold text-gray-900">Usman&apos;s Hunza budget breakdown</h3>
                   <p className="text-sm text-gray-600">Where to splurge</p>
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "Budget hotels: $15/night. Splurge on the private driver—worth every rupee for those mountain roads."
+                &quot;Budget hotels: $15/night. Splurge on the private driver—worth every rupee for those mountain roads.&quot;
               </p>
             </div>
           </div>
@@ -982,7 +982,7 @@ const LandingPage = ({ onShowAuth }) => {
         <div className="relative mx-auto max-w-7xl">
           {/* Section Header - Compact */}
           <div className={`text-center mb-8 md:mb-12 ${visibleElements['founder-journey'] ? 'animate-in-up' : 'opacity-0'}`}>
-            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-3">FOUNDER'S STORY</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-[#ff34ac] font-semibold mb-3">FOUNDER&apos;S STORY</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               <span className="bg-gradient-to-r from-[#ff34ac] via-gray-900 to-[#7dbbe5] bg-clip-text text-transparent">
                 Why I started Tucker Trips
@@ -998,7 +998,7 @@ const LandingPage = ({ onShowAuth }) => {
                 <p className="text-lg md:text-xl text-gray-800 leading-relaxed mb-6">
                   I built Tucker Trips after getting tired of planning vacations off reviews from strangers.
                   I wanted a place where my own circle—family and friends—could swap honest notes, logistics,
-                  and "what I'd do differently next time." Now it's yours too: real trips, real people,
+                  and &quot;what I&apos;d do differently next time.&quot; Now it&apos;s yours too: real trips, real people,
                   fewer guesswork headaches.
                 </p>
                 <footer className="flex items-center gap-3">
@@ -1024,7 +1024,7 @@ const LandingPage = ({ onShowAuth }) => {
                   Tucker Trips organizes your travel logistics—log it, share it, love it.
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Capture the route, costs, timing, and "next time do this instead."
+                  Capture the route, costs, timing, and &quot;next time do this instead.&quot;
                   Your circle learns from your trip; you plan the next one in half the time.
                 </p>
               </div>
@@ -1179,7 +1179,7 @@ const LandingPage = ({ onShowAuth }) => {
             &copy; {new Date().getFullYear()} Tucker Trips. Plan smarter. Travel better. Live fully.
           </p>
           <p className="text-[#ff34ac] font-medium mb-4">
-            Occasional, useful, zero fluff—trip checklists and 'wish-I-knew' notes.
+            Occasional, useful, zero fluff—trip checklists and &apos;wish-I-knew&apos; notes.
           </p>
           <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
             <Link href="/privacy" className="hover:text-[#ff34ac] transition">Privacy Policy</Link>

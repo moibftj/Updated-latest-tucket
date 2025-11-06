@@ -90,7 +90,7 @@ export default function PrivacyPolicy() {
 
             <h3 className="text-xl font-medium text-gray-800 mb-3">Public Trips</h3>
             <p className="text-gray-700 leading-relaxed mb-4">
-              If you choose to make a trip "public," it may be visible to other Tucker Trips users for inspiration. 
+              If you choose to make a trip &quot;public,&quot; it may be visible to other Tucker Trips users for inspiration. 
               You can control this setting for each trip individually.
             </p>
 
@@ -151,7 +151,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Children&apos;s Privacy</h2>
             <p className="text-gray-700 leading-relaxed">
               Tucker Trips is not intended for children under 13. We do not knowingly collect personal 
               information from children under 13. If we become aware that we have collected such information, 

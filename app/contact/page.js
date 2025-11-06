@@ -22,7 +22,7 @@ export default function ContactUs() {
           </Link>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
           <p className="text-gray-600">
-            We're here to help you make the most of your Tucker Trips experience. 
+            We&apos;re here to help you make the most of your Tucker Trips experience. 
             Reach out with questions, feedback, or just to say hello!
           </p>
         </div>
@@ -199,8 +199,8 @@ export default function ContactUs() {
                 How do I share a trip with my friends?
               </h3>
               <p className="text-gray-700">
-                When creating or editing a trip, you can set its visibility to "Shared" and enter email addresses 
-                of people you want to share with. They'll receive an invitation to view your trip details.
+                When creating or editing a trip, you can set its visibility to &quot;Shared&quot; and enter email addresses 
+                of people you want to share with. They&apos;ll receive an invitation to view your trip details.
               </p>
             </div>
 
@@ -220,7 +220,7 @@ export default function ContactUs() {
               </h3>
               <p className="text-gray-700">
                 When you delete your account, your personal information is removed according to our Privacy Policy. 
-                Trips you've shared may remain visible to maintain the integrity of shared experiences, but your 
+                Trips you&apos;ve shared may remain visible to maintain the integrity of shared experiences, but your 
                 name will be anonymized.
               </p>
             </div>
@@ -231,7 +231,7 @@ export default function ContactUs() {
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Business & Partnership Inquiries</h2>
           <p className="text-gray-700 mb-6">
-            Interested in partnering with Tucker Trips or have a business opportunity? We'd love to hear from you.
+            Interested in partnering with Tucker Trips or have a business opportunity? We&apos;d love to hear from you.
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -265,7 +265,7 @@ export default function ContactUs() {
         {/* Footer Note */}
         <div className="text-center mt-12 text-gray-600">
           <p>
-            Thanks for being part of the Tucker Trips community! We're here to help you plan smarter, 
+            Thanks for being part of the Tucker Trips community! We&apos;re here to help you plan smarter, 
             travel better, and live fully. 🧳✈️
           </p>
         </div>

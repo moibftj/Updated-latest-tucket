@@ -117,11 +117,11 @@ export default function HelpCenter() {
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700 pt-4">
                     <div className="space-y-4">
-                      <p>Getting started is easy! Here's your step-by-step guide:</p>
+                      <p>Getting started is easy! Here&apos;s your step-by-step guide:</p>
                       <ol className="list-decimal pl-6 space-y-2">
                         <li><strong>Sign Up:</strong> Create your account with your email and choose a secure password</li>
                         <li><strong>Complete Your Profile:</strong> Add your name and a brief bio to help your circle recognize you</li>
-                        <li><strong>Create Your First Trip:</strong> Click "New Trip" and add your destination, dates, and basic details</li>
+                        <li><strong>Create Your First Trip:</strong> Click &quot;New Trip&quot; and add your destination, dates, and basic details</li>
                         <li><strong>Add Trip Details:</strong> Include flights, hotels, activities, and any notes about your experience</li>
                         <li><strong>Share with Your Circle:</strong> Invite friends and family to see your trip and get their input</li>
                       </ol>
@@ -238,7 +238,7 @@ export default function HelpCenter() {
                         </div>
                         <div>
                           <h4 className="font-semibold">Trip Notes:</h4>
-                          <p className="text-sm">Add detailed notes, tips, and "what I'd do differently" insights that your friends will actually find useful.</p>
+                          <p className="text-sm">Add detailed notes, tips, and &quot;what I&apos;d do differently&quot; insights that your friends will actually find useful.</p>
                         </div>
                       </div>
                       <p className="bg-yellow-50 p-3 rounded-md">
@@ -317,12 +317,12 @@ export default function HelpCenter() {
                     <div className="space-y-4">
                       <div className="space-y-3">
                         <div>
-                          <h4 className="font-semibold text-red-600">Can't log in to my account</h4>
-                          <p className="text-sm">Check your email and password. If you've forgotten your password, use the "Forgot Password" link on the login page.</p>
+                          <h4 className="font-semibold text-red-600">Can&apos;t log in to my account</h4>
+                          <p className="text-sm">Check your email and password. If you&apos;ve forgotten your password, use the &quot;Forgot Password&quot; link on the login page.</p>
                         </div>
                         <div>
                           <h4 className="font-semibold text-red-600">Trip not showing up for shared users</h4>
-                          <p className="text-sm">Verify the trip visibility is set to "Shared" and double-check the email addresses you entered.</p>
+                          <p className="text-sm">Verify the trip visibility is set to &quot;Shared&quot; and double-check the email addresses you entered.</p>
                         </div>
                         <div>
                           <h4 className="font-semibold text-red-600">Photos not uploading</h4>
@@ -417,11 +417,11 @@ export default function HelpCenter() {
               </CardHeader>
               <CardContent className="text-sm text-gray-700">
                 <p className="mb-3">
-                  <strong>"Start with one detailed trip"</strong> - Add all the little details you wish you had known. 
+                  <strong>&quot;Start with one detailed trip&quot;</strong> - Add all the little details you wish you had known. 
                   Your future self (and friends) will thank you!
                 </p>
                 <p>
-                  <strong>"Invite travel-loving friends first"</strong> - Your feed gets 10× better with one friend 
+                  <strong>&quot;Invite travel-loving friends first&quot;</strong> - Your feed gets 10× better with one friend 
                   who travels frequently and shares honestly.
                 </p>
               </CardContent>
@@ -433,7 +433,7 @@ export default function HelpCenter() {
         <div className="text-center mt-12 bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Still need help?</h2>
           <p className="text-gray-600 mb-6">
-            Can't find what you're looking for? Our support team is here to help you make the most of Tucker Trips.
+            Can&apos;t find what you&apos;re looking for? Our support team is here to help you make the most of Tucker Trips.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">

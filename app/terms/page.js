@@ -28,12 +28,12 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Welcome to Tucker Trips</h2>
             <p className="text-gray-700 leading-relaxed">
-              These Terms of Service ("Terms") govern your use of Tucker Trips, a travel planning and sharing 
+              These Terms of Service (&quot;Terms&quot;) govern your use of Tucker Trips, a travel planning and sharing 
               platform designed to help you organize trips and share experiences with your trusted circle of 
               friends and family. By using Tucker Trips, you agree to these Terms.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
-              Tucker Trips is operated by [Company Name] ("we," "us," or "our"). By accessing or using our 
+              Tucker Trips is operated by [Company Name] (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or using our 
               service, you agree to be bound by these Terms and our Privacy Policy.
             </p>
           </section>
@@ -47,7 +47,7 @@ export default function TermsOfService() {
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
               You must be at least 13 years old to use Tucker Trips. If you are under 18, you represent that 
-              you have your parent's or guardian's permission to use the service.
+              you have your parent&apos;s or guardian&apos;s permission to use the service.
             </p>
           </section>
 
@@ -149,7 +149,7 @@ export default function TermsOfService() {
             <h3 className="text-xl font-medium text-gray-800 mb-3">User Content</h3>
             <p className="text-gray-700 leading-relaxed mb-4">
               You warrant that you own or have the right to share all content you upload to Tucker Trips. 
-              You are responsible for ensuring your content doesn't infringe on others' intellectual property rights.
+              You are responsible for ensuring your content doesn&apos;t infringe on others&apos; intellectual property rights.
             </p>
 
             <h3 className="text-xl font-medium text-gray-800 mb-3">License to Use</h3>
@@ -176,7 +176,7 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Service Availability</h2>
             <p className="text-gray-700 leading-relaxed">
-              We strive to provide reliable service, but Tucker Trips is provided "as is" and "as available." 
+              We strive to provide reliable service, but Tucker Trips is provided &quot;as is&quot; and &quot;as available.&quot; 
               We may experience downtime for maintenance, updates, or technical issues. We do not guarantee 
               uninterrupted access to our service.
             </p>
