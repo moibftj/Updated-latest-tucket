@@ -3,7 +3,7 @@
 ## 🔑 API Keys & Credentials
 
 ### Z.AI Claude Code
-- **API Key**: `d1dcbd4b831a44caa6fb1749a3be0444.6c2hi0jaLKN1aQyp`
+- **API Key**: `8ccc4aec518b4ceeac1fcfb5f4d8a26c.MtifxI0dL8jT8zqi`
 - **Base URL**: `https://api.z.ai/api/anthropic`
 - **Config File**: `~/.claude/settings.json`
 
