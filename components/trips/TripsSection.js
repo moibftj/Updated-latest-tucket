@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import { MapPin, PlusCircle } from 'lucide-react'
 import TripCard from '@/components/TripCard'
@@ -15,6 +16,7 @@ import {
 } from '@/components/ui/pagination'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { TripsSectionErrorFallback } from '@/components/ErrorFallbacks'
+import { TripsLoadingSkeleton } from '@/components/LoadingSkeletons'
 
 const Loader = () => (
   <div className="flex items-center justify-center h-64">
@@ -127,29 +129,31 @@ const TripsSection = ({ config, trips = [], isLoading = false, onNewTrip, onDele
 
   return (
     <ErrorBoundary fallback={TripsSectionErrorFallback}>
-      <div>
-        <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
-        {isLoading ? (
-          <Loader />
-        ) : trips.length === 0 ? (
-          <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {trips.map((trip) => (
-                <TripCard
-                  key={trip.id}
-                  trip={trip}
-                  onClick={onTripClick}
-                  onDelete={canDelete ? onDelete : undefined}
-                  showUserName={showUserName}
-                />
-              ))}
-            </div>
-            {renderPagination()}
-          </>
-        )}
-      </div>
+      <Suspense fallback={<TripsLoadingSkeleton count={6} />}>
+        <div>
+          <SectionHeader title={title} showCreateButton={showCreateButton} onNewTrip={onNewTrip} />
+          {isLoading ? (
+            <TripsLoadingSkeleton count={6} />
+          ) : trips.length === 0 ? (
+            <EmptyState message={emptyMessage} onNewTrip={onNewTrip} showCreateButton={showCreateButton} />
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {trips.map((trip) => (
+                  <TripCard
+                    key={trip.id}
+                    trip={trip}
+                    onClick={onTripClick}
+                    onDelete={canDelete ? onDelete : undefined}
+                    showUserName={showUserName}
+                  />
+                ))}
+              </div>
+              {renderPagination()}
+            </>
+          )}
+        </div>
+      </Suspense>
     </ErrorBoundary>
   )
 }
