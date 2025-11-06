@@ -1,11 +1,14 @@
-'use client'
-
-import { ArrowLeft, HelpCircle, Book, Users, Settings, Shield, Zap, Search, MessageCircle, Camera, Plane, Share2 } from 'lucide-react'
+import { ArrowLeft, HelpCircle, Book, Users, Settings, Shield, Zap, Search, MessageCircle, Camera, Plane, Share2, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
+
+export const metadata = {
+  title: 'Help Center - Tucker Trips',
+  description: 'Find answers to common questions about using Tucker Trips. Learn how to plan trips, share experiences, and connect with your travel circle.',
+}
 
 export default function HelpCenter() {
   return (
