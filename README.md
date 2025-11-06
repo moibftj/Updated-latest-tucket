@@ -1,390 +1,183 @@
-# Tucker Trips
+# Supabase CLI
 
-A Next.js 14 travel planning application with full-stack architecture. Users can plan trips, chat with other travelers, and share their adventures.
+[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
+](https://gitlab.com/sweatybridge/setup-cli/-/pipelines)
 
-## 📚 Documentation
+[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
 
-- [Quick Start](#quick-start) - Get the app running locally
-- [Z.AI & Supabase Setup](#zai--supabase-setup) - Configure AI coding assistant and database ⭐ NEW
-- [Webflow MCP Integration](#webflow-mcp-integration) - AI-powered content management
-- [Tech Stack](#tech-stack) - Technologies used
-- [Development](#development) - Development workflows
-- [Deployment](#deployment) - Deploy to production
-- [Troubleshooting](#troubleshooting) - Common issues and solutions
+This repository contains all the functionality for Supabase CLI.
 
-📖 **Detailed Guides:**
+- [x] Running Supabase locally
+- [x] Managing database migrations
+- [x] Creating and deploying Supabase Functions
+- [x] Generating types directly from your database schema
+- [x] Making authenticated HTTP requests to [Management API](https://supabase.com/docs/reference/api/introduction)
 
-- [ZAI_SUPABASE_SETUP.md](./ZAI_SUPABASE_SETUP.md) - **Z.AI Claude Code & Supabase configuration** ⭐ NEW
-- [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md) - Complete Webflow MCP setup and usage guide
-- [WEBFLOW_SDK_USAGE.md](./WEBFLOW_SDK_USAGE.md) - Webflow JavaScript SDK integration guide
-- [ERROR_BOUNDARIES.md](./ERROR_BOUNDARIES.md) - Error boundary implementation and best practices
-- [IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md) - 2025 error handling enhancements
-- [SECURITY.md](./SECURITY.md) - Security best practices
-- [DEPLOY_INSTRUCTIONS.md](./DEPLOY_INSTRUCTIONS.md) - Detailed deployment guide
+## Getting started
 
-## Quick Start
+### Install the CLI
 
-### Prerequisites
-
-- Node.js 18+
-- pnpm package manager
-- Git configured properly (see Git Setup below)
-
-### Installation
+Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 
 ```bash
-# Clone the repository
-git clone https://github.com/aqeelwebbing/New-latest-Tucker-1
-cd New-latest-Tucker-1
-
-# Install dependencies
-pnpm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your configuration
-
-# Start development server
-pnpm dev
+npm i supabase --save-dev
 ```
 
-### Git Setup (Important!)
-
-**If you encounter Git commit errors (GPG signing, author invalid):**
-
-#### Quick Fix
+To install the beta release channel:
 
 ```bash
-# Run the automated setup script
-./setup-git.sh
+npm i supabase@beta --save-dev
 ```
 
-#### Manual Setup
+When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
+
+```
+NODE_OPTIONS=--no-experimental-fetch yarn add supabase
+```
+
+> **Note**
+For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
+
+<details>
+  <summary><b>macOS</b></summary>
+
+  Available via [Homebrew](https://brew.sh). To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To install the beta release channel:
+  
+  ```sh
+  brew install supabase/tap/supabase-beta
+  brew link --overwrite supabase-beta
+  ```
+  
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Windows</b></summary>
+
+  Available via [Scoop](https://scoop.sh). To install:
+
+  ```powershell
+  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+  scoop install supabase
+  ```
+
+  To upgrade:
+
+  ```powershell
+  scoop update supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Linux</b></summary>
+
+  Available via [Homebrew](https://brew.sh) and Linux packages.
+
+  #### via Homebrew
+
+  To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+
+  #### via Linux packages
+
+  Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
+
+  ```sh
+  sudo apk add --allow-untrusted <...>.apk
+  ```
+
+  ```sh
+  sudo dpkg -i <...>.deb
+  ```
+
+  ```sh
+  sudo rpm -i <...>.rpm
+  ```
+
+  ```sh
+  sudo pacman -U <...>.pkg.tar.zst
+  ```
+</details>
+
+<details>
+  <summary><b>Other Platforms</b></summary>
+
+  You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
+
+  ```sh
+  go install github.com/supabase/cli@latest
+  ```
+
+  Add a symlink to the binary in `$PATH` for easier access:
+
+  ```sh
+  ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
+  ```
+
+  This works on other non-standard Linux distros.
+</details>
+
+<details>
+  <summary><b>Community Maintained Packages</b></summary>
+
+  Available via [pkgx](https://pkgx.sh/). Package script [here](https://github.com/pkgxdev/pantry/blob/main/projects/supabase.com/cli/package.yml).
+  To install in your working directory:
+
+  ```bash
+  pkgx install supabase
+  ```
+
+  Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).
+</details>
+
+### Run the CLI
 
 ```bash
-# Configure user details
-git config --local user.name "Aqeel Jamil"
-git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"
-
-# Disable GPG signing (prevents Codespaces authentication issues)
-git config --local commit.gpgsign false
+supabase bootstrap
 ```
 
-#### Common Git Issues
-
-- **GPG signing errors**: Run `git config --local commit.gpgsign false`
-- **Author invalid**: Ensure correct email with `git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"`
-- **Authentication issues**: Check `gh auth status` and re-authenticate if needed
-
-## Z.AI & Supabase Setup
-
-### AI-Powered Development with Z.AI Claude Code
-
-Tucker Trips is configured to work with Z.AI's GLM models through Claude Code for AI-assisted development.
-
-**✅ Already Configured:**
-- Claude Code installed globally
-- Z.AI API credentials configured in `~/.claude/settings.json`
-- GLM-4.6 and GLM-4.5-Air models ready to use
-
-**Quick Start:**
+Or using npx:
 
 ```bash
-# Launch Claude Code in your project
-cd /workspaces/New-latest-Tucker-1
-claude
-
-# Or use the npm script
-pnpm claude
-pnpm ai  # Shorthand
+npx supabase bootstrap
 ```
 
-**Available Models:**
-- **GLM-4.6** (Opus & Sonnet): Most powerful for complex tasks
-- **GLM-4.5-Air** (Haiku): Faster for quick operations
+The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
 
-### Supabase Database Setup
+## Docs
 
-1. **Get your Supabase credentials** from https://app.supabase.com/
-2. **Update `.env.local`** with your project values:
+Command & config reference can be found [here](https://supabase.com/docs/reference/cli/about).
 
-```bash
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-JWT_SECRET=$(openssl rand -base64 32)
+## Breaking changes
+
+We follow semantic versioning for changes that directly impact CLI commands, flags, and configurations.
+
+However, due to dependencies on other service images, we cannot guarantee that schema migrations, seed.sql, and generated types will always work for the same CLI major version. If you need such guarantees, we encourage you to pin a specific version of CLI in package.json.
+
+## Developing
+
+To run from source:
+
+```sh
+# Go >= 1.22
+go run . help
 ```
-
-3. **Apply database schema**:
-
-```bash
-# The schema is in supabase/migrations/
-# Upload via Supabase Dashboard → SQL Editor
-```
-
-📖 **Full Setup Guide**: [ZAI_SUPABASE_SETUP.md](./ZAI_SUPABASE_SETUP.md)
-
-## Webflow MCP Integration
-
-This project includes integration with Webflow's Model Context Protocol (MCP) server, enabling AI agents to interact with Webflow APIs for content management and design operations.
-
-### Quick Reference
-
-- **JavaScript SDK**: For programmatic API access → [WEBFLOW_SDK_USAGE.md](./WEBFLOW_SDK_USAGE.md)
-- **MCP Server**: For AI agent interactions → [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md)
-
-**Already installed:**
-
-- `webflow-api` (v3.2.1) - JavaScript SDK for server-side operations
-- MCP scripts in `package.json` for AI agent integration
-
-### Webflow Prerequisites
-
-- Node.js 22.3.0 or higher (for MCP server)
-- A Webflow account
-- Webflow API token (for local setup) or OAuth (for remote setup)
-
-### Remote Setup (Recommended)
-
-The remote MCP server uses OAuth for authentication and includes a companion app for live canvas syncing.
-
-#### Cursor Configuration
-
-1. The `.cursor/mcp.json` file is already configured:
-
-   ```json
-   {
-     "mcpServers": {
-       "webflow": {
-         "url": "https://mcp.webflow.com/sse"
-       }
-     }
-   }
-   ```
-
-2. Open Cursor Settings → MCP & Integrations
-3. Cursor will automatically open an OAuth login page to authorize your Webflow sites
-4. Open your site in Webflow Designer
-5. Launch the "Webflow MCP Bridge App" from the Apps panel (press E)
-6. Wait for the app to connect
-
-#### Claude Desktop Configuration
-
-Add to `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "webflow": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://mcp.webflow.com/sse"]
-    }
-  }
-}
-```
-
-### Local Setup
-
-For local development, you can run the MCP server with your own Webflow API token.
-
-#### Get Your Webflow API Token
-
-1. Go to [Webflow API Playground](https://developers.webflow.com/data/reference/authorization)
-2. Log in and generate a token
-3. Copy the token and add it to `.env.local`:
-
-```bash
-WEBFLOW_TOKEN=your_webflow_api_token_here
-```
-
-#### Run MCP Server Locally
-
-```bash
-# Using npm script
-pnpm mcp:webflow
-
-# Or directly
-WEBFLOW_TOKEN="your_token" npx -y webflow-mcp-server@latest
-```
-
-#### Cursor Local Configuration
-
-Update `.cursor/mcp.json` for local mode:
-
-```json
-{
-  "mcpServers": {
-    "webflow": {
-      "command": "npx",
-      "args": ["-y", "webflow-mcp-server@latest"],
-      "env": {
-        "WEBFLOW_TOKEN": "your_webflow_token"
-      }
-    }
-  }
-}
-```
-
-### Example Prompts
-
-Once connected, try these AI prompts:
-
-- "Analyze my last 5 blog posts and suggest 3 new topic ideas with SEO keywords"
-- "Find older blog posts that mention similar topics and add internal links to my latest post"
-- "Create a hero section card on my home page with a CTA button and responsive design"
-- "Give me a link to open [MY_SITE_NAME] in the Webflow Designer"
-
-### Troubleshooting Webflow MCP
-
-#### Reset OAuth Token
-
-```bash
-rm -rf ~/.mcp-auth
-```
-
-#### Node.js Version Issues
-
-The MCP server requires Node.js 22.3.0 or higher. Check your version:
-
-```bash
-node -v
-```
-
-If needed, upgrade Node.js or use nvm:
-
-```bash
-nvm install 22.3.0
-nvm use 22.3.0
-```
-
-#### NPM Cache Issues
-
-```bash
-npm cache clean --force
-```
-
-#### Connection Issues
-
-1. Ensure the Webflow MCP Bridge App is published in your workspace
-2. Verify the app is running in the Webflow Designer (Apps panel → E)
-3. Check that your Webflow API token is valid
-4. Restart your AI client (Cursor or Claude Desktop)
-
-### Resources
-
-- [Webflow MCP Documentation](https://github.com/webflow/mcp-server)
-- [Webflow API Documentation](https://developers.webflow.com/data/reference)
-- [Webflow JavaScript SDK](https://www.npmjs.com/package/webflow-api)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
-
-## Tech Stack
-
-- **Frontend**: Next.js 14, React, Tailwind CSS
-- **Backend**: Next.js API Routes (single-file pattern)
-- **Database**: Supabase (PostgreSQL) with UUID IDs
-- **Authentication**: JWT tokens
-- **UI Components**: shadcn/ui + Radix UI
-- **Deployment**: Netlify
-
-## Project Structure
-
-```text
-app/
-├── api/[[...path]]/route.js    # All API endpoints (monolithic pattern)
-├── globals.css                 # Global styles
-├── layout.js                   # Root layout
-└── page.js                     # Main application entry
-
-components/
-├── ui/                         # shadcn/ui components
-├── Dashboard.js                # Main dashboard
-├── EnhancedTripModal.js        # Trip creation modal
-└── ...                         # Other business components
-
-lib/
-├── api.js                      # Centralized API client
-├── supabase.js                 # Database configuration
-└── utils.js                    # Utility functions
-```
-
-## Development
-
-### Running the Application
-
-```bash
-# Standard development
-pnpm dev
-
-# Alternative dev modes
-pnpm dev:no-reload     # Without hot reload
-pnpm dev:webpack       # Webpack polling mode
-```
-
-### API Development
-
-All API routes are in `app/api/[[...path]]/route.js`. To add a new endpoint:
-
-1. Add route logic inside `handleRoute()` function
-2. Use existing patterns for authentication and database access
-3. Follow the Supabase pattern: UUID `id` fields, camelCase conversion
-
-### Testing
-
-```bash
-# Run backend tests
-python backend_test.py
-
-# Update test results
-# Edit test_result.md when behavior changes
-```
-
-## Deployment
-
-### Environment Variables
-
-Required environment variables (set in `.env.local` and Netlify):
-
-```bash
-VITE_SUPABASE_BASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-SERVICE_ROLE_KEY=your_service_role_key
-```
-
-### Netlify Deployment
-
-1. Configure environment variables in Netlify dashboard
-2. Deploy automatically via GitHub integration
-3. Build configuration is in `netlify.toml`
-
-## Architecture Notes
-
-- **Single-file API**: All backend routes in one file for this project
-- **UUID Primary Keys**: Uses UUID v4 for all database tables
-- **JWT Auth**: Stored in localStorage, verified server-side
-- **Monolithic by Design**: Intentionally simple architecture
-
-## Contributing
-
-1. Follow existing code patterns
-2. Update `test_result.md` when changing behavior
-3. Use the established Git configuration
-4. Keep the single-file API pattern intact
-
-## Troubleshooting
-
-### Git Issues
-
-- Run `./setup-git.sh` for automated configuration
-- Check `.gitconfig.template` for manual setup
-
-### Development Issues
-
-- Use `pnpm dev:webpack` if file watching doesn't work
-- Check environment variables in `.env.local`
-- Verify Supabase connection in API routes
-
-### Deployment Issues
-
-- Ensure all environment variables are set in Netlify
-- Check `netlify.toml` configuration
-- Verify build process with `pnpm build`
