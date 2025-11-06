@@ -11,5 +11,15 @@
   # Omit build artifacts and files with public signed URLs from secrets scanning
   SECRETS_SCAN_OMIT_PATHS = ".netlify/**,.next/**,components/LandingPage.js,DEPLOY_INSTRUCTIONS.md,VERCEL_DEPLOY.md"
 
+# Environment variables are set in Netlify UI
+# Required environment variables:
+# - NEXT_PUBLIC_SUPABASE_URL
+# - NEXT_PUBLIC_SUPABASE_ANON_KEY
+# - SUPABASE_SERVICE_ROLE_KEY
+# - JWT_SECRET
+# Optional for Z.AI Claude integration:
+# - ZAI_API_KEY
+# - ANTHROPIC_AUTH_TOKEN (for local Claude Code)
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
