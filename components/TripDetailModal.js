@@ -22,9 +22,11 @@ import {
   X,
   Copy,
   Upload,
-  Link
+  Link,
+  Share2
 } from 'lucide-react'
 import { useState } from 'react'
+import ShareTripModal from './ShareTripModal'
 
 // Loading skeleton component for images
 const ImageSkeleton = () => (
@@ -49,8 +51,9 @@ const RatingDisplay = ({ rating, label }) => (
   </div>
 )
 
-const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false, onCopyTrip }) => {
+const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false, onCopyTrip, currentUser }) => {
   const [imageLoadingStates, setImageLoadingStates] = useState({})
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false)
 
   if (!trip) return null
 
@@ -110,6 +113,17 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false, onCopyTr
               </DialogDescription>
             </div>
             <div className="flex items-center gap-2">
+              {currentUser && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsShareModalOpen(true)}
+                  className="flex items-center gap-2"
+                >
+                  <Share2 className="w-4 h-4" />
+                  Share
+                </Button>
+              )}
               {onCopyTrip && trip.visibility === 'public' && (
                 <Button
                   variant="outline"
@@ -498,6 +512,17 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false, onCopyTr
           </div>
         </div>
       </DialogContent>
+
+      {/* Share Trip Modal */}
+      <ShareTripModal
+        trip={trip}
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        currentUser={currentUser}
+        onShareSuccess={(sharedTrip) => {
+          console.log('Trip shared successfully:', sharedTrip)
+        }}
+      />
     </Dialog>
   )
 }

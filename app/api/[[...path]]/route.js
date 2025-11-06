@@ -840,6 +840,145 @@ async function handleRoute(request, { params }) {
       }))
     }
 
+    // POST /api/trips/:id/share - Share a trip with someone via email
+    if (route.startsWith('/trips/') && route.endsWith('/share') && method === 'POST') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      const tripId = path[1]
+      const body = await request.json()
+      const { recipientEmail } = body
+
+      if (!recipientEmail) {
+        return handleCORS(NextResponse.json(
+          { error: 'Recipient email is required' },
+          { status: 400 }
+        ))
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(recipientEmail)) {
+        return handleCORS(NextResponse.json(
+          { error: 'Invalid email address' },
+          { status: 400 }
+        ))
+      }
+
+      // Get the trip to verify ownership and get details
+      const { data: trip, error: tripError } = await supabase
+        .from('trips')
+        .select(`
+          *,
+          users!trips_user_id_fkey (name)
+        `)
+        .eq('id', tripId)
+        .eq('user_id', decoded.userId)
+        .single()
+
+      if (tripError || !trip) {
+        return handleCORS(NextResponse.json(
+          { error: 'Trip not found or you do not have permission to share it' },
+          { status: 404 }
+        ))
+      }
+
+      try {
+        // Check if recipient is already a user
+        const { data: existingUser, error: userError } = await supabase
+          .from('users')
+          .select('id, name, email')
+          .eq('email', recipientEmail.toLowerCase())
+          .single()
+
+        let recipientUserId = null
+        let isNewUser = true
+
+        if (!userError && existingUser) {
+          // User exists, share with them directly
+          recipientUserId = existingUser.id
+          isNewUser = false
+
+          // Add user to shared_with array if not already there
+          const currentSharedWith = trip.shared_with || []
+          if (!currentSharedWith.includes(recipientUserId)) {
+            const { error: updateError } = await supabase
+              .from('trips')
+              .update({
+                shared_with: [...currentSharedWith, recipientUserId],
+                updated_at: new Date().toISOString()
+              })
+              .eq('id', tripId)
+
+            if (updateError) {
+              return handleCORS(NextResponse.json(
+                { error: 'Failed to share trip' },
+                { status: 500 }
+              ))
+            }
+          }
+
+          // Send email to existing user
+          const EmailService = (await import('@/lib/email-service')).default
+          await EmailService.sendTripToExistingUser(
+            recipientEmail,
+            {
+              id: trip.id,
+              title: trip.title,
+              destination: trip.destination,
+              startDate: trip.start_date,
+              endDate: trip.end_date
+            },
+            trip.users?.name || 'Someone'
+          )
+
+        } else {
+          // User doesn't exist, send invitation email
+          // In the future, you might want to create a pending share record
+          const EmailService = (await import('@/lib/email-service')).default
+          await EmailService.sendTripInvitation(
+            recipientEmail,
+            {
+              id: trip.id,
+              title: trip.title,
+              destination: trip.destination,
+              startDate: trip.start_date,
+              endDate: trip.end_date,
+              rating: trip.rating,
+              description: trip.description
+            },
+            trip.users?.name || 'Someone'
+          )
+        }
+
+        return handleCORS(NextResponse.json({
+          success: true,
+          message: isNewUser
+            ? `Invitation sent to ${recipientEmail}`
+            : `Trip shared with ${existingUser.name || recipientEmail}`,
+          isNewUser,
+          recipientEmail,
+          sharedTrip: {
+            id: trip.id,
+            title: trip.title,
+            destination: trip.destination
+          }
+        }))
+
+      } catch (emailError) {
+        console.error('Error sending email:', emailError)
+        return handleCORS(NextResponse.json(
+          { error: 'Trip shared but failed to send email notification' },
+          { status: 500 }
+        ))
+      }
+    }
+
     // DELETE /api/trips/:id
     if (route.startsWith('/trips/') && method === 'DELETE') {
       const decoded = verifyToken(request)

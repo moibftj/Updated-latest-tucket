@@ -230,6 +230,7 @@ const Dashboard = ({ user: initialUser, onLogout }) => {
           onClose={handleCloseTripDetail}
           showUserName={activeSection === 'shared' || activeSection === 'discover'}
           onCopyTrip={activeSection === 'discover' ? handleCopyTrip : null}
+          currentUser={user}
         />
 
         <ProfileSettings
