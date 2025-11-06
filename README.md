@@ -5,7 +5,8 @@ A Next.js 14 travel planning application with full-stack architecture. Users can
 ## 📚 Documentation
 
 - [Quick Start](#quick-start) - Get the app running locally
-- [Webflow MCP Integration](#webflow-mcp-integration) - AI-powered content management ⭐ NEW
+- [Z.AI & Supabase Setup](#zai--supabase-setup) - Configure AI coding assistant and database ⭐ NEW
+- [Webflow MCP Integration](#webflow-mcp-integration) - AI-powered content management
 - [Tech Stack](#tech-stack) - Technologies used
 - [Development](#development) - Development workflows
 - [Deployment](#deployment) - Deploy to production
@@ -13,9 +14,11 @@ A Next.js 14 travel planning application with full-stack architecture. Users can
 
 📖 **Detailed Guides:**
 
+- [ZAI_SUPABASE_SETUP.md](./ZAI_SUPABASE_SETUP.md) - **Z.AI Claude Code & Supabase configuration** ⭐ NEW
 - [WEBFLOW_MCP_GUIDE.md](./WEBFLOW_MCP_GUIDE.md) - Complete Webflow MCP setup and usage guide
 - [WEBFLOW_SDK_USAGE.md](./WEBFLOW_SDK_USAGE.md) - Webflow JavaScript SDK integration guide
 - [ERROR_BOUNDARIES.md](./ERROR_BOUNDARIES.md) - Error boundary implementation and best practices
+- [IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md) - 2025 error handling enhancements
 - [SECURITY.md](./SECURITY.md) - Security best practices
 - [DEPLOY_INSTRUCTIONS.md](./DEPLOY_INSTRUCTIONS.md) - Detailed deployment guide
 
