@@ -195,7 +195,43 @@ Potential improvements to consider:
 4. **User Feedback:** Allow users to report what they were doing when error occurred
 5. **Graceful Degradation:** Show partial UI when possible instead of full error screen
 
+## 2025 Enhancements (Implemented)
+
+### Next.js Error Files
+- **app/error.js**: Root-level error boundary for the entire application
+- **app/global-error.js**: Catches errors in the root layout itself
+- Provides uniform error handling for both server and client errors
+- Integrates seamlessly with Next.js 14 App Router
+
+### React 19 Preparation
+- **ClientErrorHandler component**: Global error handler for uncaught errors and unhandled promise rejections
+- Prepares for React 19's `onUncaughtError` and `onCaughtError` handlers
+- Provides app-wide error logging alongside error boundaries
+- Ready to upgrade when React 19 is adopted
+
+### Supabase Error Best Practices
+- **lib/supabase-errors.js**: Comprehensive error handling utilities for Supabase operations
+- Categorizes errors by type (auth, database, network, permissions, etc.)
+- Provides user-friendly error messages
+- Integrates with error boundaries for proper error propagation
+- Ready for integration with Supabase Edge Functions for server-side logging
+
+### Suspense Integration
+- **LoadingSkeletons component**: Professional loading states for better UX
+- **TripsSection**: Wrapped with Suspense for better streaming and fallback during data loads
+- Provides smooth transitions between loading and loaded states
+- Especially useful for realtime features and async data fetching
+
+### Enhanced API Client
+- **lib/api.js**: Updated with better error handling and Supabase integration
+- Automatically categorizes Supabase errors
+- Provides user-friendly error messages
+- Better error propagation to error boundaries
+- Enhanced logging for debugging
+
 ## References
 
 - [React Error Boundaries Documentation](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
 - [Error Handling in React](https://react.dev/learn/error-boundaries)
+- [Next.js Error Handling](https://nextjs.org/docs/app/building-your-application/routing/error-handling)
+- [React 19 Error Handling](https://react.dev/blog/2024/04/25/react-19)

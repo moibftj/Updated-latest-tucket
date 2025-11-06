@@ -32,7 +32,7 @@ export default function Error({ error, reset }) {
         </h1>
         
         <p className="text-gray-600 mb-6">
-          We encountered an unexpected error. Don't worry, this has been logged and we'll look into it.
+          We encountered an unexpected error. Don&apos;t worry, this has been logged and we&apos;ll look into it.
         </p>
 
         {process.env.NODE_ENV === 'development' && (
