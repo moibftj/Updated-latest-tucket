@@ -1,9 +1,12 @@
-'use client'
-
 import { ArrowLeft, Mail, MessageCircle, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
+export const metadata = {
+  title: 'Contact Us - Tucker Trips',
+  description: 'Get in touch with the Tucker Trips team. We\'re here to help you make the most of your travel planning experience.',
+}
 
 export default function ContactUs() {
   return (
