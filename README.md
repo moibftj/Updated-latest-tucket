@@ -76,6 +76,54 @@ git config --local commit.gpgsign false
 - **Author invalid**: Ensure correct email with `git config --local user.email "186092537+aqeelwebbing@users.noreply.github.com"`
 - **Authentication issues**: Check `gh auth status` and re-authenticate if needed
 
+## Z.AI & Supabase Setup
+
+### AI-Powered Development with Z.AI Claude Code
+
+Tucker Trips is configured to work with Z.AI's GLM models through Claude Code for AI-assisted development.
+
+**✅ Already Configured:**
+- Claude Code installed globally
+- Z.AI API credentials configured in `~/.claude/settings.json`
+- GLM-4.6 and GLM-4.5-Air models ready to use
+
+**Quick Start:**
+
+```bash
+# Launch Claude Code in your project
+cd /workspaces/New-latest-Tucker-1
+claude
+
+# Or use the npm script
+pnpm claude
+pnpm ai  # Shorthand
+```
+
+**Available Models:**
+- **GLM-4.6** (Opus & Sonnet): Most powerful for complex tasks
+- **GLM-4.5-Air** (Haiku): Faster for quick operations
+
+### Supabase Database Setup
+
+1. **Get your Supabase credentials** from https://app.supabase.com/
+2. **Update `.env.local`** with your project values:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+JWT_SECRET=$(openssl rand -base64 32)
+```
+
+3. **Apply database schema**:
+
+```bash
+# The schema is in supabase/migrations/
+# Upload via Supabase Dashboard → SQL Editor
+```
+
+📖 **Full Setup Guide**: [ZAI_SUPABASE_SETUP.md](./ZAI_SUPABASE_SETUP.md)
+
 ## Webflow MCP Integration
 
 This project includes integration with Webflow's Model Context Protocol (MCP) server, enabling AI agents to interact with Webflow APIs for content management and design operations.
