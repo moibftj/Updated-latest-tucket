@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
@@ -1181,10 +1182,10 @@ const LandingPage = ({ onShowAuth }) => {
             Occasional, useful, zero fluff—trip checklists and 'wish-I-knew' notes.
           </p>
           <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
-            <button className="hover:text-[#ff34ac] transition">Privacy Policy</button>
-            <button className="hover:text-[#ff34ac] transition">Terms of Service</button>
-            <button className="hover:text-[#ff34ac] transition">Contact Us</button>
-            <button className="hover:text-[#ff34ac] transition">Help Center</button>
+            <Link href="/privacy" className="hover:text-[#ff34ac] transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[#ff34ac] transition">Terms of Service</Link>
+            <Link href="/contact" className="hover:text-[#ff34ac] transition">Contact Us</Link>
+            <Link href="/help" className="hover:text-[#ff34ac] transition">Help Center</Link>
           </div>
         </div>
       </footer>
