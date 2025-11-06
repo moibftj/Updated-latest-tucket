@@ -110,7 +110,7 @@ const TripDetailModal = ({ trip, isOpen, onClose, showUserName = false, onCopyTr
               </DialogDescription>
             </div>
             <div className="flex items-center gap-2">
-              {onCopyTrip && (
+              {onCopyTrip && trip.visibility === 'public' && (
                 <Button
                   variant="outline"
                   size="sm"
