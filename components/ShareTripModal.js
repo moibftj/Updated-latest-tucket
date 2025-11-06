@@ -15,7 +15,7 @@ import {
   AlertCircle,
   Loader2
 } from 'lucide-react'
-import EmailService from '@/lib/email-service'
+// EmailService is only used on the server side
 
 const ShareTripModal = ({ trip, isOpen, onClose, currentUser, onShareSuccess }) => {
   const [email, setEmail] = useState('')
@@ -36,7 +36,8 @@ const ShareTripModal = ({ trip, isOpen, onClose, currentUser, onShareSuccess }) 
   }
 
   const validateEmail = (email) => {
-    return EmailService.validateEmail(email)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   }
 
   const handleShare = async () => {
