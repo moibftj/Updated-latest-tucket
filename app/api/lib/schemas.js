@@ -50,6 +50,6 @@ export const messageSchema = z.object({
  * Validation schema for profile update
  */
 export const profileUpdateSchema = z.object({
-  name: z.string().min(1, 'Name is required').optional(),
+  name: z.string().min(1, 'Name must not be empty if provided').optional(),
   bio: z.string().max(500, 'Bio too long').optional(),
 })
