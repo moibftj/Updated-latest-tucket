@@ -5,6 +5,15 @@ import jwt from 'jsonwebtoken'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { logger } from '@/lib/logger'
+import { validateServerEnvironment } from '@/lib/env-validation'
+import { uploadFileServer, validateFile, generateFilePath, BUCKETS } from '@/lib/storage'
+
+// Validate environment variables on module load
+try {
+  validateServerEnvironment()
+} catch (error) {
+  logger.error('Environment validation failed:', error.message)
+}
 
 // Validation schemas
 const registerSchema = z.object({
@@ -1004,6 +1013,84 @@ async function handleRoute(request, { params }) {
       }
 
       return handleCORS(NextResponse.json({ success: true }))
+    }
+
+    // POST /api/upload - Upload files to Supabase Storage
+    if (route === '/upload' && method === 'POST') {
+      const decoded = verifyToken(request)
+      if (!decoded) {
+        return handleCORS(NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401 }
+        ))
+      }
+
+      try {
+        const formData = await request.formData()
+        const files = formData.getAll('files')
+        const bucket = formData.get('bucket') || BUCKETS.TRIP_IMAGES
+        const folder = formData.get('folder') || 'trips'
+
+        if (!files || files.length === 0) {
+          return handleCORS(NextResponse.json(
+            { error: 'No files provided' },
+            { status: 400 }
+          ))
+        }
+
+        const uploaded = []
+        const failed = []
+
+        for (const file of files) {
+          // Validate file
+          const validation = validateFile(file, bucket)
+          if (!validation.valid) {
+            failed.push({
+              file: file.name,
+              error: validation.error
+            })
+            continue
+          }
+
+          // Generate unique file path
+          const filePath = generateFilePath(decoded.userId, file.name, folder)
+
+          // Convert File to Buffer for server-side upload
+          const arrayBuffer = await file.arrayBuffer()
+          const buffer = Buffer.from(arrayBuffer)
+
+          // Upload to Supabase Storage
+          const result = await uploadFileServer(buffer, bucket, filePath, {
+            contentType: file.type
+          })
+
+          if (result.success) {
+            uploaded.push({
+              originalName: file.name,
+              ...result.data
+            })
+          } else {
+            failed.push({
+              file: file.name,
+              error: result.error
+            })
+          }
+        }
+
+        return handleCORS(NextResponse.json({
+          success: failed.length === 0,
+          uploaded,
+          failed,
+          message: `Uploaded ${uploaded.length} file(s)${failed.length > 0 ? `, ${failed.length} failed` : ''}`
+        }))
+
+      } catch (error) {
+        logger.error('Upload error:', error)
+        return handleCORS(NextResponse.json(
+          { error: 'Failed to process upload' },
+          { status: 500 }
+        ))
+      }
     }
 
     // Route not found

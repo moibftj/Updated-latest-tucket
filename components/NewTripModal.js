@@ -99,15 +99,18 @@ const NewTripModal = ({ open, onClose, onSuccess, tripToCopy = null }) => {
 
   const handleFileUpload = (e) => {
     const files = Array.from(e.target.files)
-    setUploadedFiles(prev => [...prev, ...files])
 
-    // In a real app, you would upload these to a storage service
-    // For now, we'll just track the file names
-    const fileNames = files.map(file => file.name).join(', ')
-    setTripForm(prev => ({
-      ...prev,
-      tripImages: prev.tripImages ? `${prev.tripImages}, ${fileNames}` : fileNames
-    }))
+    // Validate file sizes (max 10MB per file)
+    const maxSize = 10 * 1024 * 1024 // 10MB
+    const invalidFiles = files.filter(file => file.size > maxSize)
+
+    if (invalidFiles.length > 0) {
+      toast.error(`Some files exceed 10MB limit: ${invalidFiles.map(f => f.name).join(', ')}`)
+      return
+    }
+
+    setUploadedFiles(prev => [...prev, ...files])
+    toast.success(`${files.length} file(s) selected for upload`)
   }
 
   const removeFile = (index) => {
@@ -122,10 +125,42 @@ const NewTripModal = ({ open, onClose, onSuccess, tripToCopy = null }) => {
 
     setIsSubmitting(true)
     try {
-      // Prepare data for API
+      // Step 1: Upload files if any
+      let uploadedImageUrls = []
+      if (uploadedFiles.length > 0) {
+        toast.info(`Uploading ${uploadedFiles.length} image(s)...`)
+
+        const formData = new FormData()
+        uploadedFiles.forEach(file => {
+          formData.append('files', file)
+        })
+        formData.append('bucket', 'trip-images')
+        formData.append('folder', 'trips')
+
+        const token = localStorage.getItem('token')
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/upload`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        })
+
+        const uploadResult = await response.json()
+
+        if (uploadResult.success && uploadResult.uploaded.length > 0) {
+          uploadedImageUrls = uploadResult.uploaded.map(img => img.publicUrl)
+          toast.success(`Uploaded ${uploadResult.uploaded.length} image(s)`)
+        } else if (uploadResult.failed?.length > 0) {
+          toast.warning(`Some files failed to upload: ${uploadResult.failed.map(f => f.file).join(', ')}`)
+        }
+      }
+
+      // Step 2: Prepare trip data with uploaded image URLs
       const tripData = {
         ...tripForm,
         destination: tripForm.location, // Map location to destination for compatibility
+        tripImages: uploadedImageUrls.join(','), // Store URLs as comma-separated string
         // Convert arrays to JSONB format
         airlines: tripForm.airlines,
         accommodations: tripForm.accommodations,
@@ -133,6 +168,7 @@ const NewTripModal = ({ open, onClose, onSuccess, tripToCopy = null }) => {
         segments: tripForm.segments
       }
 
+      // Step 3: Create the trip
       const newTrip = await tripApi.create(tripData)
       toast.success('Trip created successfully!')
       onSuccess(newTrip)
