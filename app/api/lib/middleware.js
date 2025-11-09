@@ -155,8 +155,19 @@ export function formatTrip(trip) {
  */
 export function getPaginationParams(request, defaultLimit = 10) {
   const { searchParams } = new URL(request.url)
-  const page = parseInt(searchParams.get('page') || '1', 10)
-  const limit = parseInt(searchParams.get('limit') || String(defaultLimit), 10)
+  let page = parseInt(searchParams.get('page') || '1', 10)
+  let limit = parseInt(searchParams.get('limit') || String(defaultLimit), 10)
+
+  // Validate page and limit
+  if (isNaN(page) || page < 1) {
+    page = 1
+  }
+  // Limit must be between 1 and 100
+  if (isNaN(limit) || limit < 1) {
+    limit = defaultLimit
+  } else if (limit > 100) {
+    limit = 100
+  }
   const offset = (page - 1) * limit
 
   return { page, limit, offset }
