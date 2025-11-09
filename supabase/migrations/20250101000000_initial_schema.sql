@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS trips (
   user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   destination TEXT NOT NULL,
-  start_date TEXT NOT NULL,
-  end_date TEXT NOT NULL,
+  start_date DATE NOT NULL,  -- Changed from TEXT to DATE
+  end_date DATE,              -- Changed from TEXT to DATE, made optional
   status TEXT DEFAULT 'future' CHECK (status IN ('future', 'taken')),
   visibility TEXT DEFAULT 'private' CHECK (visibility IN ('private', 'public')),
   description TEXT DEFAULT '',
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS trips (
   segments JSONB DEFAULT '[]'::jsonb,
   shared_with JSONB DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  CONSTRAINT check_trip_dates CHECK (end_date IS NULL OR end_date >= start_date)
 );
 
 -- Create indexes for trips
@@ -49,6 +50,8 @@ CREATE INDEX IF NOT EXISTS idx_trips_visibility ON trips(visibility);
 CREATE INDEX IF NOT EXISTS idx_trips_status ON trips(status);
 CREATE INDEX IF NOT EXISTS idx_trips_created_at ON trips(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_trips_shared_with ON trips USING GIN(shared_with);
+CREATE INDEX IF NOT EXISTS idx_trips_start_date ON trips(start_date DESC);
+CREATE INDEX IF NOT EXISTS idx_trips_date_range ON trips(start_date, end_date);
 
 -- Messages table
 CREATE TABLE IF NOT EXISTS messages (
@@ -66,73 +69,87 @@ CREATE INDEX IF NOT EXISTS idx_messages_recipient_id ON messages(recipient_id);
 CREATE INDEX IF NOT EXISTS idx_messages_created_at ON messages(created_at);
 CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(sender_id, recipient_id);
 
--- Enable Row Level Security (RLS)
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE trips ENABLE ROW LEVEL SECURITY;
-ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
+-- NOTE: RLS is DISABLED for this app because we use custom JWT authentication
+-- instead of Supabase Auth. The RLS policies below reference auth.uid() which
+-- only works with Supabase Auth, not custom JWT.
+--
+-- Security is enforced at the API layer (app/api/[[...path]]/route.js) using:
+-- 1. JWT token verification
+-- 2. Service role key (bypasses RLS)
+-- 3. API-layer authorization checks
+--
+-- See migration: 20250109000000_disable_rls_for_custom_auth.sql
 
--- RLS Policies for users table
--- Users can read all user data (for discovery/chat)
-CREATE POLICY "Users can read all users"
-  ON users FOR SELECT
-  USING (true);
+-- RLS is disabled by default - no policies needed
+-- If you migrate to Supabase Auth in the future, uncomment and modify the policies below
 
--- Users can update only their own data
-CREATE POLICY "Users can update own profile"
-  ON users FOR UPDATE
-  USING (auth.uid()::text = id);
+-- -- Enable Row Level Security (RLS)
+-- ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE trips ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
--- Allow user registration (insert)
-CREATE POLICY "Anyone can insert users"
-  ON users FOR INSERT
-  WITH CHECK (true);
+-- -- RLS Policies for users table
+-- -- Users can read all user data (for discovery/chat)
+-- CREATE POLICY "Users can read all users"
+--   ON users FOR SELECT
+--   USING (true);
 
--- RLS Policies for trips table
--- Users can read their own trips
-CREATE POLICY "Users can read own trips"
-  ON trips FOR SELECT
-  USING (user_id = auth.uid()::text);
+-- -- Users can update only their own data
+-- CREATE POLICY "Users can update own profile"
+--   ON users FOR UPDATE
+--   USING (auth.uid()::text = id);
 
--- Users can read public trips
-CREATE POLICY "Users can read public trips"
-  ON trips FOR SELECT
-  USING (visibility = 'public');
+-- -- Allow user registration (insert)
+-- CREATE POLICY "Anyone can insert users"
+--   ON users FOR INSERT
+--   WITH CHECK (true);
 
--- Users can read trips shared with them
-CREATE POLICY "Users can read shared trips"
-  ON trips FOR SELECT
-  USING (shared_with ? auth.uid()::text);
+-- -- RLS Policies for trips table
+-- -- Users can read their own trips
+-- CREATE POLICY "Users can read own trips"
+--   ON trips FOR SELECT
+--   USING (user_id = auth.uid()::text);
 
--- Users can insert their own trips
-CREATE POLICY "Users can insert own trips"
-  ON trips FOR INSERT
-  WITH CHECK (user_id = auth.uid()::text);
+-- -- Users can read public trips
+-- CREATE POLICY "Users can read public trips"
+--   ON trips FOR SELECT
+--   USING (visibility = 'public');
 
--- Users can update their own trips
-CREATE POLICY "Users can update own trips"
-  ON trips FOR UPDATE
-  USING (user_id = auth.uid()::text);
+-- -- Users can read trips shared with them
+-- CREATE POLICY "Users can read shared trips"
+--   ON trips FOR SELECT
+--   USING (shared_with ? auth.uid()::text);
 
--- Users can delete their own trips
-CREATE POLICY "Users can delete own trips"
-  ON trips FOR DELETE
-  USING (user_id = auth.uid()::text);
+-- -- Users can insert their own trips
+-- CREATE POLICY "Users can insert own trips"
+--   ON trips FOR INSERT
+--   WITH CHECK (user_id = auth.uid()::text);
 
--- RLS Policies for messages table
--- Users can read messages they sent or received
-CREATE POLICY "Users can read own messages"
-  ON messages FOR SELECT
-  USING (sender_id = auth.uid()::text OR recipient_id = auth.uid()::text);
+-- -- Users can update their own trips
+-- CREATE POLICY "Users can update own trips"
+--   ON trips FOR UPDATE
+--   USING (user_id = auth.uid()::text);
 
--- Users can insert messages they send
-CREATE POLICY "Users can insert messages"
-  ON messages FOR INSERT
-  WITH CHECK (sender_id = auth.uid()::text);
+-- -- Users can delete their own trips
+-- CREATE POLICY "Users can delete own trips"
+--   ON trips FOR DELETE
+--   USING (user_id = auth.uid()::text);
 
--- Users can update messages they received (for marking as read)
-CREATE POLICY "Users can update received messages"
-  ON messages FOR UPDATE
-  USING (recipient_id = auth.uid()::text);
+-- -- RLS Policies for messages table
+-- -- Users can read messages they sent or received
+-- CREATE POLICY "Users can read own messages"
+--   ON messages FOR SELECT
+--   USING (sender_id = auth.uid()::text OR recipient_id = auth.uid()::text);
+
+-- -- Users can insert messages they send
+-- CREATE POLICY "Users can insert messages"
+--   ON messages FOR INSERT
+--   WITH CHECK (sender_id = auth.uid()::text);
+
+-- -- Users can update messages they received (for marking as read)
+-- CREATE POLICY "Users can update received messages"
+--   ON messages FOR UPDATE
+--   USING (recipient_id = auth.uid()::text);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()

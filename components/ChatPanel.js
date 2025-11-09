@@ -10,14 +10,24 @@ import { userApi, messageApi } from '@/lib/api'
 import { logger } from '@/lib/logger'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { ChatPanelErrorFallback } from '@/components/ErrorFallbacks'
+import { useRealtimeMessages } from '@/hooks/useRealtimeMessages'
+import { useRealtimeOnlineUsers } from '@/hooks/useRealtimeOnlineUsers'
 
 const ChatPanel = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [onlineUsers, setOnlineUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
-  const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const messagesEndRef = useRef(null)
+
+  // Use Realtime hooks instead of polling
+  const { onlineUsers } = useRealtimeOnlineUsers(isOpen ? currentUser?.id : null)
+  const { messages: realtimeMessages } = useRealtimeMessages(
+    currentUser?.id,
+    selectedUser?.id
+  )
+
+  // Use realtime messages when available
+  const messages = realtimeMessages
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -40,53 +50,19 @@ const ChatPanel = ({ currentUser }) => {
     return () => clearInterval(heartbeat)
   }, [])
 
-  // Fetch online users
-  useEffect(() => {
-    if (!isOpen) return
-
-    const fetchOnlineUsers = async () => {
-      try {
-        const users = await userApi.getOnlineUsers()
-        setOnlineUsers(users)
-      } catch (error) {
-        logger?.error?.('Failed to fetch online users:', error)
-      }
-    }
-
-    fetchOnlineUsers()
-    const interval = setInterval(fetchOnlineUsers, 10000) // Poll every 10 seconds
-
-    return () => clearInterval(interval)
-  }, [isOpen])
-
-  // Fetch messages when user is selected
-  useEffect(() => {
-    if (!selectedUser) return
-
-    const fetchMessages = async () => {
-      try {
-        const msgs = await messageApi.getConversation(selectedUser.id)
-        setMessages(msgs)
-      } catch (error) {
-        logger?.error?.('Failed to fetch messages:', error)
-      }
-    }
-
-    fetchMessages()
-    const interval = setInterval(fetchMessages, 3000) // Poll every 3 seconds
-
-    return () => clearInterval(interval)
-  }, [selectedUser])
+  // Note: Polling removed - now using Realtime subscriptions via hooks
+  // - useRealtimeOnlineUsers: Real-time updates for online users
+  // - useRealtimeMessages: Real-time updates for messages
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedUser) return
 
     try {
-      const message = await messageApi.send({
+      await messageApi.send({
         recipientId: selectedUser.id,
         content: newMessage
       })
-      setMessages(prev => [...prev, message])
+      // Don't manually add message - Realtime subscription will handle it
       setNewMessage('')
     } catch (error) {
       toast.error('Failed to send message')
