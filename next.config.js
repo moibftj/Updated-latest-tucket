@@ -7,7 +7,7 @@ const nextConfig = {
       'images.unsplash.com',
       'tuckertrips.com',
       'supabase.com',
-      '*.supabase.co'
+      'ugxzjmzrmvbnhfejwjse.supabase.co'
     ],
   },
   // Experimental features removed - using Supabase instead of MongoDB
