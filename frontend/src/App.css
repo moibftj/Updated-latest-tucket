@@ -1,0 +1,125 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, #root {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Custom animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.02);
+    }
+}
+
+.animate-float {
+    animation: float 8s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes sticky-bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+.animate-sticky-bounce {
+    animation: sticky-bounce 4s ease-in-out infinite;
+}
+
+/* Video hover effects */
+video {
+    transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+video:hover {
+    transform: scale(1.02);
+}
+
+/* Prevent video overflow on mobile */
+@media (max-width: 640px) {
+    video {
+        max-width: 100%;
+        height: auto !important;
+        width: 100%;
+    }
+    
+    .animate-float {
+        animation: none;
+    }
+    
+    section {
+        overflow-x: hidden;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+    section {
+        overflow-x: hidden;
+    }
+}
+
+/* Button hover glow */
+button:hover {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, textarea {
+    transition: all 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4DB8BA;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a9799;
+}
